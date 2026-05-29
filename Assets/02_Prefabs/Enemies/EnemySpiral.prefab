@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpiral
   _maxHp: 30
   _moveSpeed: 3
+  _score: 100
   _isColorless: 0
   _enemyColor: 0
   _redColor: {r: 1, g: 0, b: 0, a: 1}
@@ -137,7 +138,10 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 1891232714594278134, guid: ad4a771d8c72f9449aa418ebc6546d8a, type: 3}
   _bulletsPerVolley: 4
   _fireInterval: 1.5
-  _bulletAngularSpeed: 120
+  _orbitRadius: 8
+  _orbitSpeed: 45
+  _orbitSpeedCharge: 120
+  _chargeUpDuration: 0.6
 --- !u!54 &3768366025319557466
 Rigidbody:
   m_ObjectHideFlags: 0

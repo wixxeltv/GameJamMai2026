@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Enemy : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] protected float _maxHp = 30f;
     [SerializeField] protected float _moveSpeed = 3f;
+    [SerializeField] protected int _score = 0;
 
     [Header("Couleur")]
     [SerializeField] private bool _isColorless = false;
@@ -45,6 +47,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
+        WaveManager.Instance.EnemyKilled();
+        ScoreManager.Instance.IncreaseScore(_score);
         Destroy(gameObject);
     }
 

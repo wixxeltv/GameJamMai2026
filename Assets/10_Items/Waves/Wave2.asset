@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e24e60151b3484d942ce20d665752a, type: 3}
-  m_Name: InfiniteRound
+  m_Name: Wave2
   m_EditorClassIdentifier: Assembly-CSharp::Wave
-  enemeisToKill: 1000
+  enemeisToKill: 2
   spawnInterval: 2
   enemies:
   - {fileID: 3094351274075372918, guid: 97b4d6ff565932a479a45afacedc3cfb, type: 3}
   - {fileID: 8028507437721584375, guid: 9b90f4781afde1a4a8d2f498d6515ea1, type: 3}
-  - {fileID: 2412643063995333145, guid: e7b2e928ab1a66549be398363e0f09e7, type: 3}

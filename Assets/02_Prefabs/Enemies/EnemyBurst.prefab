@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBurst
   _maxHp: 30
   _moveSpeed: 3
+  _score: 100
   _isColorless: 0
   _enemyColor: 2
   _redColor: {r: 1, g: 0, b: 0, a: 1}
@@ -139,6 +140,9 @@ MonoBehaviour:
   _timeBetweenBullets: 0.1
   _burstInterval: 3
   _spreadAngle: 15
+  _telegraphDuration: 0.5
+  _dashSpeed: 18
+  _dashDuration: 0.25
 --- !u!54 &7044245187979812364
 Rigidbody:
   m_ObjectHideFlags: 0
