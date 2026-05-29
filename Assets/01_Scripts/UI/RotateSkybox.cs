@@ -1,0 +1,11 @@
+using UnityEngine;
+
+public class RotateSkybox : MonoBehaviour
+{
+    [SerializeField] private float rotateSpeed = 1.2f;
+
+    void Update()
+    {
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time * rotateSpeed);
+    }
+}
