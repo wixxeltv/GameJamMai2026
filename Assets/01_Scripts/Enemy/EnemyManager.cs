@@ -4,6 +4,7 @@ public class EnemyManager : MonoBehaviour
 {
     [Header("Prefabs ennemis")]
     [SerializeField] private Enemy[] _enemyPrefabs;
+    private Enemy[] _usableEnemies;
 
     [Header("Spawn")]
     [SerializeField] private Transform _spawnLineCenter;
@@ -16,6 +17,7 @@ public class EnemyManager : MonoBehaviour
         get { return _minSpawnInterval; }
         set { _minSpawnInterval = value; }
     }
+    public void SetEnemies(Enemy[] enemies) => _usableEnemies = enemies;
     
     private float _timer;
     private float _elapsed;
@@ -36,10 +38,10 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        if (_enemyPrefabs == null || _enemyPrefabs.Length == 0) return;
+        if (_usableEnemies.Length == 0) return;
 
         Vector3 spawnPos = _spawnLineCenter.position + Vector3.right * Random.Range(-_spawnLineWidth / 2f, _spawnLineWidth / 2f);
-        Enemy prefab = _enemyPrefabs[Random.Range(0, _enemyPrefabs.Length)];
+        Enemy prefab = _usableEnemies[Random.Range(0, _usableEnemies.Length)];
         Instantiate(prefab, spawnPos, Quaternion.identity);
     }
 }

@@ -19,11 +19,13 @@ public class WaveManager : MonoBehaviour
     {
         _waveInfoUI.SetWaveCount(_currentWave);
         _enemyManager.SpawnInterval = (waves[_currentWave].spawnInterval);
+        _enemyManager.SetEnemies(waves[_currentWave].enemies);
     }
 
     public void EndWave()
     {
         _currentWave++;
+        StartWave();
     }
     
 }
