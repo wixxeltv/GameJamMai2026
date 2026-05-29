@@ -67,7 +67,7 @@ public class PlayerColorController : MonoBehaviour
     {
         if (_redBulletPrefab == null) return;
         var go = Instantiate(_redBulletPrefab, firePoint.position, firePoint.rotation);
-        if (go.TryGetComponent<Bullet>(out var b)) b.Damage = 10f * _redDamageMultiplier;
+        if (go.TryGetComponent<Bullet>(out var b)) { b.Damage = 10f * _redDamageMultiplier; b.BulletColor = ColorType.Red; }
         ApplyBulletColor(go);
     }
 
@@ -75,7 +75,7 @@ public class PlayerColorController : MonoBehaviour
     {
         if (_yellowBulletPrefab == null) return;
         var go = Instantiate(_yellowBulletPrefab, firePoint.position, firePoint.rotation);
-        if (go.TryGetComponent<HomingBullet>(out var b)) b.Damage = 10f;
+        if (go.TryGetComponent<HomingBullet>(out var b)) { b.Damage = 10f; b.BulletColor = ColorType.Yellow; }
         ApplyBulletColor(go);
     }
 
@@ -89,7 +89,7 @@ public class PlayerColorController : MonoBehaviour
             Quaternion rot = firePoint.rotation * Quaternion.Euler(0f, angle, 0f);
             var go = Instantiate(_blueBulletPrefab, firePoint.position, rot);
             go.transform.localScale *= _blueScale;
-            if (go.TryGetComponent<Bullet>(out var b)) b.Damage = 10f * _blueDamageMultiplier;
+            if (go.TryGetComponent<Bullet>(out var b)) { b.Damage = 10f * _blueDamageMultiplier; b.BulletColor = ColorType.Blue; }
             ApplyBulletColor(go);
         }
     }

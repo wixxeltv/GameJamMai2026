@@ -7,6 +7,7 @@ public class HomingBullet : MonoBehaviour
     [SerializeField] private float _lifetime = 4f;
 
     public float Damage { get; set; } = 10f;
+    public ColorType BulletColor { get; set; } = ColorType.Yellow;
 
     private Transform _target;
 
@@ -28,6 +29,15 @@ public class HomingBullet : MonoBehaviour
         }
 
         transform.Translate(Vector3.forward * _speed * Time.deltaTime, Space.Self);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<Enemy>(out var enemy))
+        {
+            enemy.TakeDamage(Damage, BulletColor);
+            Destroy(gameObject);
+        }
     }
 
     private void FindTarget()
