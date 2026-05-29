@@ -10,7 +10,13 @@ public class EnemyBurst : Enemy
     [SerializeField] private float _burstInterval = 3f;
     [SerializeField] private float _spreadAngle = 15f;
 
+    [Header("Telegraph & Dash")]
+    [SerializeField] private float _telegraphDuration = 0.5f;
+    [SerializeField] private float _dashSpeed = 18f;
+    [SerializeField] private float _dashDuration = 0.25f;
+
     private float _burstTimer;
+    private bool _isActing;
 
     protected override void Start()
     {
@@ -22,36 +28,64 @@ public class EnemyBurst : Enemy
     {
         if (_player == null) return;
 
-        MoveTowardPlayer();
-
-        _burstTimer -= Time.deltaTime;
-        if (_burstTimer <= 0f)
+        if (!_isActing)
         {
-            StartCoroutine(FireBurst());
-            _burstTimer = _burstInterval;
+            Vector3 dir = (_player.position - transform.position).normalized;
+            transform.position += (dir * _moveSpeed + GetSeparationForce()) * Time.deltaTime;
+
+            _burstTimer -= Time.deltaTime;
+            if (_burstTimer <= 0f)
+            {
+                StartCoroutine(BurstSequence());
+                _burstTimer = _burstInterval;
+            }
         }
     }
 
-    private void MoveTowardPlayer()
+    private IEnumerator BurstSequence()
     {
-        Vector3 dir = (_player.position - transform.position).normalized;
-        transform.position += dir * _moveSpeed * Time.deltaTime;
-    }
+        _isActing = true;
 
-    private IEnumerator FireBurst()
-    {
-        if (_bulletPrefab == null) yield break;
-
-        Vector3 dir = (_player.position - transform.position).normalized;
-        Quaternion baseRot = Quaternion.LookRotation(dir);
-        float halfSpread = _spreadAngle * (_bulletsPerBurst - 1) / 2f;
-
-        for (int i = 0; i < _bulletsPerBurst; i++)
+        // Telegraph : s'arrête et tremble légèrement
+        float t = 0f;
+        Vector3 origin = transform.position;
+        while (t < _telegraphDuration)
         {
-            float angle = -halfSpread + _spreadAngle * i;
-            Quaternion rot = baseRot * Quaternion.Euler(0f, angle, 0f);
-            Instantiate(_bulletPrefab, transform.position, rot);
-            yield return new WaitForSeconds(_timeBetweenBullets);
+            t += Time.deltaTime;
+            transform.position = origin + Random.insideUnitSphere * 0.15f;
+            transform.position = new Vector3(transform.position.x, origin.y, transform.position.z);
+            yield return null;
         }
+        transform.position = origin;
+
+        // Dash vers le joueur
+        float dashTimer = 0f;
+        while (dashTimer < _dashDuration)
+        {
+            dashTimer += Time.deltaTime;
+            if (_player != null)
+            {
+                Vector3 dashDir = (_player.position - transform.position).normalized;
+                transform.position += dashDir * _dashSpeed * Time.deltaTime;
+            }
+            yield return null;
+        }
+        
+        // Burst
+        if (_bulletPrefab != null)
+        {
+            Vector3 dir = (_player.position - transform.position).normalized;
+            Quaternion baseRot = Quaternion.LookRotation(dir);
+            float halfSpread = _spreadAngle * (_bulletsPerBurst - 1) / 2f;
+
+            for (int i = 0; i < _bulletsPerBurst; i++)
+            {
+                float angle = -halfSpread + _spreadAngle * i;
+                Instantiate(_bulletPrefab, transform.position, baseRot * Quaternion.Euler(0f, angle, 0f));
+                yield return new WaitForSeconds(_timeBetweenBullets);
+            }
+        }
+
+        _isActing = false;
     }
 }

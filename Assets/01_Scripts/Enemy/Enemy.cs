@@ -48,6 +48,21 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    protected Vector3 GetSeparationForce(float radius = 2f, float strength = 3f)
+    {
+        Vector3 force = Vector3.zero;
+        Collider[] neighbours = Physics.OverlapSphere(transform.position, radius);
+        foreach (Collider col in neighbours)
+        {
+            if (col.gameObject == gameObject) continue;
+            if (!col.TryGetComponent<Enemy>(out _)) continue;
+            Vector3 away = transform.position - col.transform.position;
+            if (away.sqrMagnitude > 0f)
+                force += away.normalized / away.magnitude;
+        }
+        return force * strength;
+    }
+
     private void ApplyVisualColor()
     {
         if (_renderer == null) return;
