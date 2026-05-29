@@ -19,10 +19,12 @@ public class ComboInfoUI : MonoBehaviour
             slot.SetArrow(arrowImages);
         }
         _comboSystem.OnCombosGenerated.AddListener(OnCombosGenerated);
+        _comboSystem.OnBufferChanged.AddListener(OnBufferChanged);
     }
 
-    void Start()
+    private void OnBufferChanged(List<ComboSystem.ComboType> buffer)
     {
+        
     }
 
     private void OnCombosGenerated(Dictionary<ColorType, List<ComboSystem.ComboType>> combos)

@@ -4,8 +4,14 @@ using UnityEngine.UI;
 
 public class ComboSlotUI : MonoBehaviour
 {
-    [Header("Slots")] [SerializeField] private Image[] comboSlots;
-    [Header("Images")] private Sprite[] _arrowImages;
+    [Header("Slots")]
+    [SerializeField] private Image[] comboSlots;
+    [Header("Images")]
+    private Sprite[] _arrowImages;
+    
+    [Header("Colors")]
+    [SerializeField] private Color unpressedColor;
+    [SerializeField] private Color pressedColor;
 
     public void SetArrow(Sprite[] arrows)
     {
@@ -14,18 +20,9 @@ public class ComboSlotUI : MonoBehaviour
 
     public void UpdateSlots(List<ComboSystem.ComboType> combos)
     {
-        // First, clear all slots
-        for (int i = 0; i < comboSlots.Length; i++)
-        {
-            comboSlots[i].sprite = null;
-            comboSlots[i].enabled = false;
-        }
-    
         // Then fill only the ones we have combos for
         for (int i = 0; i < combos.Count; i++)
         {
-            Debug.Log(combos.Count);
-            comboSlots[i].enabled = true;
             switch (combos[i])
             {
                 case ComboSystem.ComboType.ArrowUp:
@@ -42,5 +39,10 @@ public class ComboSlotUI : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void UpdateBackground()
+    {
+        
     }
 }
