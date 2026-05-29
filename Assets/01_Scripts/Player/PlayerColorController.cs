@@ -110,6 +110,12 @@ public class PlayerColorController : MonoBehaviour
             _playerRenderer.material.color = GetCurrentColor();
     }
 
+    public void SwitchToColor(ColorType color)
+    {
+        CurrentColor = color;
+        ApplyStats();
+    }
+
     private void ApplyBulletColor(GameObject bullet)
     {
         if (bullet.TryGetComponent<Renderer>(out var r))
