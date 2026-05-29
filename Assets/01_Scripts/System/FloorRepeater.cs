@@ -23,9 +23,8 @@ public class FloorRepeater : MonoBehaviour
             {
                 Debug.Log("It has reached its destination");
                 Instantiate(floor[_floorIndex], spawnPoint.transform.position, floor[_floorIndex].transform.rotation, transform);
-                
-                if(_floorIndex == 2) _floorIndex = 0;
-                else{_floorIndex++;}
+
+                _floorIndex = (_floorIndex + 1) % 3;
                 
                 Destroy(onetilefloor);
             }

@@ -40,9 +40,11 @@ public class PlayerColorController : MonoBehaviour
     // Appelé via Unity Event (performed)
     public void OnColorSwitch(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
-        CurrentColor = (ColorType)(((int)CurrentColor + 1) % 3);
-        ApplyStats();
+        if (context.started)
+        {
+            CurrentColor = (ColorType)(((int)CurrentColor + 1) % 3);
+            ApplyStats();
+        }
     }
 
     public void Shoot(Transform firePoint)
