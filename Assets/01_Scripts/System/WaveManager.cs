@@ -2,25 +2,28 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] private int numberOfRounds;
-    public int currentWave;
+    [SerializeField] private Wave[] waves;
+    private int _currentWave;
     
     private WaveInfoUI _waveInfoUI;
+    private EnemyManager _enemyManager;
 
     private void Start()
     {
         _waveInfoUI = FindFirstObjectByType<WaveInfoUI>();
+        _enemyManager = FindFirstObjectByType<EnemyManager>();
         StartWave();
     }
     
-    public void StartWave()
+    private void StartWave()
     {
-        _waveInfoUI.SetWaveCount(currentWave);
+        _waveInfoUI.SetWaveCount(_currentWave);
+        _enemyManager.SpawnInterval = (waves[_currentWave].spawnInterval);
     }
 
     public void EndWave()
     {
-        currentWave++;
+        _currentWave++;
     }
     
 }

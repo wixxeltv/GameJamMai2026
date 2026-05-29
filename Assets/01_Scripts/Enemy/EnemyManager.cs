@@ -10,8 +10,13 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float _spawnLineWidth = 20f;
     [SerializeField] private float _spawnInterval = 2f;
     [SerializeField] private float _minSpawnInterval = 0.4f;
-    [SerializeField] private float _difficultyRampTime = 120f;
 
+    public float SpawnInterval
+    {
+        get { return _minSpawnInterval; }
+        set { _minSpawnInterval = value; }
+    }
+    
     private float _timer;
     private float _elapsed;
 
@@ -20,7 +25,7 @@ public class EnemyManager : MonoBehaviour
         _elapsed += Time.deltaTime;
         _timer += Time.deltaTime;
 
-        float currentInterval = Mathf.Lerp(_spawnInterval, _minSpawnInterval, _elapsed / _difficultyRampTime);
+        float currentInterval = Mathf.Lerp(_spawnInterval, _minSpawnInterval, _elapsed);
 
         if (_timer >= currentInterval)
         {
