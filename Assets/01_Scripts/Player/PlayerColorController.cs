@@ -17,8 +17,25 @@ public class PlayerColorController : MonoBehaviour
     [SerializeField] private float _blueDamageMultiplier = 0.6f;
     [SerializeField] private float _blueScale = 1.8f;
 
+    [Header("Couleurs visuelles")]
+    [SerializeField] private Color _redColor = Color.red;
+    [SerializeField] private Color _yellowColor = Color.yellow;
+    [SerializeField] private Color _blueColor = Color.cyan;
+
     public ColorType CurrentColor { get; private set; } = ColorType.Red;
     public float SpeedMultiplier { get; private set; } = 1f;
+
+    private Renderer _playerRenderer;
+
+    private void Awake()
+    {
+        _playerRenderer = GetComponentInChildren<Renderer>();
+    }
+
+    private void Start()
+    {
+        ApplyStats();
+    }
 
     // Appelé via Unity Event (performed)
     public void OnColorSwitch(InputAction.CallbackContext context)
@@ -49,6 +66,7 @@ public class PlayerColorController : MonoBehaviour
         if (_redBulletPrefab == null) return;
         var go = Instantiate(_redBulletPrefab, firePoint.position, firePoint.rotation);
         if (go.TryGetComponent<Bullet>(out var b)) b.Damage = 10f * _redDamageMultiplier;
+        ApplyBulletColor(go);
     }
 
     private void ShootYellow(Transform firePoint)
@@ -56,6 +74,7 @@ public class PlayerColorController : MonoBehaviour
         if (_yellowBulletPrefab == null) return;
         var go = Instantiate(_yellowBulletPrefab, firePoint.position, firePoint.rotation);
         if (go.TryGetComponent<HomingBullet>(out var b)) b.Damage = 10f;
+        ApplyBulletColor(go);
     }
 
     private void ShootBlue(Transform firePoint)
@@ -69,11 +88,29 @@ public class PlayerColorController : MonoBehaviour
             var go = Instantiate(_blueBulletPrefab, firePoint.position, rot);
             go.transform.localScale *= _blueScale;
             if (go.TryGetComponent<Bullet>(out var b)) b.Damage = 10f * _blueDamageMultiplier;
+            ApplyBulletColor(go);
         }
     }
+
+    private Color GetCurrentColor() => CurrentColor switch
+    {
+        ColorType.Red => _redColor,
+        ColorType.Yellow => _yellowColor,
+        ColorType.Blue => _blueColor,
+        _ => Color.white
+    };
 
     private void ApplyStats()
     {
         SpeedMultiplier = CurrentColor == ColorType.Yellow ? _yellowSpeedMultiplier : 1f;
+
+        if (_playerRenderer != null)
+            _playerRenderer.material.color = GetCurrentColor();
+    }
+
+    private void ApplyBulletColor(GameObject bullet)
+    {
+        if (bullet.TryGetComponent<Renderer>(out var r))
+            r.material.color = GetCurrentColor();
     }
 }
