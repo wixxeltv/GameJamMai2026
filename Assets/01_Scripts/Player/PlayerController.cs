@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _fireRate = 0.2f;
 
     private PlayerColorController _colorController;
+    private PlayerFeedback _playerFeedback;
+    
     private Vector2 _moveInput;
     private bool _isFiring;
     private float _nextFireTime;
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _colorController = GetComponent<PlayerColorController>();
+        _playerFeedback = GetComponent<PlayerFeedback>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -53,9 +56,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    public void Shoot()
     {
-        if (_firePoint == null || _colorController == null) return;
+        if (_firePoint == null || _colorController == null || _playerFeedback == null) return;
         _colorController.Shoot(_firePoint);
+        _playerFeedback.ShootEffect();
     }
 }
