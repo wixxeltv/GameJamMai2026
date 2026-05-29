@@ -5,27 +5,29 @@ public class FloorRepeater : MonoBehaviour
     [SerializeField] private GameObject spawnPoint;
     [SerializeField] private GameObject targetPoint;
     [SerializeField] private float speed = 1.0f;
-    [SerializeField] private GameObject[] floorsPrefab;
-    [SerializeField] private GameObject floor;
+    private GameObject[] _floorsPrefab;
+    [SerializeField] private GameObject[] floor;
+    [Range (0, 2)] private int _floorIndex; 
 
-    void Start()
-    {
-        Instantiate(floor, spawnPoint.transform.position, Quaternion.identity, transform);
-    }
     void Update()
     {
-        floorsPrefab = GameObject.FindGameObjectsWithTag("Floor");
+        _floorsPrefab = GameObject.FindGameObjectsWithTag("Floor");
         
         float step = speed * Time.deltaTime;
-        foreach (GameObject floor in floorsPrefab)
+        foreach (GameObject onetilefloor in _floorsPrefab)
         {
-            floor.transform.position =
-                Vector3.MoveTowards(floor.transform.position, targetPoint.transform.position, step);
-            if (Vector3.Distance(floor.transform.position, targetPoint.transform.position) < 0.025f)
+            onetilefloor.transform.position =
+                Vector3.MoveTowards(onetilefloor.transform.position, targetPoint.transform.position, step);
+
+            if (Vector3.Distance(onetilefloor.transform.position, targetPoint.transform.position) < 0.025f)
             {
                 Debug.Log("It has reached its destination");
-                floor.transform.position = spawnPoint.transform.position;
-                //Instantiate(floor, spawnPoint.transform.position, Quaternion.identity, transform);
+                Instantiate(floor[_floorIndex], spawnPoint.transform.position, floor[_floorIndex].transform.rotation, transform);
+                
+                if(_floorIndex == 2) _floorIndex = 0;
+                else{_floorIndex++;}
+                
+                Destroy(onetilefloor);
             }
         }
     }
