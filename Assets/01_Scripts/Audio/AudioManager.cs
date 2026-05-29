@@ -16,10 +16,14 @@ public class AudioManager : MonoBehaviour
         if(musicSource) musicSource.loop = true;
     }
     
-    public void PlaySfx(AudioClip clip)
+    public void PlaySfx(AudioClip clip, float volume)
     {
         //Allows for SFX to be played in other scripts
-        if(sfxSource) sfxSource.PlayOneShot(clip);
+        if(sfxSource)
+        {
+            sfxSource.volume=volume;
+            sfxSource.PlayOneShot(clip);
+        }
     }
 
     public void StopSfx()
