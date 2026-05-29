@@ -7,13 +7,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _moveSpeed = 8f;
 
     [Header("Shooting")]
-    [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _firePoint;
     [SerializeField] private float _fireRate = 0.2f;
 
+    private PlayerColorController _colorController;
     private Vector2 _moveInput;
     private bool _isFiring;
     private float _nextFireTime;
+
+    private void Awake()
+    {
+        _colorController = GetComponent<PlayerColorController>();
+    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -34,7 +39,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector3 move = new Vector3(_moveInput.x, 0f, _moveInput.y).normalized * _moveSpeed * Time.deltaTime;
+        float speed = _moveSpeed * (_colorController != null ? _colorController.SpeedMultiplier : 1f);
+        Vector3 move = new Vector3(_moveInput.x, 0f, _moveInput.y).normalized * speed * Time.deltaTime;
         transform.position += move;
     }
 
@@ -49,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
-        if (_bulletPrefab == null || _firePoint == null) return;
-        Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
+        if (_firePoint == null || _colorController == null) return;
+        _colorController.Shoot(_firePoint);
     }
 }
