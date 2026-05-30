@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour
 {
-    [SerializeField] private Image mask;
+    [SerializeField] private Slider slider;
     public int minimum;
     public int maximum;
     public int current;
@@ -22,6 +23,6 @@ public class ProgressBar : MonoBehaviour
         float currentOffset = current - minimum;
         float maximumOffset = maximum - minimum;
         float fillAmount = currentOffset / maximumOffset;
-        mask.fillAmount = Mathf.MoveTowards(mask.fillAmount, fillAmount, fillSpeed * Time.deltaTime);
+        slider.value = Mathf.MoveTowards(slider.value, fillAmount, fillSpeed * Time.deltaTime);
     }
 }
