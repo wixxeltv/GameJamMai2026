@@ -207,20 +207,22 @@ public class Boss : Enemy
     private void ApplyForm(int index)
     {
         for (int i = 0; i < _forms.Length; i++)
-            if (_forms[i].model != null && _forms[i].model != gameObject)
-                _forms[i].model.SetActive(i == index);
-        SetBossColor(_forms[index].color, _forms[index].visualColor);
+        {
+            if (_forms[i].model == null || _forms[i].model == gameObject) continue;
+            _forms[i].model.SetActive(i == index);
+            if (i == index)
+            {
+                var r = _forms[i].model.GetComponent<Renderer>()
+                     ?? _forms[i].model.GetComponentInChildren<Renderer>();
+                if (r != null) r.SetPropertyBlock(null);
+            }
+        }
+        SetBossColor(_forms[index].color);
     }
 
-    private void SetBossColor(ColorType colorType, Color visualColor)
+    private void SetBossColor(ColorType colorType)
     {
         SetEnemyColor(colorType);
-        if (_currentFormIndex < _forms.Length && _forms[_currentFormIndex].model != null)
-        {
-            var r = _forms[_currentFormIndex].model.GetComponent<Renderer>()
-                 ?? _forms[_currentFormIndex].model.GetComponentInChildren<Renderer>();
-            if (r != null) r.material.color = visualColor;
-        }
     }
 
     private float GetHpPercent() => CurrentHp / MaxHp;

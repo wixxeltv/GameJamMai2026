@@ -11,60 +11,56 @@ public class BossFeedback : EnemyFeedbackBase
     [SerializeField] private Slider _healthUI;
 
     [Header("Blink")]
-    [SerializeField] private float _blinkDuration = 0.2f;
     [SerializeField] private float _blinkInterval = 0.05f;
-    [SerializeField] private Color _blinkColor = Color.white;
+    [SerializeField] private int _blinkCount = 3;
+
+    private static readonly int ColorProp = Shader.PropertyToID("_BaseColor");
 
     private Coroutine _blinkCoroutine;
     private Coroutine _deathCoroutine;
-    private Color _originalColor;
-    private bool _isBlinking;
+    private MaterialPropertyBlock _propBlock;
+
+    void Start()
+    {
+        _propBlock = new MaterialPropertyBlock();
+    }
 
     public override void Blink()
     {
         Renderer r = GetActiveRenderer();
         if (r == null) return;
-
-        if (!_isBlinking)
-            _originalColor = r.material.color;
-
-        if (_blinkCoroutine != null)
-            StopCoroutine(_blinkCoroutine);
-
-        _blinkCoroutine = StartCoroutine(BlinkRoutine(r));
+        if (_blinkCoroutine != null) StopCoroutine(_blinkCoroutine);
+        r.SetPropertyBlock(null);
+        _blinkCoroutine = StartCoroutine(BlinkCoroutine(r));
     }
 
     public override void DeathEffect()
     {
         if (_deathCoroutine != null) return;
+        if (_healthUI != null) Destroy(_healthUI.gameObject);
         _deathCoroutine = StartCoroutine(DeathRoutine());
     }
 
-    private IEnumerator BlinkRoutine(Renderer r)
+    private IEnumerator BlinkCoroutine(Renderer r)
     {
-        _isBlinking = true;
-        Material mat = r.material;
-        float elapsed = 0f;
-        bool on = false;
-
-        while (elapsed < _blinkDuration)
+        for (int i = 0; i < _blinkCount; i++)
         {
-            if (r == null || !r.gameObject.activeInHierarchy) break;
-            mat.color = on ? _blinkColor : _originalColor;
-            on = !on;
+            if (r == null || !r.gameObject.activeInHierarchy)
+            {
+                ResetAllPropertyBlocks();
+                yield break;
+            }
+            _propBlock.SetColor(ColorProp, Color.white);
+            r.SetPropertyBlock(_propBlock);
             yield return new WaitForSeconds(_blinkInterval);
-            elapsed += _blinkInterval;
+            r.SetPropertyBlock(null);
+            yield return new WaitForSeconds(_blinkInterval);
         }
-
-        if (r != null && r.gameObject.activeInHierarchy)
-            mat.color = _originalColor;
-
-        _isBlinking = false;
-        _blinkCoroutine = null;
     }
 
     private IEnumerator DeathRoutine()
     {
+        ResetAllPropertyBlocks();
         foreach (var r in GetComponentsInChildren<Renderer>())
             r.gameObject.SetActive(false);
 
@@ -76,8 +72,13 @@ public class BossFeedback : EnemyFeedbackBase
             while (effect.isPlaying) yield return null;
         }
 
-        if (_healthUI != null) Destroy(_healthUI.gameObject);
         Destroy(gameObject);
+    }
+
+    private void ResetAllPropertyBlocks()
+    {
+        foreach (var r in GetComponentsInChildren<Renderer>(true))
+            r.SetPropertyBlock(null);
     }
 
     private Renderer GetActiveRenderer()

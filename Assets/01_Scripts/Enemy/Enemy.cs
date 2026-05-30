@@ -12,12 +12,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool _isColorless = false;
     [SerializeField] private ColorType _enemyColor = ColorType.Red;
 
-    [Header("Couleurs visuelles")]
-    private Color _redColor = Color.red;
-    private Color _yellowColor = Color.yellow;
-    private Color _blueColor = Color.cyan;
-    private Color _colorlessColor = Color.white;
-
     public bool IsColorless => _isColorless;
     public ColorType EnemyColor => _enemyColor;
 
@@ -48,7 +42,6 @@ public class Enemy : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;
         _enemyFeedback = GetComponent<EnemyFeedbackBase>();
         if (_healthBar) { _healthBar.minimum = 0; _healthBar.maximum = _maxHp; _healthBar.current = _maxHp; }
-        ApplyVisualColor();
     }
 
     public void TakeDamage(float damage, ColorType bulletColor)
@@ -95,15 +88,4 @@ public class Enemy : MonoBehaviour
         return force * strength;
     }
 
-    private void ApplyVisualColor()
-    {
-        if (_renderer == null) return;
-        _renderer.material.color = _isColorless ? _colorlessColor : _enemyColor switch
-        {
-            ColorType.Red    => _redColor,
-            ColorType.Yellow => _yellowColor,
-            ColorType.Blue   => _blueColor,
-            _                => _colorlessColor
-        };
-    }
 }

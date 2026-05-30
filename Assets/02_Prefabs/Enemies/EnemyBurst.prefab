@@ -141,7 +141,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 9f10ddb5d27622840974e14cc58f24b7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -319,10 +319,6 @@ MonoBehaviour:
   _score: 100
   _isColorless: 0
   _enemyColor: 2
-  _redColor: {r: 1, g: 0, b: 0, a: 1}
-  _yellowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _blueColor: {r: 0, g: 1, b: 1, a: 1}
-  _colorlessColor: {r: 1, g: 1, b: 1, a: 1}
   _bulletPrefab: {fileID: 1891232714594278134, guid: 7240a521f6407234ea301625cda78642, type: 3}
   _bulletsPerBurst: 4
   _timeBetweenBullets: 0.1
@@ -376,7 +372,7 @@ MonoBehaviour:
   deathSfx: {fileID: 0}
   deathParticles: {fileID: 8791802859067835849, guid: ae07f2a45f14a82428409cfe410e6002, type: 3}
   _blinkInterval: 0.1
-  _blinkColor: {r: 1, g: 1, b: 1, a: 1}
+  _blinkCount: 4
 --- !u!114 &812292753611418519
 MonoBehaviour:
   m_ObjectHideFlags: 0
