@@ -8,6 +8,7 @@ public class ComboSlotUI : MonoBehaviour
     [Header("Slots")]
     [SerializeField] private Image[] arrowSlots;
     [SerializeField] private Image[] comboSlots;
+    [SerializeField] private RectTransform backgroundImage;
     [Header("Images")]
     private Sprite[] _arrowImages;
     
@@ -16,6 +17,7 @@ public class ComboSlotUI : MonoBehaviour
     [SerializeField] private Color pressedColor = Color.grey;
 
     private List<ComboSystem.ComboType> _currentCombo;
+    private int increaseValue = 55;
     
     public void SetArrow(Sprite[] arrows)
     {
@@ -25,9 +27,14 @@ public class ComboSlotUI : MonoBehaviour
     public void UpdateSlots(List<ComboSystem.ComboType> combos)
     {
         _currentCombo = combos;
-        
+        if (combos.Count > 1)
+        {
+            Vector2 size = backgroundImage.sizeDelta;
+            backgroundImage.sizeDelta = new Vector2(size.x+55, size.y);
+        }
         for (int i = 0; i < combos.Count; i++)
         {
+            arrowSlots[i].gameObject.SetActive(true);
             switch (combos[i])
             {
                 case ComboSystem.ComboType.ArrowUp:
