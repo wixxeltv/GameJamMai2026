@@ -1,15 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
     [SerializeField] private float _speed = 10f;
     [SerializeField] private float _lifetime = 5f;
-    [SerializeField] private float _angularSpeed = 0f; // 0 = droit, >0 = courbe circulaire
+    [SerializeField] private float _angularSpeed = 0f;
     [SerializeField] private float _damage = 10f;
+    [SerializeField] private float _shrinkDuration = 0.15f;
 
     private void Start()
     {
-        Destroy(gameObject, _lifetime);
+        StartCoroutine(DestroyAfterLifetime());
     }
 
     private void Update()
@@ -25,8 +27,28 @@ public class EnemyBullet : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerHealth>()?.TakeDamage(_damage);
-            Destroy(gameObject);
+            StartCoroutine(ShrinkAndDestroy());
         }
     }
+
+    private IEnumerator DestroyAfterLifetime()
+    {
+        yield return new WaitForSeconds(_lifetime);
+        StartCoroutine(ShrinkAndDestroy());
+    }
+
+    private IEnumerator ShrinkAndDestroy()
+    {
+        Vector3 initialScale = transform.localScale;
+        float timer = 0f;
+
+        while (timer < _shrinkDuration)
+        {
+            timer += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(initialScale, Vector3.zero, timer / _shrinkDuration);
+            yield return null;
+        }
+
+        Destroy(gameObject);
+    }
 }
-    

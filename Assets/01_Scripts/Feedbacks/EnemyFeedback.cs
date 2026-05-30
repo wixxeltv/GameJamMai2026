@@ -50,13 +50,13 @@ public class EnemyFeedback : MonoBehaviour
         var effect= Instantiate(deathParticles, shootPoint.transform.position, Quaternion.identity, shootPoint.transform);
         effect.Play();
         if (AudioManager.Instance) AudioManager.Instance.PlaySfx(deathSfx, 100f);
-        
+
         while (effect.isPlaying)
         {
-            if(healthUI.value<=0) Destroy(healthUI.gameObject);
             yield return null;
         }
-        
+
+        if (healthUI != null) Destroy(healthUI.gameObject);
         Destroy(gameObject);
     }
     

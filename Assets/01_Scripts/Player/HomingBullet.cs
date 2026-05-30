@@ -37,7 +37,7 @@ public class HomingBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Enemy>(out var enemy))
+        if (other.TryGetComponent<Enemy>(out var enemy) && enemy.IsAlive)
         {
             enemy.TakeDamage(Damage, BulletColor);
             Destroy(gameObject);

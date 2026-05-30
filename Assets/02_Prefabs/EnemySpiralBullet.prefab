@@ -126,10 +126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f974fce56e6d4488066407e5c969ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBullet
-  _speed: 10
-  _lifetime: 5
-  _angularSpeed: 150
-  _damage: 10
+  _speed: 8
+  _lifetime: 3
+  _angularSpeed: 120
+  _damage: 5
+  _shrinkDuration: 0.2
 --- !u!54 &-3102038232065022104
 Rigidbody:
   m_ObjectHideFlags: 0
