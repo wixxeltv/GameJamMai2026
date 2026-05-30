@@ -32,6 +32,7 @@ public class WaveManager : MonoBehaviour
         _waveInfoUI = FindFirstObjectByType<WaveInfoUI>();
         _enemyManager = FindFirstObjectByType<EnemyManager>();
         _comboSystem = FindFirstObjectByType<ComboSystem>();
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.attackBGM, 100f);
         StartWave();
     }
 
@@ -55,6 +56,7 @@ public class WaveManager : MonoBehaviour
         if (wave.isBoss)
         {
             _waveInfoUI?.SetEnemiesLeft(1);
+            if (AudioManager.Instance) AudioManager.Instance.PlayMusic(AudioManager.Instance.bossBGM, 100f);
             _enemyManager.SetSpawning(false);
             _enemyManager.SpawnBoss(wave.enemies[0]);
         }

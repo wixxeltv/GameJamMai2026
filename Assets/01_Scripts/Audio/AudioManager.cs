@@ -6,6 +6,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] public AudioSource musicSource;
     [SerializeField] public AudioSource sfxSource;
     
+    [Header("Musics")]
+    [SerializeField] public AudioClip attackBGM;
+    [SerializeField] public AudioClip bossBGM;
+    
     public static AudioManager Instance;
     
     void Awake()
@@ -26,6 +30,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlayMusic(AudioClip clip, float volume)
+    {
+        if (musicSource)
+        {
+            musicSource.volume = volume;
+            musicSource.clip = clip;
+            musicSource.Play();
+        }
+    }
     public void StopSfx()
     {
         if(sfxSource) sfxSource.Stop();

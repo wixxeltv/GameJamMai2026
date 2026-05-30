@@ -127,7 +127,7 @@ MonoBehaviour:
   shootPoint: {fileID: 500963670527184025}
   appearance: {fileID: 3245159784781486492}
   healthUI: {fileID: 5866019425506895539}
-  deathSfx: {fileID: 0}
+  deathSfx: {fileID: 8300000, guid: c2806d4fef45e7a4fa949eb3d6b2441d, type: 3}
   deathParticles: {fileID: 8791802859067835849, guid: ae07f2a45f14a82428409cfe410e6002, type: 3}
   _blinkInterval: 0.1
   _blinkCount: 3

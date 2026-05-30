@@ -6,6 +6,8 @@ public class PlayerFeedback : MonoBehaviour
 {
     [SerializeField] private GameObject shootPoint;
     
+    [SerializeField] private AudioClip playerHitSFX;
+    
     [SerializeField] private AudioClip shootSFX;
     [SerializeField] private ParticleSystem shootParticles;
     
@@ -42,8 +44,8 @@ public class PlayerFeedback : MonoBehaviour
     
     public void DeathEffect()
     {
-        var effect= Instantiate(shootParticles, shootPoint.transform.position, Quaternion.identity, shootPoint.transform);
-        effect.Play();
+        // var effect= Instantiate(shootParticles, shootPoint.transform.position, Quaternion.identity, shootPoint.transform);
+        // effect.Play();
         if (AudioManager.Instance) AudioManager.Instance.PlaySfx(deathSFX, 100f);
     }
     
@@ -64,6 +66,7 @@ public class PlayerFeedback : MonoBehaviour
         _isBlinking = true;
         float elapsedTime = 0f;
         bool isBlinkOn = false;
+        AudioManager.Instance.PlaySfx(playerHitSFX, 100f);
 
         while (elapsedTime < duration)
         {

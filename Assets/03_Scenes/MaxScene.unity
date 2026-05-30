@@ -195,7 +195,7 @@ MonoBehaviour:
   waves:
   - {fileID: 11400000, guid: 97b6a3830f2a2d341aa9439ad175220f, type: 2}
   - {fileID: 11400000, guid: e5e4e717e08ea9d4eb6df2bc00c6fd15, type: 2}
-  - {fileID: 11400000, guid: bdcf610c49ad3ff4c9a054001d355c1b, type: 2}
+  - {fileID: 11400000, guid: 6227a117f3f2ca54a9f8d0bec8cba486, type: 2}
   _timeBetweenWaves: 5
   OnWaveStarted:
     m_PersistentCalls:
@@ -491,6 +491,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   musicSource: {fileID: 710319396}
   sfxSource: {fileID: 710319395}
+  attackBGM: {fileID: 8300000, guid: 8a7d305ca5fc0d14a9daabc618676fb9, type: 3}
+  bossBGM: {fileID: 8300000, guid: 2dca478f30025d1448eadb1e2cb44982, type: 3}
 --- !u!4 &710319398
 Transform:
   m_ObjectHideFlags: 0

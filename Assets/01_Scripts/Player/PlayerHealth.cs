@@ -60,6 +60,7 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         _progressBar.current = 0;
+        _playerFeedback.DeathEffect();
         OnDeath?.Invoke();
         gameObject.SetActive(false);
         GameManager.Instance.PlayerDied();
