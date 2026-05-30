@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class ProgressBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
-    public int minimum;
-    public int maximum;
-    public int current;
+    public float minimum;
+    public float maximum;
+    public float current;
     
     [Header("Settings")]
     [SerializeField] private float fillSpeed = 0.5f;
