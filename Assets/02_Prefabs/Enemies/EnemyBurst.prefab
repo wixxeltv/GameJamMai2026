@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -10, y: -10}
+  m_SizeDelta: {x: -0.09999998, y: -0.099999994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3695730603765763887
 CanvasRenderer:
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 100
 --- !u!1 &3850296628441634321
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +206,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6350693831584364959}
   - component: {fileID: 5989635605041199678}
-  - component: {fileID: 7348639670061225145}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
@@ -230,10 +229,10 @@ RectTransform:
   - {fileID: 7883136457330917902}
   m_Father: {fileID: 1537997739667264444}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 35}
-  m_SizeDelta: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 3, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5989635605041199678
 CanvasRenderer:
@@ -243,36 +242,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5872364055944148514}
   m_CullTransparentMesh: 1
---- !u!114 &7348639670061225145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5872364055944148514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e8e366a51617f80419420ed85acc4935, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6459444772088680020
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +255,7 @@ GameObject:
   - component: {fileID: 3094351274075372918}
   - component: {fileID: 7044245187979812364}
   - component: {fileID: 2205831173434343607}
+  - component: {fileID: 812292753611418519}
   m_Layer: 0
   m_Name: EnemyBurst
   m_TagString: Enemy
@@ -353,7 +323,6 @@ MonoBehaviour:
   _yellowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _blueColor: {r: 0, g: 1, b: 1, a: 1}
   _colorlessColor: {r: 1, g: 1, b: 1, a: 1}
-  _healthBar: {fileID: 0}
   _bulletPrefab: {fileID: 1891232714594278134, guid: 7240a521f6407234ea301625cda78642, type: 3}
   _bulletsPerBurst: 4
   _timeBetweenBullets: 0.1
@@ -403,10 +372,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyFeedback
   shootPoint: {fileID: 5497472780518207340}
   appearance: {fileID: 3850296628441634321}
+  healthUI: {fileID: 5104723067049883225}
   deathSfx: {fileID: 0}
   deathParticles: {fileID: 8791802859067835849, guid: ae07f2a45f14a82428409cfe410e6002, type: 3}
   _blinkInterval: 0.1
   _blinkColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &812292753611418519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6459444772088680020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ea9f90fce228124c9ee53e469786049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProgressBar
+  slider: {fileID: 5104723067049883225}
+  minimum: 0
+  maximum: 0
+  current: 0
+  fillSpeed: 3
 --- !u!1 &8152539817744429615
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,8 +406,8 @@ GameObject:
   - component: {fileID: 5073640013319917917}
   - component: {fileID: 3292088286723709856}
   - component: {fileID: 5478479282494990725}
-  - component: {fileID: 5028579706162884763}
-  - component: {fileID: 5862670593696859960}
+  - component: {fileID: 3120676080393715330}
+  - component: {fileID: 5104723067049883225}
   m_Layer: 0
   m_Name: HealthInfoCanvas
   m_TagString: Untagged
@@ -443,10 +430,10 @@ RectTransform:
   - {fileID: 6350693831584364959}
   m_Father: {fileID: 6217599684940511848}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.134}
-  m_SizeDelta: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 2}
+  m_SizeDelta: {x: 3, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5073640013319917917
 Canvas:
@@ -511,7 +498,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5028579706162884763
+--- !u!114 &3120676080393715330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -520,15 +507,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8152539817744429615}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ea9f90fce228124c9ee53e469786049, type: 3}
+  m_Script: {fileID: 11500000, guid: 84feec7ffd9cfc5479ea61e443abcda4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ProgressBar
-  slider: {fileID: 0}
-  minimum: 0
-  maximum: 0
-  current: 0
-  fillSpeed: 0.5
---- !u!114 &5862670593696859960
+  m_EditorClassIdentifier: Assembly-CSharp::UIFollowAndFaceCamera
+  _target: {fileID: 1537997739667264444}
+  _offset: {x: 0, y: 2, z: 0}
+--- !u!114 &5104723067049883225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -591,7 +575,7 @@ GameObject:
   - component: {fileID: 1750564692339775350}
   - component: {fileID: 268501570423392540}
   m_Layer: 0
-  m_Name: Panel (2)
+  m_Name: BackgroundPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -614,7 +598,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -10, y: -10}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1750564692339775350
 CanvasRenderer:
@@ -653,4 +637,4 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 100
