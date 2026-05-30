@@ -19,7 +19,11 @@ public class HomingBullet : MonoBehaviour
 
     private void Update()
     {
-        if (_target == null) FindTarget();
+        if (_target == null || !_target.TryGetComponent<Enemy>(out var e) || !e.IsAlive)
+        {
+            _target = null;
+            FindTarget();
+        }
 
         if (_target != null)
         {
@@ -47,6 +51,7 @@ public class HomingBullet : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
         {
+            if (!enemy.TryGetComponent<Enemy>(out var e) || !e.IsAlive) continue;
             float dist = Vector3.Distance(transform.position, enemy.transform.position);
             if (dist < closest)
             {

@@ -23,14 +23,15 @@ public class FloorRepeater : MonoBehaviour
             if (Vector3.Distance(onetilefloor.transform.position, targetPoint.transform.position) < 0.025f)
             {
                 Debug.Log("It has reached its destination");
-                int randomIndex = Random.Range(0, 1);
+                int randomIndex = Random.Range(0, 2);
                 switch (randomIndex)
                 {
                     case 0:
                         Instantiate(floor[_floorIndex], spawnPoint.transform.position, floor[_floorIndex].transform.rotation, transform);
                         break;
                     case 1:
-                        Instantiate(floor[_floorIndex], spawnPoint.transform.position, floor[_floorIndex].transform.rotation, transform);
+                        Quaternion invertedRot = floor[_floorIndex].transform.rotation * Quaternion.Euler(0f, 180f, 0f);
+                        Instantiate(floor[_floorIndex], spawnPoint.transform.position, invertedRot, transform);
                         break;
                 }
                 _floorIndex = (_floorIndex + 1) % 3;
