@@ -36,7 +36,7 @@ public class ScoreInfoUI : MonoBehaviour
         Vector2 startPosition = tempText.rectTransform.anchoredPosition;
 
         float randomX = Random.Range(-0.5f, 0.5f); 
-        Vector2 moveDirection = new Vector2(randomX, 1f).normalized; 
+        Vector2 moveDirection = new Vector2(randomX, -1f).normalized; 
 
         while (elapsedTime < duration)
         {

@@ -17,14 +17,20 @@ public class PlayerHealth : MonoBehaviour
 
     private float _currentHp;
     private float _invincibilityTimer;
+    
+    private ProgressBar _progressBar;
 
     private void Start()
     {
+        _progressBar = FindFirstObjectByType<ProgressBar>();
+        _progressBar.maximum = (int)_maxHp;
+        _progressBar.current = (int)CurrentHp;
         _currentHp = _maxHp;
     }
 
     private void Update()
     {
+        _progressBar.current = (int)CurrentHp;
         if (_invincibilityTimer > 0f)
             _invincibilityTimer -= Time.deltaTime;
     }
