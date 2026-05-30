@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
 
     private PlayerColorController _colorController;
     private PlayerFeedback _playerFeedback;
-    
+    private Rigidbody _rb;
+
     private Vector2 _moveInput;
     private bool _isFiring;
     private float _nextFireTime;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         _colorController = GetComponent<PlayerColorController>();
         _playerFeedback = GetComponent<PlayerFeedback>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -36,15 +38,22 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        HandleMovement();
         HandleShooting();
+    }
+
+    private void FixedUpdate()
+    {
+        HandleMovement();
     }
 
     private void HandleMovement()
     {
         float speed = _moveSpeed * (_colorController != null ? _colorController.SpeedMultiplier : 1f);
-        Vector3 move = new Vector3(_moveInput.x, 0f, _moveInput.y).normalized * speed * Time.deltaTime;
-        transform.position += move;
+        Vector3 move = new Vector3(_moveInput.x, 0f, _moveInput.y).normalized * speed * Time.fixedDeltaTime;
+        if (_rb != null)
+            _rb.MovePosition(_rb.position + move);
+        else
+            transform.position += move;
     }
 
     private void HandleShooting()
