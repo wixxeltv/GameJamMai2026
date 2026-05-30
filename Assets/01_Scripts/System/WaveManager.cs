@@ -63,6 +63,7 @@ public class WaveManager : MonoBehaviour
             _waveInfoUI?.SetEnemiesLeft(wave.enemeisToKill);
             _enemyManager.SetEnemies(wave.enemies);
             _enemyManager.SpawnInterval = wave.spawnInterval;
+            _enemyManager.SetMaxEnemies(wave.maxEnemies > 0 ? wave.maxEnemies : 999);
             _enemyManager.SetSpawning(true);
         }
 

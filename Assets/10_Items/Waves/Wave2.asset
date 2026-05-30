@@ -16,3 +16,5 @@ MonoBehaviour:
   spawnInterval: 2
   enemies:
   - {fileID: 2412643063995333145, guid: e7b2e928ab1a66549be398363e0f09e7, type: 3}
+  isBoss: 0
+  maxEnemies: 5

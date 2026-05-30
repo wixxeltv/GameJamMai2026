@@ -20,6 +20,7 @@ public class ProgressBar : MonoBehaviour
 
     void GetCurrentFill()
     {
+        if (slider == null) return;
         float currentOffset = current - minimum;
         float maximumOffset = maximum - minimum;
         float fillAmount = currentOffset / maximumOffset;

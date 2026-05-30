@@ -377,8 +377,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   waves:
-  - {fileID: 11400000, guid: 97b6a3830f2a2d341aa9439ad175220f, type: 2}
-  - {fileID: 11400000, guid: e5e4e717e08ea9d4eb6df2bc00c6fd15, type: 2}
   - {fileID: 11400000, guid: 6227a117f3f2ca54a9f8d0bec8cba486, type: 2}
   _timeBetweenWaves: 5
   OnWaveStarted:

@@ -39,7 +39,7 @@ public class HomingBullet : MonoBehaviour
     {
         if (other.TryGetComponent<Enemy>(out var enemy) && enemy.IsAlive)
         {
-            enemy.TakeDamage(Damage, BulletColor);
+            enemy.TakeDamage(Damage, BulletColor, transform.position);
             Destroy(gameObject);
         }
     }

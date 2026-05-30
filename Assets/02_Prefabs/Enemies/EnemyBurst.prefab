@@ -317,6 +317,8 @@ MonoBehaviour:
   _maxHp: 30
   _moveSpeed: 3
   _score: 100
+  _wrongColorDamageMultiplier: 0.05
+  _wrongColorKnockbackMultiplier: 0.1
   _isColorless: 0
   _enemyColor: 2
   _bulletPrefab: {fileID: 1891232714594278134, guid: 7240a521f6407234ea301625cda78642, type: 3}
@@ -327,6 +329,9 @@ MonoBehaviour:
   _telegraphDuration: 0.5
   _dashSpeed: 18
   _dashDuration: 0.25
+  _dashMinDistance: 1.5
+  _retreatSpeed: 5
+  _retreatDuration: 1
 --- !u!54 &7044245187979812364
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -372,7 +377,9 @@ MonoBehaviour:
   deathSfx: {fileID: 0}
   deathParticles: {fileID: 8791802859067835849, guid: ae07f2a45f14a82428409cfe410e6002, type: 3}
   _blinkInterval: 0.1
-  _blinkCount: 4
+  _blinkCount: 3
+  _knockbackForce: 10
+  _knockbackDuration: 0.15
 --- !u!114 &812292753611418519
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -494,9 +494,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3495eda9a5529ab41bc2092050e58179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
-  _maxHp: 400
+  _maxHp: 1200
   _moveSpeed: 1
   _score: 50
+  _wrongColorDamageMultiplier: 0.1
+  _wrongColorKnockbackMultiplier: 0.3
   _isColorless: 0
   _enemyColor: 0
   _forms:
@@ -515,16 +517,23 @@ MonoBehaviour:
   _firePoint: {fileID: 6217599684940511848}
   _figureEightWidth: 5
   _figureEightHeight: 4
-  _figureEightSpeed: 0.3
-  _centerOffset: {x: 0, y: 0, z: -3}
+  _figureEightSpeedPhase1: 0.5
+  _figureEightSpeedPhase2: 0.8
+  _figureEightSpeedPhase3: 1
+  _centerOffset: {x: 0, y: 0, z: -4}
   _spiralBulletsPerVolley: 5
   _spiralFireInterval: 1.5
-  _shooterFireInterval: 1
+  _shooterFireInterval: 0.5
   _burstBulletsCount: 5
   _burstSpreadAngle: 20
   _burstFireInterval: 2
   _burstTimeBetweenBullets: 0.08
   _colorSwitchInterval: 4
+  _rageBulletsCount: 12
+  _phase3IntervalMultiplier: 0.55
+  _phase3SwitchEveryNShots: 4
+  _phase2HpThreshold: 0.8
+  _phase3HpThreshold: 0.4
 --- !u!114 &6454654451899762283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,9 +550,9 @@ MonoBehaviour:
   _particleSpawnPoint: {fileID: 6217599684940511848}
   _deathSfx: {fileID: 0}
   _healthUI: {fileID: 5840159058545759616}
-  _blinkDuration: 0.2
   _blinkInterval: 0.1
-  _blinkColor: {r: 1, g: 1, b: 1, a: 1}
+  _blinkCount: 3
+  _wrongColorBlinkColor: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
 --- !u!1 &7216543600039386699
 GameObject:
   m_ObjectHideFlags: 0

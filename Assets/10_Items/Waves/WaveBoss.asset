@@ -17,3 +17,4 @@ MonoBehaviour:
   enemies:
   - {fileID: 4466447079290650434, guid: 1ce4b5105fa16964682d0fad916e4f50, type: 3}
   isBoss: 1
+  maxEnemies: 1

@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.TryGetComponent<Enemy>(out var enemy))
         {
-            enemy.TakeDamage(Damage, BulletColor);
+            enemy.TakeDamage(Damage, BulletColor, transform.position);
             Destroy(gameObject);
         }
     }

@@ -13,6 +13,7 @@ public class EnemyManager : MonoBehaviour
 
     private float _spawnInterval = 2f;
     private float _timer;
+    private int _maxEnemies = 999;
 
     public float SpawnInterval
     {
@@ -20,6 +21,7 @@ public class EnemyManager : MonoBehaviour
         set => _spawnInterval = value;
     }
 
+    public void SetMaxEnemies(int max) => _maxEnemies = max;
     public void SetEnemies(Enemy[] enemies) => _usableEnemies = enemies;
 
     public void SetSpawning(bool active)
@@ -42,6 +44,9 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnEnemy()
     {
+        _activeEnemies.RemoveAll(e => e == null || !e.IsAlive);
+        if (_activeEnemies.Count >= _maxEnemies) return;
+
         Vector3 spawnPos = _spawnLineCenter.position + Vector3.right * Random.Range(-_spawnLineWidth / 2f, _spawnLineWidth / 2f);
         Enemy prefab = _usableEnemies[Random.Range(0, _usableEnemies.Length)];
         Enemy instance = Instantiate(prefab, spawnPos, Quaternion.identity);

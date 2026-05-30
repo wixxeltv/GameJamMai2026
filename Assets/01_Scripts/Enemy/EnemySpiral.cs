@@ -10,8 +10,9 @@ public class EnemySpiral : Enemy
     [Header("Orbite")]
     [SerializeField] private float _orbitRadius = 8f;
     [SerializeField] private float _orbitSpeed = 45f;
-    [SerializeField] private float _orbitSpeedCharge = 120f; // vitesse pendant le telegraph
+    [SerializeField] private float _orbitSpeedCharge = 120f;
     [SerializeField] private float _chargeUpDuration = 0.6f;
+    [SerializeField] private float _minDistanceToPlayer = 4f;
 
     private float _fireTimer;
     private float _volleyAngle;
@@ -58,7 +59,13 @@ public class EnemySpiral : Enemy
         float rad = _orbitAngle * Mathf.Deg2Rad;
         Vector3 targetPos = _player.position + new Vector3(Mathf.Cos(rad), 0f, Mathf.Sin(rad)) * _orbitRadius;
 
-        Vector3 dir = (targetPos - transform.position).normalized;
+        Vector3 dir;
+        float distToPlayer = Vector3.Distance(transform.position, _player.position);
+        if (distToPlayer < _minDistanceToPlayer)
+            dir = (transform.position - _player.position).normalized;
+        else
+            dir = (targetPos - transform.position).normalized;
+
         transform.position += (dir * _moveSpeed + GetSeparationForce()) * Time.deltaTime;
     }
 

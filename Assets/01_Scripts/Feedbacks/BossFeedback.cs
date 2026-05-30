@@ -25,13 +25,15 @@ public class BossFeedback : EnemyFeedbackBase
         _propBlock = new MaterialPropertyBlock();
     }
 
-    public override void Blink()
+    [SerializeField] private Color _wrongColorBlinkColor = Color.grey;
+
+    public override void Blink(bool wrongColor = false)
     {
         Renderer r = GetActiveRenderer();
         if (r == null) return;
         if (_blinkCoroutine != null) StopCoroutine(_blinkCoroutine);
         r.SetPropertyBlock(null);
-        _blinkCoroutine = StartCoroutine(BlinkCoroutine(r));
+        _blinkCoroutine = StartCoroutine(BlinkCoroutine(r, wrongColor ? _wrongColorBlinkColor : Color.white));
     }
 
     public override void DeathEffect()
@@ -41,7 +43,7 @@ public class BossFeedback : EnemyFeedbackBase
         _deathCoroutine = StartCoroutine(DeathRoutine());
     }
 
-    private IEnumerator BlinkCoroutine(Renderer r)
+    private IEnumerator BlinkCoroutine(Renderer r, Color blinkColor)
     {
         for (int i = 0; i < _blinkCount; i++)
         {
@@ -50,7 +52,7 @@ public class BossFeedback : EnemyFeedbackBase
                 ResetAllPropertyBlocks();
                 yield break;
             }
-            _propBlock.SetColor(ColorProp, Color.white);
+            _propBlock.SetColor(ColorProp, blinkColor);
             r.SetPropertyBlock(_propBlock);
             yield return new WaitForSeconds(_blinkInterval);
             r.SetPropertyBlock(null);

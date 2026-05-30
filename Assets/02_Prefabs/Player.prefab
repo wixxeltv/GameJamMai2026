@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9328ee3fab3a664096f1fc018c7b38b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _moveSpeed: 8
+  _moveSpeed: 5
   _firePoint: {fileID: 3213542910495621614}
   _fireRate: 0.2
 --- !u!114 &4729680092311754354
@@ -329,7 +329,7 @@ MonoBehaviour:
   _blueBulletPrefab: {fileID: 1891232714594278134, guid: 79c7b365a92791146b9d02b733ef4705, type: 3}
   _spreadAngle: 20
   _redDamageMultiplier: 1.5
-  _yellowSpeedMultiplier: 1.8
+  _yellowSpeedMultiplier: 1.4
   _blueDamageMultiplier: 0.6
   _blueScale: 1.8
   _redColor: {r: 1, g: 0, b: 0, a: 1}
@@ -348,8 +348,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerFeedback
   shootPoint: {fileID: 5078338147583862979}
-  shootEffect: {fileID: 0}
+  shootSFX: {fileID: 0}
   shootParticles: {fileID: 2504214343621411456, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
+  deathSFX: {fileID: 0}
+  deathParticles: {fileID: 0}
+  _blinkInterval: 0.1
+  _blinkColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &340845693342667369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,8 +368,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   _maxHp: 100
   _invincibilityDuration: 1
-  _blinkInterval: 0.1
-  _blinkColor: {r: 1, g: 1, b: 1, a: 1}
   OnDeath:
     m_PersistentCalls:
       m_Calls: []

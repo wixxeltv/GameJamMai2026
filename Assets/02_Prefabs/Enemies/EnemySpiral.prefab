@@ -319,11 +319,13 @@ MonoBehaviour:
   _maxHp: 30
   _moveSpeed: 3
   _score: 100
+  _wrongColorDamageMultiplier: 0.05
+  _wrongColorKnockbackMultiplier: 0.1
   _isColorless: 0
   _enemyColor: 0
   _bulletPrefab: {fileID: 1891232714594278134, guid: ad4a771d8c72f9449aa418ebc6546d8a, type: 3}
-  _bulletsPerVolley: 4
-  _fireInterval: 1.5
+  _bulletsPerVolley: 3
+  _fireInterval: 3
   _orbitRadius: 8
   _orbitSpeed: 45
   _orbitSpeedCharge: 120
@@ -373,7 +375,9 @@ MonoBehaviour:
   deathSfx: {fileID: 0}
   deathParticles: {fileID: 8791802859067835849, guid: ae07f2a45f14a82428409cfe410e6002, type: 3}
   _blinkInterval: 0.1
-  _blinkCount: 4
+  _blinkCount: 3
+  _knockbackForce: 10
+  _knockbackDuration: 0.15
 --- !u!114 &161324275286849329
 MonoBehaviour:
   m_ObjectHideFlags: 0

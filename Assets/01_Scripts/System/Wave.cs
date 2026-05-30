@@ -7,4 +7,5 @@ public class Wave : ScriptableObject
     public float spawnInterval;
     public Enemy[] enemies;
     public bool isBoss;
+    public int maxEnemies;
 }

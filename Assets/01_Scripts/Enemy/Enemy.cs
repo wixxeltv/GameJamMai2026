@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float _maxHp = 30f;
     [SerializeField] protected float _moveSpeed = 3f;
     [SerializeField] protected int _score = 0;
+    [SerializeField] private float _wrongColorDamageMultiplier = 0.1f;
+    [SerializeField] private float _wrongColorKnockbackMultiplier = 0.3f;
 
     [Header("Couleur")]
     [SerializeField] private bool _isColorless = false;
@@ -25,6 +27,7 @@ public class Enemy : MonoBehaviour
     private Renderer _renderer;
     private ProgressBar _healthBar;
     private Collider _collider;
+    private float _startY;
 
     private bool _isDying;
     private EnemyFeedbackBase _enemyFeedback;
@@ -34,6 +37,13 @@ public class Enemy : MonoBehaviour
         _renderer = GetComponentInChildren<Renderer>();
         _healthBar = GetComponent<ProgressBar>();
         _collider = GetComponent<Collider>();
+        _startY = transform.position.y;
+    }
+
+    private void LateUpdate()
+    {
+        if (!_isDying)
+            transform.position = new Vector3(transform.position.x, _startY, transform.position.z);
     }
 
     protected virtual void Start()
@@ -44,13 +54,15 @@ public class Enemy : MonoBehaviour
         if (_healthBar) { _healthBar.minimum = 0; _healthBar.maximum = _maxHp; _healthBar.current = _maxHp; }
     }
 
-    public void TakeDamage(float damage, ColorType bulletColor)
+    public void TakeDamage(float damage, ColorType bulletColor, Vector3 fromPosition = default)
     {
         if (_isDying) return;
-        if (_enemyFeedback) _enemyFeedback.Blink();
-        if (!_isColorless && bulletColor != _enemyColor) return;
+        bool wrongColor = !_isColorless && bulletColor != _enemyColor;
+        if (_enemyFeedback) _enemyFeedback.Blink(wrongColor);
+        if (wrongColor) damage *= _wrongColorDamageMultiplier;
         _currentHp -= damage;
         if (_healthBar) _healthBar.current = _currentHp;
+        if (_player != null) _enemyFeedback?.Knockback(_player.position, wrongColor ? _wrongColorKnockbackMultiplier : 1f);
         if (_currentHp <= 0f) Die();
     }
 
@@ -82,6 +94,7 @@ public class Enemy : MonoBehaviour
             if (col.gameObject == gameObject) continue;
             if (!col.TryGetComponent<Enemy>(out _)) continue;
             Vector3 away = transform.position - col.transform.position;
+            away.y = 0f;
             if (away.sqrMagnitude > 0f)
                 force += away.normalized / away.magnitude;
         }
