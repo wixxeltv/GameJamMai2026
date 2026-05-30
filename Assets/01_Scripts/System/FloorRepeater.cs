@@ -35,7 +35,7 @@ public class FloorRepeater : MonoBehaviour
                 //         Instantiate(floor[_floorIndex], spawnPoint.transform.position, invertedRot, transform);
                 //         break;
                 // }
-                _floorIndex = (_floorIndex + 1) % 3;
+                _floorIndex = (_floorIndex + 1) % 5;
                 
                 Destroy(onetilefloor);
             }
