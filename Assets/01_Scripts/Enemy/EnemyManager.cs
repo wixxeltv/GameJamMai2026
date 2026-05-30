@@ -57,6 +57,13 @@ public class EnemyManager : MonoBehaviour
         _activeEnemies.Clear();
     }
 
+    public void SpawnBoss(Enemy bossPrefab)
+    {
+        if (bossPrefab == null) return;
+        Enemy instance = Instantiate(bossPrefab, _spawnLineCenter.position, Quaternion.identity);
+        _activeEnemies.Add(instance);
+    }
+
     public void RemoveEnemy(Enemy enemy)
     {
         _activeEnemies.Remove(enemy);

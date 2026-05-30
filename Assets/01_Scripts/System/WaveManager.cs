@@ -49,11 +49,22 @@ public class WaveManager : MonoBehaviour
         _enemiesKilled = 0;
         _isTransitioning = false;
 
+        Wave wave = waves[_currentWave];
         _waveInfoUI?.SetWaveCount(_currentWave);
-        _waveInfoUI?.SetEnemiesLeft(waves[_currentWave].enemeisToKill);
-        _enemyManager.SetEnemies(waves[_currentWave].enemies);
-        _enemyManager.SpawnInterval = waves[_currentWave].spawnInterval;
-        _enemyManager.SetSpawning(true);
+
+        if (wave.isBoss)
+        {
+            _waveInfoUI?.SetEnemiesLeft(1);
+            _enemyManager.SetSpawning(false);
+            _enemyManager.SpawnBoss(wave.enemies[0]);
+        }
+        else
+        {
+            _waveInfoUI?.SetEnemiesLeft(wave.enemeisToKill);
+            _enemyManager.SetEnemies(wave.enemies);
+            _enemyManager.SpawnInterval = wave.spawnInterval;
+            _enemyManager.SetSpawning(true);
+        }
 
         _comboSystem?.GenerateCombos(_currentWave + 1);
         OnWaveStarted?.Invoke(_currentWave);

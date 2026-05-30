@@ -15,55 +15,71 @@ public class Boss : Enemy
     [SerializeField] private BossForm[] _forms;
 
     [Header("Bullets")]
-    [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private GameObject _bulletPrefabRed;
+    [SerializeField] private GameObject _bulletPrefabYellow;
+    [SerializeField] private GameObject _bulletPrefabBlue;
     [SerializeField] private Transform _firePoint;
 
-    [Header("Phase 1 - Tir simple")]
-    [SerializeField] private float _phase1FireInterval = 2f;
+    [Header("Mouvement en 8")]
+    [SerializeField] private float _figureEightWidth = 8f;
+    [SerializeField] private float _figureEightHeight = 4f;
+    [SerializeField] private float _figureEightSpeed = 0.8f;
+    [SerializeField] private Vector3 _centerOffset = Vector3.zero;
 
-    [Header("Phase 2 - Changement de couleur")]
-    [SerializeField] private float _phase2FireInterval = 1.2f;
-    [SerializeField] private float _colorSwitchInterval = 3f;
+    [Header("Tir - Rouge (Spiral)")]
+    [SerializeField] private int _spiralBulletsPerVolley = 5;
+    [SerializeField] private float _spiralFireInterval = 1.5f;
 
-    [Header("Phase 3 - Chaos")]
-    [SerializeField] private float _phase3FireInterval = 0.6f;
+    [Header("Tir - Jaune (Shooter)")]
+    [SerializeField] private float _shooterFireInterval = 1.2f;
+
+    [Header("Tir - Bleu (Burst)")]
+    [SerializeField] private int _burstBulletsCount = 5;
+    [SerializeField] private float _burstSpreadAngle = 20f;
+    [SerializeField] private float _burstFireInterval = 2f;
+    [SerializeField] private float _burstTimeBetweenBullets = 0.08f;
+
+    [Header("Phases")]
+    [SerializeField] private float _colorSwitchInterval = 6f;
 
     private int _currentPhase = 0;
     private int _currentFormIndex = 0;
-    private Renderer _bossRenderer;
+    private float _figureEightT;
+    private Vector3 _spawnCenter;
+    private float _volleyAngle;
 
     protected override void Start()
     {
         base.Start();
-        _bossRenderer = GetComponentInChildren<Renderer>();
+        _spawnCenter = transform.position;
         InitRandomForm();
         StartCoroutine(PhaseRoutine());
     }
 
     private void Update()
     {
-        if (_player == null || !IsAlive) return;
-        
-        float dist = Vector3.Distance(transform.position, _player.position);
-        if (dist > 8f)
-        {
-            Vector3 dir = (_player.position - transform.position).normalized;
-            transform.position += dir * _moveSpeed * Time.deltaTime;
-        }
+        if (!IsAlive) return;
+        MoveFigureEight();
     }
-    
+
+    private void MoveFigureEight()
+    {
+        _figureEightT += _figureEightSpeed * Time.deltaTime;
+        float x = _figureEightWidth * Mathf.Sin(_figureEightT);
+        float z = _figureEightHeight * Mathf.Sin(_figureEightT * 2f);
+        transform.position = _spawnCenter + _centerOffset + new Vector3(x, 0f, z);
+    }
+
+    // --- Phases ---
 
     private IEnumerator PhaseRoutine()
     {
-        // Phase 1
         _currentPhase = 1;
         yield return StartCoroutine(Phase1());
 
-        // Phase 2
         _currentPhase = 2;
         yield return StartCoroutine(Phase2());
 
-        // Phase 3
         _currentPhase = 3;
         yield return StartCoroutine(Phase3());
     }
@@ -71,21 +87,14 @@ public class Boss : Enemy
     private IEnumerator Phase1()
     {
         while (IsAlive && GetHpPercent() > 0.6f)
-        {
-            Shoot();
-            yield return new WaitForSeconds(_phase1FireInterval);
-        }
+            yield return StartCoroutine(ShootByColor());
     }
 
     private IEnumerator Phase2()
     {
         StartCoroutine(ColorSwitchRoutine());
-
         while (IsAlive && GetHpPercent() > 0.2f)
-        {
-            Shoot();
-            yield return new WaitForSeconds(_phase2FireInterval);
-        }
+            yield return StartCoroutine(ShootByColor());
     }
 
     private IEnumerator Phase3()
@@ -93,8 +102,7 @@ public class Boss : Enemy
         while (IsAlive)
         {
             SwitchToRandomForm();
-            Shoot();
-            yield return new WaitForSeconds(_phase3FireInterval);
+            yield return StartCoroutine(ShootByColor());
         }
     }
 
@@ -106,15 +114,78 @@ public class Boss : Enemy
             SwitchToRandomForm();
         }
     }
-    
 
-    private void Shoot()
+    // --- Tir selon couleur ---
+
+    private IEnumerator ShootByColor()
     {
-        if (_bulletPrefab == null || _firePoint == null || _player == null) return;
-        Vector3 dir = (_player.position - _firePoint.position).normalized;
-        Instantiate(_bulletPrefab, _firePoint.position, Quaternion.LookRotation(dir));
+        switch (EnemyColor)
+        {
+            case ColorType.Red:
+                ShootSpiral();
+                yield return new WaitForSeconds(_spiralFireInterval);
+                break;
+            case ColorType.Yellow:
+                ShootStraight();
+                yield return new WaitForSeconds(_shooterFireInterval);
+                break;
+            default: // Blue
+                yield return StartCoroutine(ShootBurst());
+                yield return new WaitForSeconds(_burstFireInterval);
+                break;
+        }
     }
-    
+
+    private void ShootSpiral()
+    {
+        if (_bulletPrefabRed == null || _firePoint == null) return;
+        float angleStep = 360f / _spiralBulletsPerVolley;
+        for (int i = 0; i < _spiralBulletsPerVolley; i++)
+        {
+            float angle = _volleyAngle + angleStep * i;
+            Instantiate(_bulletPrefabRed, _firePoint.position, Quaternion.Euler(0f, angle, 0f));
+        }
+        _volleyAngle += 15f;
+    }
+
+    private void ShootStraight()
+    {
+        if (_bulletPrefabYellow == null || _firePoint == null || _player == null) return;
+        Vector3 dir = (_player.position - _firePoint.position).normalized;
+        Instantiate(_bulletPrefabYellow, _firePoint.position, Quaternion.LookRotation(dir));
+    }
+
+    private IEnumerator ShootBurst()
+    {
+        if (_bulletPrefabBlue == null || _firePoint == null || _player == null) yield break;
+        Vector3 dir = (_player.position - _firePoint.position).normalized;
+        Quaternion baseRot = Quaternion.LookRotation(dir);
+        float halfSpread = _burstSpreadAngle * (_burstBulletsCount - 1) / 2f;
+        for (int i = 0; i < _burstBulletsCount; i++)
+        {
+            float angle = -halfSpread + _burstSpreadAngle * i;
+            Instantiate(_bulletPrefabBlue, _firePoint.position, baseRot * Quaternion.Euler(0f, angle, 0f));
+            yield return new WaitForSeconds(_burstTimeBetweenBullets);
+        }
+    }
+
+    // --- Mort ---
+
+    protected override void Die()
+    {
+        DisableAllModels();
+        base.Die();
+    }
+
+    // --- Formes ---
+
+    private void DisableAllModels()
+    {
+        if (_forms == null) return;
+        foreach (var form in _forms)
+            if (form.model != null && form.model != gameObject)
+                form.model.SetActive(false);
+    }
 
     private void InitRandomForm()
     {
@@ -136,18 +207,20 @@ public class Boss : Enemy
     private void ApplyForm(int index)
     {
         for (int i = 0; i < _forms.Length; i++)
-            if (_forms[i].model != null)
+            if (_forms[i].model != null && _forms[i].model != gameObject)
                 _forms[i].model.SetActive(i == index);
-
         SetBossColor(_forms[index].color, _forms[index].visualColor);
     }
 
     private void SetBossColor(ColorType colorType, Color visualColor)
     {
         SetEnemyColor(colorType);
-
-        if (_bossRenderer != null)
-            _bossRenderer.material.color = visualColor;
+        if (_currentFormIndex < _forms.Length && _forms[_currentFormIndex].model != null)
+        {
+            var r = _forms[_currentFormIndex].model.GetComponent<Renderer>()
+                 ?? _forms[_currentFormIndex].model.GetComponentInChildren<Renderer>();
+            if (r != null) r.material.color = visualColor;
+        }
     }
 
     private float GetHpPercent() => CurrentHp / MaxHp;

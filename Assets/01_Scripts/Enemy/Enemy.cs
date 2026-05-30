@@ -13,10 +13,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ColorType _enemyColor = ColorType.Red;
 
     [Header("Couleurs visuelles")]
-    [SerializeField] private Color _redColor = Color.red;
-    [SerializeField] private Color _yellowColor = Color.yellow;
-    [SerializeField] private Color _blueColor = Color.cyan;
-    [SerializeField] private Color _colorlessColor = Color.white;
+    private Color _redColor = Color.red;
+    private Color _yellowColor = Color.yellow;
+    private Color _blueColor = Color.cyan;
+    private Color _colorlessColor = Color.white;
 
     public bool IsColorless => _isColorless;
     public ColorType EnemyColor => _enemyColor;
@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     private Collider _collider;
 
     private bool _isDying;
-    private EnemyFeedback _enemyFeedback;
+    private EnemyFeedbackBase _enemyFeedback;
 
     protected virtual void Awake()
     {
@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
     {
         _currentHp = _maxHp;
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;
-        _enemyFeedback = GetComponent<EnemyFeedback>();
+        _enemyFeedback = GetComponent<EnemyFeedbackBase>();
         if (_healthBar) { _healthBar.minimum = 0; _healthBar.maximum = _maxHp; _healthBar.current = _maxHp; }
         ApplyVisualColor();
     }

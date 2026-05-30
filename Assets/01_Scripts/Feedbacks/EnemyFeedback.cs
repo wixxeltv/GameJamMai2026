@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class EnemyFeedback : MonoBehaviour
+public class EnemyFeedback : EnemyFeedbackBase
 {
     [Header("References")]
     [SerializeField] private GameObject shootPoint;
@@ -37,11 +37,11 @@ public class EnemyFeedback : MonoBehaviour
         }
     }
     
-    public void DeathEffect()
+    public override void DeathEffect()
     {
         if (_deathCoroutine != null) return;
-        
-        appearance.SetActive(false);
+
+        if (appearance != null) appearance.SetActive(false);
         _deathCoroutine = StartCoroutine(DeathSequence());
     }
 
@@ -60,14 +60,15 @@ public class EnemyFeedback : MonoBehaviour
         Destroy(gameObject);
     }
     
-    public void Blink()
+    public override void Blink()
     {
-        if (_isBlinking && _material == null) return;
-        
+        _renderer = GetComponentInChildren<Renderer>();
+        if (_renderer == null) return;
+        _material = _renderer.material;
+        _originalColor = _material.color;
+
         if (_blinkCoroutine != null)
-        {
             StopCoroutine(_blinkCoroutine);
-        }
         _blinkCoroutine = StartCoroutine(BlinkCoroutine(0.2f));
     }
     
