@@ -52,7 +52,7 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (Enemy enemy in _activeEnemies)
         {
-            if (enemy != null) Destroy(enemy.gameObject);
+            if (enemy != null) enemy.Kill();
         }
         _activeEnemies.Clear();
     }

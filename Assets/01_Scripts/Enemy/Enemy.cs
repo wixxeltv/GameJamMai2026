@@ -20,12 +20,13 @@ public class Enemy : MonoBehaviour
 
     public bool IsColorless => _isColorless;
     public ColorType EnemyColor => _enemyColor;
-    public bool IsAlive => _currentHp > 0f;
+    public bool IsAlive => _currentHp > 0f && !_isDying;
 
     protected float _currentHp;
     protected Transform _player;
     private Renderer _renderer;
-    
+    private bool _isDying;
+
     private EnemyFeedback _enemyFeedback;
 
     protected virtual void Awake()
@@ -43,7 +44,8 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage, ColorType bulletColor)
     {
-        if(_enemyFeedback) _enemyFeedback.Blink();
+        if (_isDying) return;
+        if (_enemyFeedback) _enemyFeedback.Blink();
         if (!_isColorless && bulletColor != _enemyColor) return;
         _currentHp -= damage;
         if (_currentHp <= 0f) Die();
@@ -51,9 +53,18 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
-        _enemyFeedback.DeathEffect();
+        if (_isDying) return;
+        _isDying = true;
+        _enemyFeedback?.DeathEffect();
         WaveManager.Instance.EnemyKilled();
         ScoreManager.Instance.IncreaseScore(_score);
+    }
+    
+    public void Kill()
+    {
+        if (_isDying) return;
+        _isDying = true;
+        _enemyFeedback?.DeathEffect();
     }
 
     protected Vector3 GetSeparationForce(float radius = 2f, float strength = 3f)
