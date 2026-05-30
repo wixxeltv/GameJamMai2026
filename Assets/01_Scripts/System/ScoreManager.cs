@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ScoreManager : MonoBehaviour
 {
     private int _totalScore = 0;
     
     public static ScoreManager Instance;
+    
+    public UnityEvent OnScoreUpdated;
     
     public int GetTotalScore() { return _totalScore; }
     
@@ -23,5 +26,6 @@ public class ScoreManager : MonoBehaviour
     public void IncreaseScore(int score)
     {
         _totalScore += score;
+        OnScoreUpdated.Invoke();
     }
 }

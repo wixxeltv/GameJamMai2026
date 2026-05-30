@@ -40,9 +40,4 @@ public class ComboSlotUI : MonoBehaviour
             }
         }
     }
-
-    public void UpdateBackground()
-    {
-        
-    }
 }

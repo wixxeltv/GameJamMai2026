@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private Wave[] waves;
     private int _currentWave;
     private int _enemiesKilled;
+    
+    public UnityEvent OnScoreUpdated;
     
     private WaveInfoUI _waveInfoUI;
     private EnemyManager _enemyManager;
