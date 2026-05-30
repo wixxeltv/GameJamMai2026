@@ -24,7 +24,8 @@ public class ComboSlotUI : MonoBehaviour
 
     public void UpdateSlots(List<ComboSystem.ComboType> combos)
     {
-        // Then fill only the ones we have combos for
+        _currentCombo = combos;
+        
         for (int i = 0; i < combos.Count; i++)
         {
             switch (combos[i])
@@ -47,6 +48,7 @@ public class ComboSlotUI : MonoBehaviour
     
     public void UpdateBuffer(List<ComboSystem.ComboType> buffer)
     {
+        Debug.Log("update buffer");
         if (_currentCombo == null) return;
         
         for (int i = 0; i < _currentCombo.Count && i < arrowSlots.Length; i++)
