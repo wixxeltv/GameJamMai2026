@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class EnemyFeedback : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject shootPoint;
     [SerializeField] private GameObject appearance;
+    [SerializeField] private Slider healthUI;
     
     [Header("FX")]
     [SerializeField] private AudioClip deathSfx;
@@ -49,7 +51,11 @@ public class EnemyFeedback : MonoBehaviour
         effect.Play();
         if (AudioManager.Instance) AudioManager.Instance.PlaySfx(deathSfx, 100f);
         
-        while (effect.isPlaying) yield return null;
+        while (effect.isPlaying)
+        {
+            if(healthUI.value<=0) Destroy(healthUI.gameObject);
+            yield return null;
+        }
         
         Destroy(gameObject);
     }
