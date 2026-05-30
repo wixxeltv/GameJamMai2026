@@ -30,7 +30,7 @@ public class EnemySpiral : Enemy
 
     private void Update()
     {
-        if (_player == null) return;
+        if (_player == null || !IsAlive) return;
 
         Orbit();
 

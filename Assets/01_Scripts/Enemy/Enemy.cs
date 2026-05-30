@@ -25,6 +25,8 @@ public class Enemy : MonoBehaviour
     protected float _currentHp;
     protected Transform _player;
     private Renderer _renderer;
+    
+    private EnemyFeedback _enemyFeedback;
 
     protected virtual void Awake()
     {
@@ -35,6 +37,7 @@ public class Enemy : MonoBehaviour
     {
         _currentHp = _maxHp;
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        _enemyFeedback = GetComponent<EnemyFeedback>();
         ApplyVisualColor();
     }
 
@@ -47,9 +50,9 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
+        _enemyFeedback.DeathEffect();
         WaveManager.Instance.EnemyKilled();
         ScoreManager.Instance.IncreaseScore(_score);
-        Destroy(gameObject);
     }
 
     protected Vector3 GetSeparationForce(float radius = 2f, float strength = 3f)
