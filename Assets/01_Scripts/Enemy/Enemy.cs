@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     protected float _currentHp;
     protected Transform _player;
     private Renderer _renderer;
-   // [SerializeField] private EnemyProgressBar _healthBar;
+    [SerializeField] private ProgressBar _healthBar;
 
     private bool _isDying;
     private EnemyFeedback _enemyFeedback;
@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
         _currentHp = _maxHp;
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;
         _enemyFeedback = GetComponent<EnemyFeedback>();
-      //  _healthBar?.SetValues(_maxHp, _maxHp);
+        if (_healthBar) { _healthBar.minimum = 0; _healthBar.maximum = _maxHp; _healthBar.current = _maxHp; }
         ApplyVisualColor();
     }
 
@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
         if (_enemyFeedback) _enemyFeedback.Blink();
         if (!_isColorless && bulletColor != _enemyColor) return;
         _currentHp -= damage;
-        //_healthBar?.SetValues(_currentHp, _maxHp);
+        if (_healthBar) _healthBar.current = _currentHp;
         if (_currentHp <= 0f) Die();
     }
 
