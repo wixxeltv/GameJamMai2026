@@ -59,7 +59,7 @@ public class WaveManager : MonoBehaviour
         if (wave.isBoss)
         {
             _waveInfoUI?.SetEnemiesLeft(1);
-            if (AudioManager.Instance) AudioManager.Instance.PlayMusic(AudioManager.Instance.bossBGM, 80);
+            if (AudioManager.Instance) AudioManager.Instance.ChangeBGM(AudioManager.Instance.bossBGM);
             _enemyManager.SetSpawning(false);
             _enemyManager.SpawnBoss(wave.enemies[0]);
         }

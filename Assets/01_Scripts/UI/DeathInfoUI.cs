@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 public class DeathInfoUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
+    private SceneTransitionUI sceneTransition;
+
+    private void Start()
+    {
+        sceneTransition = FindFirstObjectByType<SceneTransitionUI>();
+    }
     public void OnEnable()
     {
         scoreText.text = ScoreManager.Instance.GetTotalScore().ToString("00000");
@@ -17,6 +23,6 @@ public class DeathInfoUI : MonoBehaviour
     
     public void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        sceneTransition.DarkenScreen("MainMenu");
     }
 }

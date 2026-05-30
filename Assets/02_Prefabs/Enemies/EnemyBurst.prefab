@@ -224,6 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc620e0ca3809c46840f8404c4dadc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBurst
+  objectToWobble: {fileID: 6919191030823372417}
+  wobbleSpeed: 10
+  wobbleAmount: 5
   _maxHp: 30
   _moveSpeed: 3
   _score: 100
@@ -580,15 +583,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

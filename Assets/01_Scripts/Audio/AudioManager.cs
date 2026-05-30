@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -42,5 +43,35 @@ public class AudioManager : MonoBehaviour
     public void StopSfx()
     {
         if(sfxSource) sfxSource.Stop();
+    }
+    
+    public void ChangeBGM(AudioClip clip)
+    {
+        StartCoroutine(GradualChangeEnumerator(clip));
+    }
+    
+    private IEnumerator GradualChangeEnumerator(AudioClip newClip)
+    {
+        float t = 0f;
+        float startVolume = musicSource.volume;
+        
+        while (t < 1f)
+        {
+            musicSource.volume = Mathf.Lerp(startVolume, 0, t);
+            t += Time.deltaTime / 1;
+            yield return null;
+        }
+
+        float t2 = 0f;
+
+        musicSource.clip = newClip;
+        musicSource.Play();
+
+        while (t2 < 1f)
+        {
+            musicSource.volume = Mathf.Lerp(0, startVolume, t2);
+            t2 += Time.deltaTime / 1;
+            yield return null;
+        }
     }
 }

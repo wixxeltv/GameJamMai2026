@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     {
         _currentGameState = GameState.MainMenu;
         _playerHealth = FindFirstObjectByType<PlayerHealth>();
+        StartGame();
     }
     public void SwitchState(GameState newState)
     {
