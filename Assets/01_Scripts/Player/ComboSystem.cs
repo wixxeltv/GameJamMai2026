@@ -54,16 +54,24 @@ public class ComboSystem : MonoBehaviour
 
     public void GenerateCombos(int waveNumber)
     {
-        _currentLength = Mathf.Min(_startLength + waveNumber - 1, _maxLength);
-        _combos.Clear();
         _inputBuffer.Clear();
 
         ComboType[] allInputs = { ComboType.ArrowUp, ComboType.ArrowDown, ComboType.ArrowLeft, ComboType.ArrowRight };
         ColorType[] colors = { ColorType.Red, ColorType.Yellow, ColorType.Blue };
 
-        foreach (ColorType color in colors)
-            _combos[color] = RandomCombo(allInputs, _currentLength);
+        if (waveNumber == 1)
+        {
+            _combos.Clear();
+            foreach (ColorType color in colors)
+                _combos[color] = RandomCombo(allInputs, 1);
+        }
+        else if (_currentLength < _maxLength)
+        {
+            foreach (ColorType color in colors)
+                _combos[color].Add(allInputs[Random.Range(0, allInputs.Length)]);
+        }
 
+        _currentLength = _combos[ColorType.Red].Count;
         OnCombosGenerated?.Invoke(_combos);
     }
 
