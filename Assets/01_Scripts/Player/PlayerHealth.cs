@@ -46,7 +46,7 @@ public class PlayerHealth : MonoBehaviour
         _invincibilityTimer = _invincibilityDuration;
 
         OnHealthChanged?.Invoke(_currentHp);
-        
+        CameraShake.Instance?.Shake(0.5f, 0.2f);
         _playerFeedback.StartBlinking(_invincibilityDuration);
 
         if (_currentHp <= 0f) Die();

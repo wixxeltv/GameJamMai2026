@@ -52,6 +52,9 @@ public class Boss : Enemy
     [Header("Transition de phase")]
     [SerializeField] private float _transitionDuration = 1.5f;
     [SerializeField] private float _transitionVibrateAmount = 0.3f;
+    [SerializeField] private float _transitionShakeMagnitude = 0.25f;
+    [SerializeField] private float _chaosShakeMagnitude = 0.55f;
+    [SerializeField] private float _chaosFireInterval = 0.35f;
 
     private int _currentPhase = 0;
     private int _currentFormIndex = 0;
@@ -96,20 +99,26 @@ public class Boss : Enemy
         _currentPhase = 1;
         yield return StartCoroutine(Phase1());
 
-        yield return StartCoroutine(PhaseTransition());
+        yield return StartCoroutine(PhaseTransition(chaos: false));
         _currentPhase = 2;
         yield return StartCoroutine(Phase2());
 
-        yield return StartCoroutine(PhaseTransition());
+        yield return StartCoroutine(PhaseTransition(chaos: true));
         _currentPhase = 3;
         yield return StartCoroutine(Phase3());
     }
 
-    private IEnumerator PhaseTransition()
+    private IEnumerator PhaseTransition(bool chaos = false)
     {
         _isTransitioning = true;
         Vector3 frozenPos = transform.position;
         float elapsed = 0f;
+        float nextChaosShot = 0f;
+        int colorCycleIndex = 0;
+        ColorType[] chaosColors = { ColorType.Red, ColorType.Yellow, ColorType.Blue };
+
+        CameraShake.Instance?.Shake(_transitionDuration, chaos ? _chaosShakeMagnitude : _transitionShakeMagnitude);
+
 
         while (elapsed < _transitionDuration)
         {
@@ -118,6 +127,15 @@ public class Boss : Enemy
             Vector3 shake = Random.insideUnitSphere * _transitionVibrateAmount;
             shake.y = 0f;
             transform.position = frozenPos + shake;
+
+            if (chaos && elapsed >= nextChaosShot)
+            {
+                SetBossColor(chaosColors[colorCycleIndex % chaosColors.Length]);
+                colorCycleIndex++;
+                StartCoroutine(RageBurst());
+                nextChaosShot = elapsed + _chaosFireInterval;
+            }
+
             yield return null;
         }
 

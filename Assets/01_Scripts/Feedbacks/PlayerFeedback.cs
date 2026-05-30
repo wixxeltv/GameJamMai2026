@@ -67,8 +67,11 @@ public class PlayerFeedback : MonoBehaviour
         float elapsedTime = 0f;
         bool isBlinkOn = false;
         
-        int random = Random.Range(0, playerHitSFX.Length);
-        AudioManager.Instance.PlaySfx(playerHitSFX[random], 100f);
+        if (playerHitSFX != null && playerHitSFX.Length > 0 && AudioManager.Instance)
+        {
+            int random = Random.Range(0, playerHitSFX.Length);
+            AudioManager.Instance.PlaySfx(playerHitSFX[random], 100f);
+        }
 
         while (elapsedTime < duration)
         {
