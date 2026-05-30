@@ -7,6 +7,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private Wave[] waves;
     [SerializeField] private float _timeBetweenWaves = 5f;
     [SerializeField] private AudioClip _waveSound;
+    [SerializeField] private AudioClip _babyCelebration;
 
     public UnityEvent<int> OnWaveStarted;
     public UnityEvent OnWaveEnd;
@@ -85,7 +86,7 @@ public class WaveManager : MonoBehaviour
         _enemyManager.KillAllEnemies();
         
         // Reset audio
-        AudioManager.Instance.PlayMusic(AudioManager.Instance.attackBGM, 80f);
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.attackBGM, 70f);
         
         StartWave();
     }
@@ -105,6 +106,7 @@ public class WaveManager : MonoBehaviour
         _enemyManager.SetSpawning(false);
         _enemyManager.KillAllEnemies();
         AudioManager.Instance.PlaySfx(_waveSound, 100f);
+        AudioManager.Instance.PlaySfx(_babyCelebration, 100f);
         float timer = _timeBetweenWaves;
         while (timer > 0f)
         {

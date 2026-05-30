@@ -198,7 +198,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6227a117f3f2ca54a9f8d0bec8cba486, type: 2}
   _timeBetweenWaves: 5
   _waveSound: {fileID: 8300000, guid: ea2726bce9819454b9967f24d6bbbba9, type: 3}
+  _babyCelebration: {fileID: 8300000, guid: 9c58f50dcac11604b8b7c98efd9acb1b, type: 3}
   OnWaveStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWaveEnd:
     m_PersistentCalls:
       m_Calls: []
   OnWaveTimerTick:
