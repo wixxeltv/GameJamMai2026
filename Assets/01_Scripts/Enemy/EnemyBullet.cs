@@ -8,6 +8,7 @@ public class EnemyBullet : MonoBehaviour
     [SerializeField] private float _angularSpeed = 0f;
     [SerializeField] private float _damage = 10f;
     [SerializeField] private float _shrinkDuration = 0.15f;
+    [SerializeField] private ParticleSystem _hitEffect;
 
     private void Start()
     {
@@ -27,8 +28,16 @@ public class EnemyBullet : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerHealth>()?.TakeDamage(_damage);
+            SpawnHitEffect();
             StartCoroutine(ShrinkAndDestroy());
         }
+    }
+
+    private void SpawnHitEffect()
+    {
+        if (_hitEffect == null) return;
+        var effect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
+        Destroy(effect.gameObject, effect.main.duration + effect.main.startLifetime.constantMax);
     }
 
     private IEnumerator DestroyAfterLifetime()

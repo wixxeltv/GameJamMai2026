@@ -131,6 +131,7 @@ MonoBehaviour:
   _angularSpeed: 0
   _damage: 10
   _shrinkDuration: 0.15
+  _hitEffect: {fileID: 4021103657954561960, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
 --- !u!54 &-3102038232065022104
 Rigidbody:
   m_ObjectHideFlags: 0

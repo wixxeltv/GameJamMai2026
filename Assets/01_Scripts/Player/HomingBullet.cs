@@ -9,6 +9,8 @@ public class HomingBullet : MonoBehaviour
     public float Damage { get; set; } = 10f;
     public ColorType BulletColor { get; set; } = ColorType.Yellow;
 
+    [SerializeField] private ParticleSystem _hitEffect;
+
     private Transform _target;
 
     private void Start()
@@ -40,8 +42,16 @@ public class HomingBullet : MonoBehaviour
         if (other.TryGetComponent<Enemy>(out var enemy) && enemy.IsAlive)
         {
             enemy.TakeDamage(Damage, BulletColor, transform.position);
+            SpawnHitEffect();
             Destroy(gameObject);
         }
+    }
+
+    private void SpawnHitEffect()
+    {
+        if (_hitEffect == null) return;
+        var effect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
+        Destroy(effect.gameObject, effect.main.duration + effect.main.startLifetime.constantMax);
     }
 
     private void FindTarget()
