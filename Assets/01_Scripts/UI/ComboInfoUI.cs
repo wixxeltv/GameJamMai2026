@@ -10,6 +10,7 @@ public class ComboInfoUI : MonoBehaviour
     [SerializeField] Sprite[] arrowImages;
 
     private ComboSystem _comboSystem;
+    private WaveManager _waveManager;
     
     [SerializeField] private AudioClip confirmationSFX;
     [SerializeField] private AudioClip[] voicelinesSFX;
@@ -17,6 +18,8 @@ public class ComboInfoUI : MonoBehaviour
     private void Awake()
     {
         _comboSystem = FindFirstObjectByType<ComboSystem>();
+        _waveManager = FindFirstObjectByType<WaveManager>();
+        
         foreach (var slot in comboSlots)
         {
             slot.SetArrow(arrowImages);
@@ -24,6 +27,7 @@ public class ComboInfoUI : MonoBehaviour
         _comboSystem.OnCombosGenerated.AddListener(OnCombosGenerated);
         _comboSystem.OnBufferChanged.AddListener(OnBufferChanged);
         _comboSystem.OnColorSwitched.AddListener(OnColorSwitched);
+        _waveManager.OnWaveStarted.AddListener(OnValueReset);
     }
 
     public void OnColorSwitched(ColorType color)
@@ -57,6 +61,17 @@ public class ComboInfoUI : MonoBehaviour
         foreach (var slot in comboSlots)
         {
             slot.UpdateBuffer(buffer);
+        }
+    }
+    
+    private void OnValueReset(int round)
+    {
+        if(round != 0) return;
+        
+        // Update all combo slots with the current buffer
+        foreach (var slot in comboSlots)
+        {
+            slot.ResetSlots();
         }
     }
 }

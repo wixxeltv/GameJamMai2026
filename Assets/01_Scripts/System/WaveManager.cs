@@ -9,6 +9,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private AudioClip _waveSound;
 
     public UnityEvent<int> OnWaveStarted;
+    public UnityEvent OnWaveEnd;
     public UnityEvent<float> OnWaveTimerTick;
     public UnityEvent OnAllWavesCompleted;
 
@@ -73,11 +74,27 @@ public class WaveManager : MonoBehaviour
         _comboSystem?.GenerateCombos(_currentWave + 1);
         OnWaveStarted?.Invoke(_currentWave);
     }
-
+    
+    public void ResetAllWaves()
+    {
+        StopAllCoroutines();
+        _currentWave = 0;
+        _isTransitioning = false;
+        _enemiesKilled = 0;
+        _enemyManager.SetSpawning(false);
+        _enemyManager.KillAllEnemies();
+        
+        // Reset audio
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.attackBGM, 80f);
+        
+        StartWave();
+    }
+    
     public void ResetWaveCount()
     {
         _currentWave = -1;
-        StartCoroutine(EndWaveRoutine());
+        _enemyManager.SetSpawning(false);
+        _enemyManager.KillAllEnemies();
         StartWave();
     }
 
@@ -105,6 +122,7 @@ public class WaveManager : MonoBehaviour
         }
 
         StartWave();
+        OnWaveEnd?.Invoke();
     }
 
     public void EnemyKilled()

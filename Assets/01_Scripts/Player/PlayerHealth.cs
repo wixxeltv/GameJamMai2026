@@ -54,8 +54,11 @@ public class PlayerHealth : MonoBehaviour
 
     public void ResetHealth()
     {
-        gameObject.SetActive(true);
+        StopAllCoroutines();
         _currentHp = _maxHp;
+        _invincibilityTimer = 0f;
+    
+        OnHealthChanged?.Invoke(_currentHp);
     }
     private void Die()
     {

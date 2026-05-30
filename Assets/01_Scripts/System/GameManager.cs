@@ -45,8 +45,16 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         SwitchState(GameState.Gameplay);
+        
+        ScoreManager.Instance.ResetScore();
+        
         _playerHealth.ResetHealth();
-        WaveManager.Instance.ResetWaveCount();
+        _playerHealth.gameObject.SetActive(true);
+        
+        WaveManager.Instance.ResetAllWaves();
+        
+        // Hide death screen
+        _deathScreen.SetActive(false);
     }
 
     public void EndGame()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -20,7 +21,14 @@ public class ComboSlotUI : MonoBehaviour
 
     private List<ComboSystem.ComboType> _currentCombo;
     private int increaseValue = 55;
-    
+
+    private Vector2 originalSize;
+
+    private void Start()
+    {
+        originalSize = backgroundImage.sizeDelta;
+    }
+
     public void SetArrow(Sprite[] arrows)
     {
         _arrowImages = arrows;
@@ -85,6 +93,15 @@ public class ComboSlotUI : MonoBehaviour
         for (int i = 0; i < matches && i < arrowSlots.Length; i++)
         {
             arrowSlots[i].color = pressedColor;
+        }
+    }
+
+    public void ResetSlots()
+    {
+        backgroundImage.sizeDelta = originalSize;
+        for (int i = 1; i < arrowSlots.Length; i++)
+        {
+            arrowSlots[i].gameObject.SetActive(false);
         }
     }
 }

@@ -28,4 +28,10 @@ public class ScoreManager : MonoBehaviour
         _totalScore += score;
         OnScoreUpdated.Invoke();
     }
+    
+    public void ResetScore()
+    {
+        _totalScore = 0;
+        OnScoreUpdated?.Invoke();
+    }
 }

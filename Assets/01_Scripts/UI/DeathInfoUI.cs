@@ -12,13 +12,11 @@ public class DeathInfoUI : MonoBehaviour
     
     public void StartGame()
     {
-        gameObject.SetActive(false);
         GameManager.Instance.StartGame();
     }
     
     public void MainMenu()
     {
-        gameObject.SetActive(false);
         SceneManager.LoadScene("MainMenu");
     }
 }
