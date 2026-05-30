@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9c05d398f70c24f80c6760a9c8f06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeathInfoUI
-  scoreText: {fileID: 8814154583147652373}
+  scoreText: {fileID: 8472824565937054089}
 --- !u!1 &626120421481698712
 GameObject:
   m_ObjectHideFlags: 0

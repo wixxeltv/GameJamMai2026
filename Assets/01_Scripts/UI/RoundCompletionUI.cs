@@ -8,6 +8,7 @@ public class RoundCompletionUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countdownText;
     [SerializeField] private Image completionPanel;
 
+    private int _roundcount;
     private WaveManager _waveManager;
     
     private void Start()
@@ -18,15 +19,18 @@ public class RoundCompletionUI : MonoBehaviour
         _waveManager.OnWaveTimerTick.AddListener(OnWaveTimerTick);
     }
     
-    public void OnWaveStarted(int round)
+    private void OnWaveStarted(int round)
     {
+        Debug.Log("Wave has been called");
         completionPanel.gameObject.SetActive(false);
-        roundText.text="Round "+(round+1)+" Completed";
+        _roundcount = round;
     }
     
-    public void OnWaveTimerTick(float waitTime)
+    private void OnWaveTimerTick(float waitTime)
     {
+        Debug.Log("Timer has been called");
         completionPanel.gameObject.SetActive(true);
+        roundText.text="Round "+(_roundcount+1)+" Completed";
         countdownText.text=((int)waitTime).ToString();
     }
 }

@@ -2108,6 +2108,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 3325636858533105246}
   unpressedColor: {r: 1, g: 0.94509804, b: 0.57254905, a: 1}
   pressedColor: {r: 1, g: 0.83137256, b: 0, a: 1}
+  inputPressedSFX: {fileID: 8300000, guid: bccc73d2a60ccdd4b8fa5c1d888e15a3, type: 3}
 --- !u!1 &7362081333081143904
 GameObject:
   m_ObjectHideFlags: 0
@@ -2201,6 +2202,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 6796772741041229618}
   unpressedColor: {r: 0.6431373, g: 0.84705883, b: 0.84705883, a: 1}
   pressedColor: {r: 0.21568629, g: 0.63529414, b: 0.7137255, a: 1}
+  inputPressedSFX: {fileID: 8300000, guid: bccc73d2a60ccdd4b8fa5c1d888e15a3, type: 3}
 --- !u!1 &7442959594363560635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2952,6 +2954,10 @@ PrefabInstance:
       propertyPath: backgroundImage
       value: 
       objectReference: {fileID: 3126817548449909022}
+    - target: {fileID: 2261313400214897804, guid: 437ce559d00a2c7488a03e80db15b2f7, type: 3}
+      propertyPath: inputPressedSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: bccc73d2a60ccdd4b8fa5c1d888e15a3, type: 3}
     - target: {fileID: 2261313400214897804, guid: 437ce559d00a2c7488a03e80db15b2f7, type: 3}
       propertyPath: unpressedColor.b
       value: 0.4039216

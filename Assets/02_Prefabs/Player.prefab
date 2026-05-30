@@ -348,9 +348,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerFeedback
   shootPoint: {fileID: 5078338147583862979}
-  shootSFX: {fileID: 0}
+  playerHitSFX:
+  - {fileID: 8300000, guid: b95550489f4480e49b8ffb890be495f5, type: 3}
+  - {fileID: 8300000, guid: f652490f4207b224b85a07013e7937d6, type: 3}
+  - {fileID: 8300000, guid: 9a23103d01774454f9767050a7a1e9b8, type: 3}
+  shootSFX: {fileID: 8300000, guid: ac7bfc808badd8848851c9b2147f916b, type: 3}
   shootParticles: {fileID: 2504214343621411456, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
-  deathSFX: {fileID: 0}
+  deathSFX: {fileID: 8300000, guid: 8ccb0751033d2cf47b6f228ef9dacc6c, type: 3}
   deathParticles: {fileID: 0}
   _blinkInterval: 0.1
   _blinkColor: {r: 1, g: 1, b: 1, a: 1}

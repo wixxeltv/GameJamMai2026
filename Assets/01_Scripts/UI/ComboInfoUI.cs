@@ -10,6 +10,9 @@ public class ComboInfoUI : MonoBehaviour
     [SerializeField] Sprite[] arrowImages;
 
     private ComboSystem _comboSystem;
+    
+    [SerializeField] private AudioClip confirmationSFX;
+    [SerializeField] private AudioClip[] voicelinesSFX;
 
     private void Awake()
     {
@@ -20,8 +23,15 @@ public class ComboInfoUI : MonoBehaviour
         }
         _comboSystem.OnCombosGenerated.AddListener(OnCombosGenerated);
         _comboSystem.OnBufferChanged.AddListener(OnBufferChanged);
+        _comboSystem.OnColorSwitched.AddListener(OnColorSwitched);
     }
 
+    public void OnColorSwitched(ColorType color)
+    {
+        int randomIndex = Random.Range(0, voicelinesSFX.Length);
+        AudioManager.Instance.PlaySfx(voicelinesSFX[randomIndex], 100f);
+        AudioManager.Instance.PlaySfx(confirmationSFX, 100f);
+    }
     private void OnCombosGenerated(Dictionary<ColorType, List<ComboSystem.ComboType>> combos)
     {
         foreach (var key in combos)

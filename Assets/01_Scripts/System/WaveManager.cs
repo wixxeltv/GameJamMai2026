@@ -33,7 +33,7 @@ public class WaveManager : MonoBehaviour
         _waveInfoUI = FindFirstObjectByType<WaveInfoUI>();
         _enemyManager = FindFirstObjectByType<EnemyManager>();
         _comboSystem = FindFirstObjectByType<ComboSystem>();
-        AudioManager.Instance.PlayMusic(AudioManager.Instance.attackBGM, 100f);
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.attackBGM, 80f);
         StartWave();
     }
 
@@ -109,7 +109,7 @@ public class WaveManager : MonoBehaviour
 
     public void EnemyKilled()
     { 
-        _waveInfoUI?.SetEnemiesLeft(waves[_currentWave].enemeisToKill-_enemiesKilled);
         _enemiesKilled++;
+        _waveInfoUI?.SetEnemiesLeft(waves[_currentWave].enemeisToKill-_enemiesKilled);
     }
 }

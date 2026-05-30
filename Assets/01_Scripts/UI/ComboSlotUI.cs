@@ -15,6 +15,8 @@ public class ComboSlotUI : MonoBehaviour
     [Header("Colors")]
     [SerializeField] private Color unpressedColor = Color.white;
     [SerializeField] private Color pressedColor = Color.grey;
+    
+    [SerializeField] private AudioClip inputPressedSFX;
 
     private List<ComboSystem.ComboType> _currentCombo;
     private int increaseValue = 55;
@@ -56,6 +58,7 @@ public class ComboSlotUI : MonoBehaviour
     public void UpdateBuffer(List<ComboSystem.ComboType> buffer)
     {
         Debug.Log("update buffer");
+        AudioManager.Instance.PlaySfx(inputPressedSFX, 100f);
         if (_currentCombo == null) return;
         
         for (int i = 0; i < _currentCombo.Count && i < arrowSlots.Length; i++)
@@ -84,5 +87,4 @@ public class ComboSlotUI : MonoBehaviour
             arrowSlots[i].color = pressedColor;
         }
     }
-
 }

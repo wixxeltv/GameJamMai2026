@@ -197,25 +197,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e5e4e717e08ea9d4eb6df2bc00c6fd15, type: 2}
   - {fileID: 11400000, guid: 6227a117f3f2ca54a9f8d0bec8cba486, type: 2}
   _timeBetweenWaves: 5
-  _waveSound: {fileID: 0}
+  _waveSound: {fileID: 8300000, guid: ea2726bce9819454b9967f24d6bbbba9, type: 3}
   OnWaveStarted:
     m_PersistentCalls:
       m_Calls: []
   OnWaveTimerTick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 670368730491537201}
-        m_TargetAssemblyTypeName: RoundCompletionUI, Assembly-CSharp
-        m_MethodName: WaveTimerTick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnAllWavesCompleted:
     m_PersistentCalls:
       m_Calls: []
@@ -2658,6 +2646,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoundCompletedCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2341419134434610291, guid: 1f49ad6ba726dfb45856e4ae31ca1cb9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5109504390892943336, guid: 1f49ad6ba726dfb45856e4ae31ca1cb9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2746,6 +2738,10 @@ PrefabInstance:
       propertyPath: completionPanel
       value: 
       objectReference: {fileID: 670368730491537202}
+    - target: {fileID: 7759418821564140732, guid: 1f49ad6ba726dfb45856e4ae31ca1cb9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2767,17 +2763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
---- !u!114 &670368730491537201 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7499373948225498688, guid: 1f49ad6ba726dfb45856e4ae31ca1cb9, type: 3}
-  m_PrefabInstance: {fileID: 670368730491537198}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6125aa86c0c15dc4f8277d96e31708f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RoundCompletionUI
 --- !u!114 &670368730491537202 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 694216375629452525, guid: 1f49ad6ba726dfb45856e4ae31ca1cb9, type: 3}
@@ -3196,6 +3181,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6172560837259009227, guid: 58b5f4d2a4e16084689d8327840f1adc, type: 3}
+      propertyPath: confirmationSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 3285bf5d05eac1b4cbc265966007c52c, type: 3}
+    - target: {fileID: 6172560837259009227, guid: 58b5f4d2a4e16084689d8327840f1adc, type: 3}
+      propertyPath: voicelinesSFX.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172560837259009227, guid: 58b5f4d2a4e16084689d8327840f1adc, type: 3}
+      propertyPath: 'voicelinesSFX.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 26c74178953ca5b468523d5467dfc20a, type: 3}
+    - target: {fileID: 6172560837259009227, guid: 58b5f4d2a4e16084689d8327840f1adc, type: 3}
+      propertyPath: 'voicelinesSFX.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 787e97295e6324b40b2c20715f548830, type: 3}
+    - target: {fileID: 6172560837259009227, guid: 58b5f4d2a4e16084689d8327840f1adc, type: 3}
+      propertyPath: 'voicelinesSFX.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f4c6cd00d0519484297bbf34d68d986e, type: 3}
     - target: {fileID: 7496526907989085619, guid: 58b5f4d2a4e16084689d8327840f1adc, type: 3}
       propertyPath: m_PixelPerfect
       value: 0

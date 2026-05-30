@@ -7,7 +7,7 @@ public class DeathInfoUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     public void OnEnable()
     {
-        scoreText.text = ScoreManager.Instance.GetTotalScore().ToString();
+        scoreText.text = ScoreManager.Instance.GetTotalScore().ToString("00000");
     }
     
     public void StartGame()
