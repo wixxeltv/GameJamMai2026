@@ -6,6 +6,7 @@ public class WaveManager : MonoBehaviour
 {
     [SerializeField] private Wave[] waves;
     [SerializeField] private float _timeBetweenWaves = 5f;
+    [SerializeField] private AudioClip _waveSound;
 
     public UnityEvent<int> OnWaveStarted;
     public UnityEvent<float> OnWaveTimerTick;
@@ -56,7 +57,7 @@ public class WaveManager : MonoBehaviour
         if (wave.isBoss)
         {
             _waveInfoUI?.SetEnemiesLeft(1);
-            if (AudioManager.Instance) AudioManager.Instance.PlayMusic(AudioManager.Instance.bossBGM, 100f);
+            if (AudioManager.Instance) AudioManager.Instance.PlayMusic(AudioManager.Instance.bossBGM, 80);
             _enemyManager.SetSpawning(false);
             _enemyManager.SpawnBoss(wave.enemies[0]);
         }
@@ -86,7 +87,7 @@ public class WaveManager : MonoBehaviour
         _isTransitioning = true;
         _enemyManager.SetSpawning(false);
         _enemyManager.KillAllEnemies();
-
+        AudioManager.Instance.PlaySfx(_waveSound, 100f);
         float timer = _timeBetweenWaves;
         while (timer > 0f)
         {

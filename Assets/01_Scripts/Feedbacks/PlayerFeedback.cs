@@ -6,7 +6,7 @@ public class PlayerFeedback : MonoBehaviour
 {
     [SerializeField] private GameObject shootPoint;
     
-    [SerializeField] private AudioClip playerHitSFX;
+    [SerializeField] private AudioClip[] playerHitSFX;
     
     [SerializeField] private AudioClip shootSFX;
     [SerializeField] private ParticleSystem shootParticles;
@@ -66,7 +66,9 @@ public class PlayerFeedback : MonoBehaviour
         _isBlinking = true;
         float elapsedTime = 0f;
         bool isBlinkOn = false;
-        AudioManager.Instance.PlaySfx(playerHitSFX, 100f);
+        
+        int random = Random.Range(0, playerHitSFX.Length);
+        AudioManager.Instance.PlaySfx(playerHitSFX[random], 100f);
 
         while (elapsedTime < duration)
         {
