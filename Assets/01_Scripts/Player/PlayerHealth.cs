@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
     private float _currentHp;
     private float _invincibilityTimer;
     
-    private Transform _respawnPosition;
+    [SerializeField] private Transform respawnPosition;
     
     private ProgressBar _progressBar;
     private PlayerFeedback _playerFeedback;
@@ -59,7 +59,7 @@ public class PlayerHealth : MonoBehaviour
         StopAllCoroutines();
         _currentHp = _maxHp;
         _invincibilityTimer = 0f;
-        gameObject.transform.position = _respawnPosition.position;
+        gameObject.transform.position = respawnPosition.position;
         OnHealthChanged?.Invoke(_currentHp);
     }
     private void Die()
