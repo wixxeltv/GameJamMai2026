@@ -10,7 +10,7 @@ public class FloorRepeater : MonoBehaviour
     [Range (0, 2)] private int _floorIndex;
     private Quaternion _rotation = new Quaternion(0f, 180f, 0f, 0f);
 
-    void Update()
+    void FixedUpdate()
     {
         _floorsPrefab = GameObject.FindGameObjectsWithTag("Floor");
         
@@ -23,17 +23,18 @@ public class FloorRepeater : MonoBehaviour
             if (Vector3.Distance(onetilefloor.transform.position, targetPoint.transform.position) < 0.025f)
             {
                 Debug.Log("It has reached its destination");
-                int randomIndex = Random.Range(0, 2);
-                switch (randomIndex)
-                {
-                    case 0:
-                        Instantiate(floor[_floorIndex], spawnPoint.transform.position, floor[_floorIndex].transform.rotation, transform);
-                        break;
-                    case 1:
-                        Quaternion invertedRot = floor[_floorIndex].transform.rotation * Quaternion.Euler(0f, 180f, 0f);
-                        Instantiate(floor[_floorIndex], spawnPoint.transform.position, invertedRot, transform);
-                        break;
-                }
+                Instantiate(floor[_floorIndex], spawnPoint.transform.position, floor[_floorIndex].transform.rotation, transform);
+                //int randomIndex = Random.Range(0, 2);
+                // switch (randomIndex)
+                // {
+                //     case 0:
+                //         Instantiate(floor[_floorIndex], spawnPoint.transform.position, floor[_floorIndex].transform.rotation, transform);
+                //         break;
+                //     case 1:
+                //         Quaternion invertedRot = floor[_floorIndex].transform.rotation * Quaternion.Euler(0f, 180f, 0f);
+                //         Instantiate(floor[_floorIndex], spawnPoint.transform.position, invertedRot, transform);
+                //         break;
+                // }
                 _floorIndex = (_floorIndex + 1) % 3;
                 
                 Destroy(onetilefloor);
