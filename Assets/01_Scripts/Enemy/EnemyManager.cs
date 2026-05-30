@@ -1,35 +1,39 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [Header("Prefabs ennemis")]
-    [SerializeField] private Enemy[] _enemyPrefabs;
-    private Enemy[] _usableEnemies;
+    private Enemy[] _usableEnemies = new Enemy[0];
+    private List<Enemy> _activeEnemies = new List<Enemy>();
+    private bool _isSpawning = false;
 
     [Header("Spawn")]
     [SerializeField] private Transform _spawnLineCenter;
     [SerializeField] private float _spawnLineWidth = 20f;
-    [SerializeField] private float _spawnInterval = 2f;
-    [SerializeField] private float _minSpawnInterval = 0.4f;
+
+    private float _spawnInterval = 2f;
+    private float _timer;
 
     public float SpawnInterval
     {
-        get { return _minSpawnInterval; }
-        set { _minSpawnInterval = value; }
+        get => _spawnInterval;
+        set => _spawnInterval = value;
     }
+
     public void SetEnemies(Enemy[] enemies) => _usableEnemies = enemies;
-    
-    private float _timer;
-    private float _elapsed;
+
+    public void SetSpawning(bool active)
+    {
+        _isSpawning = active;
+        _timer = 0f;
+    }
 
     private void Update()
     {
-        _elapsed += Time.deltaTime;
+        if (!_isSpawning || _usableEnemies.Length == 0) return;
+
         _timer += Time.deltaTime;
-
-        float currentInterval = Mathf.Lerp(_spawnInterval, _minSpawnInterval, _elapsed);
-
-        if (_timer >= currentInterval)
+        if (_timer >= _spawnInterval)
         {
             _timer = 0f;
             SpawnEnemy();
@@ -38,10 +42,23 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        if (_usableEnemies.Length == 0) return;
-
         Vector3 spawnPos = _spawnLineCenter.position + Vector3.right * Random.Range(-_spawnLineWidth / 2f, _spawnLineWidth / 2f);
         Enemy prefab = _usableEnemies[Random.Range(0, _usableEnemies.Length)];
-        Instantiate(prefab, spawnPos, Quaternion.identity);
+        Enemy instance = Instantiate(prefab, spawnPos, Quaternion.identity);
+        _activeEnemies.Add(instance);
+    }
+
+    public void KillAllEnemies()
+    {
+        foreach (Enemy enemy in _activeEnemies)
+        {
+            if (enemy != null) Destroy(enemy.gameObject);
+        }
+        _activeEnemies.Clear();
+    }
+
+    public void RemoveEnemy(Enemy enemy)
+    {
+        _activeEnemies.Remove(enemy);
     }
 }

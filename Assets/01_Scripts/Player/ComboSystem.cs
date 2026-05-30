@@ -8,7 +8,7 @@ public class ComboSystem : MonoBehaviour
     public enum ComboType { ArrowUp, ArrowDown, ArrowLeft, ArrowRight }
 
     [Header("Config")]
-    [SerializeField] private int _startLength = 1;
+    //[SerializeField] private int _startLength = 1;
     [SerializeField] private int _maxLength = 4;
     [SerializeField] private float _bufferResetTime = 2f;
 
