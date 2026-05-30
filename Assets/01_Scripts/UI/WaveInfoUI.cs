@@ -7,6 +7,7 @@ public class WaveInfoUI : MonoBehaviour
 {
     [SerializeField] private GameObject wavePanel;
     [SerializeField] private TextMeshProUGUI waveCountText;
+    [SerializeField] private TextMeshProUGUI enemiesLeftText;
     
     [Header("Animation Settings")]
     [SerializeField] private float maxScaleMultiplier = 1.1f;
@@ -18,6 +19,13 @@ public class WaveInfoUI : MonoBehaviour
     {
         _originalScale = wavePanel.transform.localScale;
     }
+
+    public void SetEnemiesLeft(int enemiesLeft)
+    {
+        enemiesLeftText.text = enemiesLeft.ToString();
+        
+        StartCoroutine(PulsePanelAnimation(enemiesLeftText.gameObject));
+    }
     
     public void SetWaveCount(int waveCount)
     {
@@ -25,10 +33,10 @@ public class WaveInfoUI : MonoBehaviour
 
         if (waveCount == 0) return;
         
-        StartCoroutine(PulsePanelAnimation());
+        StartCoroutine(PulsePanelAnimation(wavePanel));
     }
     
-    private IEnumerator PulsePanelAnimation()
+    private IEnumerator PulsePanelAnimation(GameObject pusleObject)
     {
         float elapsedTime = 0f;
         Vector3 targetScale = _originalScale * maxScaleMultiplier;
@@ -39,10 +47,10 @@ public class WaveInfoUI : MonoBehaviour
             float t = elapsedTime / animationDuration;
             float pulseWeight = Mathf.Sin(t * Mathf.PI);
 
-            wavePanel.transform.localScale = Vector3.Lerp(_originalScale, targetScale, pulseWeight);
+            pusleObject.transform.localScale = Vector3.Lerp(_originalScale, targetScale, pulseWeight);
 
             yield return null;
         }
-        wavePanel.transform.localScale = _originalScale;
+        pusleObject.transform.localScale = _originalScale;
     }
 }

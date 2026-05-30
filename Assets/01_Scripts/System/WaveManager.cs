@@ -50,6 +50,7 @@ public class WaveManager : MonoBehaviour
         _isTransitioning = false;
 
         _waveInfoUI?.SetWaveCount(_currentWave);
+        _waveInfoUI?.SetEnemiesLeft(waves[_currentWave].enemeisToKill);
         _enemyManager.SetEnemies(waves[_currentWave].enemies);
         _enemyManager.SpawnInterval = waves[_currentWave].spawnInterval;
         _enemyManager.SetSpawning(true);
@@ -60,6 +61,7 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator EndWaveRoutine()
     {
+        _waveInfoUI?.SetEnemiesLeft(0);
         _isTransitioning = true;
         _enemyManager.SetSpawning(false);
         _enemyManager.KillAllEnemies();
@@ -83,5 +85,9 @@ public class WaveManager : MonoBehaviour
         StartWave();
     }
 
-    public void EnemyKilled() => _enemiesKilled++;
+    public void EnemyKilled()
+    { 
+        _waveInfoUI?.SetEnemiesLeft(waves[_currentWave].enemeisToKill-_enemiesKilled);
+        _enemiesKilled++;
+    }
 }
