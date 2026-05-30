@@ -4,6 +4,7 @@ public enum GameState
 {
     MainMenu,
     Gameplay,
+    Death
 }
 
 public class GameManager : MonoBehaviour
@@ -15,6 +16,9 @@ public class GameManager : MonoBehaviour
 
     public GameState State => _currentGameState;
     
+    [SerializeField] private GameObject _deathScreen;
+    private PlayerHealth _playerHealth;
+    
     private void Awake()
     {
         if (Instance && Instance != this) Destroy(gameObject);
@@ -24,6 +28,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _currentGameState = GameState.MainMenu;
+        _playerHealth = FindFirstObjectByType<PlayerHealth>();
     }
     public void SwitchState(GameState newState)
     {
@@ -40,10 +45,18 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         SwitchState(GameState.Gameplay);
+        _playerHealth.ResetHealth();
+        WaveManager.Instance.ResetWaveCount();
     }
 
     public void EndGame()
     {
         SwitchState(GameState.MainMenu);
+    }
+
+    public void PlayerDied()
+    {
+        SwitchState(GameState.Death);
+        _deathScreen.gameObject.SetActive(true);
     }
 }

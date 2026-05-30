@@ -52,10 +52,16 @@ public class PlayerHealth : MonoBehaviour
         if (_currentHp <= 0f) Die();
     }
 
+    public void ResetHealth()
+    {
+        gameObject.SetActive(true);
+        _currentHp = _maxHp;
+    }
     private void Die()
     {
         _progressBar.current = 0;
         OnDeath?.Invoke();
         gameObject.SetActive(false);
+        GameManager.Instance.PlayerDied();
     }
 }

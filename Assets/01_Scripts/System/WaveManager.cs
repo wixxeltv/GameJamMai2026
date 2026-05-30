@@ -59,6 +59,13 @@ public class WaveManager : MonoBehaviour
         OnWaveStarted?.Invoke(_currentWave);
     }
 
+    public void ResetWaveCount()
+    {
+        _currentWave = -1;
+        StartCoroutine(EndWaveRoutine());
+        StartWave();
+    }
+
     private IEnumerator EndWaveRoutine()
     {
         _waveInfoUI?.SetEnemiesLeft(0);
