@@ -19,6 +19,7 @@ public class ComboInfoUI : MonoBehaviour
             slot.SetArrow(arrowImages);
         }
         _comboSystem.OnCombosGenerated.AddListener(OnCombosGenerated);
+        _comboSystem.OnBufferChanged.AddListener(OnBufferChanged);
     }
 
     private void OnCombosGenerated(Dictionary<ColorType, List<ComboSystem.ComboType>> combos)
@@ -37,6 +38,15 @@ public class ComboInfoUI : MonoBehaviour
                     comboSlots[2].UpdateSlots(key.Value);
                     break;
             }
+        }
+    }
+    
+    private void OnBufferChanged(List<ComboSystem.ComboType> buffer)
+    {
+        // Update all combo slots with the current buffer
+        foreach (var slot in comboSlots)
+        {
+            slot.UpdateBuffer(buffer);
         }
     }
 }

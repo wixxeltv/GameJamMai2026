@@ -1,18 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ComboSlotUI : MonoBehaviour
 {
     [Header("Slots")]
+    [SerializeField] private Image[] arrowSlots;
     [SerializeField] private Image[] comboSlots;
     [Header("Images")]
     private Sprite[] _arrowImages;
     
     [Header("Colors")]
-    [SerializeField] private Color unpressedColor;
-    [SerializeField] private Color pressedColor;
+    [SerializeField] private Color unpressedColor = Color.white;
+    [SerializeField] private Color pressedColor = Color.grey;
 
+    private List<ComboSystem.ComboType> _currentCombo;
+    
     public void SetArrow(Sprite[] arrows)
     {
         _arrowImages = arrows;
@@ -40,4 +44,36 @@ public class ComboSlotUI : MonoBehaviour
             }
         }
     }
+    
+    public void UpdateBuffer(List<ComboSystem.ComboType> buffer)
+    {
+        if (_currentCombo == null) return;
+        
+        for (int i = 0; i < _currentCombo.Count && i < arrowSlots.Length; i++)
+        {
+            arrowSlots[i].color = unpressedColor;
+        }
+        
+        int matches = 0;
+        int offset = buffer.Count - _currentCombo.Count;
+        if (offset < 0) offset = 0;
+        
+        for (int i = 0; i < _currentCombo.Count && (offset + i) < buffer.Count; i++)
+        {
+            if (buffer[offset + i] == _currentCombo[i])
+            {
+                matches++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        
+        for (int i = 0; i < matches && i < arrowSlots.Length; i++)
+        {
+            arrowSlots[i].color = pressedColor;
+        }
+    }
+
 }
