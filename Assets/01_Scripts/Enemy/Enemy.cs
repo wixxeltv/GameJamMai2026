@@ -27,10 +27,10 @@ public class Enemy : MonoBehaviour
     protected float _currentHp;
     protected Transform _player;
     private Renderer _renderer;
-   // [SerializeField] private EnemyProgressBar _healthBar;
 
     private bool _isDying;
     private EnemyFeedback _enemyFeedback;
+    private ProgressBar _healthBar;
 
     protected virtual void Awake()
     {
@@ -41,15 +41,20 @@ public class Enemy : MonoBehaviour
     {
         _currentHp = _maxHp;
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        _healthBar = GetComponent<ProgressBar>();
         _enemyFeedback = GetComponent<EnemyFeedback>();
+        _healthBar.maximum = _maxHp;
+        _healthBar.current = _maxHp;
       //  _healthBar?.SetValues(_maxHp, _maxHp);
         ApplyVisualColor();
     }
 
     public void TakeDamage(float damage, ColorType bulletColor)
     {
+        _currentHp -= damage;
         if (_isDying) return;
         if (_enemyFeedback) _enemyFeedback.Blink();
+        if (_healthBar) _healthBar.current=_currentHp;
         if (!_isColorless && bulletColor != _enemyColor) return;
         _currentHp -= damage;
         //_healthBar?.SetValues(_currentHp, _maxHp);
@@ -59,6 +64,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         if (_isDying) return;
+        _healthBar.current = 0;
         _isDying = true;
         _enemyFeedback?.DeathEffect();
         WaveManager.Instance.EnemyKilled();
