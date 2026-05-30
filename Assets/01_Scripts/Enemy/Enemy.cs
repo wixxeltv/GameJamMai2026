@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage, ColorType bulletColor)
     {
+        if(_enemyFeedback) _enemyFeedback.Blink();
         if (!_isColorless && bulletColor != _enemyColor) return;
         _currentHp -= damage;
         if (_currentHp <= 0f) Die();

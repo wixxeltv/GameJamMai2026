@@ -125,9 +125,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyFeedback
   shootPoint: {fileID: 500963670527184025}
-  apperance: {fileID: 3245159784781486492}
+  appearance: {fileID: 3245159784781486492}
   deathSfx: {fileID: 0}
   deathParticles: {fileID: 8791802859067835849, guid: ae07f2a45f14a82428409cfe410e6002, type: 3}
+  _blinkInterval: 0.1
+  _blinkColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &500963670527184025
 GameObject:
   m_ObjectHideFlags: 0
