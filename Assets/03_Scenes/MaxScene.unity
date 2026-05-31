@@ -508,6 +508,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 708581715644074160, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 994129529876607786, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
       propertyPath: _renderer
       value: 
@@ -616,6 +620,10 @@ PrefabInstance:
       propertyPath: EmissionModule.rateOverDistance.minScalar
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6331222067037103617, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9122949048447231763, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.0020000339
@@ -627,7 +635,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 188786131288789514, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1426258625}
   m_SourcePrefab: {fileID: 100100000, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
 --- !u!23 &356297457 stripped
 MeshRenderer:
@@ -1188,6 +1199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca2f528d6e05a240861c34b064bc4d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrebossFightUI
+--- !u!1 &936728925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6331222067037103617, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+  m_PrefabInstance: {fileID: 356297456}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &940877095
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,6 +1499,24 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7569339909974589009, guid: 2f205543db69aea4ab5326b8c4286963, type: 3}
   m_PrefabInstance: {fileID: 637000876215860534}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1426258615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 188786131288789514, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+  m_PrefabInstance: {fileID: 356297456}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1426258625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426258615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da7d146f6858a27418f70c314b9b3ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShittyScript
+  help: {fileID: 936728925}
 --- !u!1001 &1458479564
 PrefabInstance:
   m_ObjectHideFlags: 0
