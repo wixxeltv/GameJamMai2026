@@ -26,8 +26,9 @@ public class RoundCompletionUI : MonoBehaviour
 
     public void Update()
     {
-        if (_waveManager._waitingForDialogue)
+        if (_waveManager.waitingForDialogue)
         {
+            StopAllCoroutines();
             completionPanel.gameObject.SetActive(false);
         }
     }

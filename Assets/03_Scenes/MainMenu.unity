@@ -363,7 +363,9 @@ MonoBehaviour:
   bossBGM: {fileID: 8300000, guid: 2dca478f30025d1448eadb1e2cb44982, type: 3}
   mainmenuBGM: {fileID: 8300000, guid: a4a9fb3775f5db34b9b37381c7087723, type: 3}
   tutorialBGM: {fileID: 8300000, guid: 44ef62fb062df2447a6b782e8d131caf, type: 3}
+  dialogueBGM: {fileID: 8300000, guid: 6e0ed613a131adb49952c00ae45261ab, type: 3}
   creditsBGM: {fileID: 8300000, guid: e098c4f0bd0bfdf479b928a4f8c5788e, type: 3}
+  resolutionBGM: {fileID: 8300000, guid: 78323c4095011b84dbb2c87c82be776a, type: 3}
 --- !u!4 &92792279
 Transform:
   m_ObjectHideFlags: 0

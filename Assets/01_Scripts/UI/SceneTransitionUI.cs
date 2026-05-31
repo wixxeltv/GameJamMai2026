@@ -21,7 +21,12 @@ public class SceneTransitionUI : MonoBehaviour
     {
         fadeCoroutine=StartCoroutine(DoFadeOut(scene));
     }
-
+    
+    public void DarkenScreen()
+    {
+        fadeCoroutine=StartCoroutine(DoFadeOut());
+    }
+    
     public void LightenScreen()
     {
         fadeCoroutine=StartCoroutine(DoFadeIn());
@@ -42,6 +47,23 @@ public class SceneTransitionUI : MonoBehaviour
         }
 
         SceneManager.LoadScene(scene);
+        yield return null;
+    }
+    
+    public IEnumerator DoFadeOut()
+    {
+        Color startColor = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);;
+        Color endColor = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1); // fully opaque
+
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            fadeImage.color = Color.Lerp(startColor, endColor, t);
+            t += Time.deltaTime / fadeOutDuration;
+            yield return null;
+        }
+
         yield return null;
     }
 

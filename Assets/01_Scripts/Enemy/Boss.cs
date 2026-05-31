@@ -294,6 +294,9 @@ public class Boss : Enemy
     {
         DisableAllModels();
         base.Die();
+        
+        _progressBar.gameObject.SetActive(false);
+        WaveManager.Instance.BossKilled();
     }
 
     // --- Formes ---

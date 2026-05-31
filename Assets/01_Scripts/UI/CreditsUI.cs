@@ -10,6 +10,7 @@ public class CreditsUI : MonoBehaviour
     }
     public void MainMenu()
     {
+        AudioManager.Instance.ChangeBGM(AudioManager.Instance.creditsBGM);
         _sceneTransition.DarkenScreen("MainMenu");
     }
 
