@@ -128,4 +128,5 @@ MonoBehaviour:
   _speed: 18
   _turnSpeed: 250
   _lifetime: 4
-  _hitEffect: {fileID: 0}
+  _hitEffect: {fileID: 4021103657954561960, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
+  _hitSFX: {fileID: 8300000, guid: 27e26db3dc1aeac4280f671d53162030, type: 3}
