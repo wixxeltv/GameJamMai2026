@@ -326,6 +326,7 @@ MonoBehaviour:
   _wrongColorKnockbackMultiplier: 0.1
   _isColorless: 0
   _enemyColor: 0
+  sliderImage: {fileID: 4189974715549317048}
   _bulletPrefab: {fileID: 1891232714594278134, guid: ad4a771d8c72f9449aa418ebc6546d8a, type: 3}
   _bulletsPerVolley: 3
   _fireInterval: 3

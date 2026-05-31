@@ -494,6 +494,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3495eda9a5529ab41bc2092050e58179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
+  objectToWobble: {fileID: 0}
+  wobbleSpeed: 10
+  wobbleAmount: 5
   _maxHp: 1200
   _moveSpeed: 1
   _score: 50
@@ -501,6 +504,7 @@ MonoBehaviour:
   _wrongColorKnockbackMultiplier: 0.3
   _isColorless: 0
   _enemyColor: 0
+  sliderImage: {fileID: 1304484777164429968}
   _forms:
   - model: {fileID: 3850296628441634321}
     color: 0
@@ -534,6 +538,11 @@ MonoBehaviour:
   _phase3SwitchEveryNShots: 4
   _phase2HpThreshold: 0.8
   _phase3HpThreshold: 0.4
+  _transitionDuration: 1.5
+  _transitionVibrateAmount: 0.3
+  _transitionShakeMagnitude: 0.25
+  _chaosShakeMagnitude: 0.55
+  _chaosFireInterval: 0.35
 --- !u!114 &6454654451899762283
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class Enemy : MonoBehaviour
 
     private bool _isDying;
     private EnemyFeedbackBase _enemyFeedback;
+    [SerializeField] protected Image sliderImage;
 
     protected virtual void Awake()
     {
@@ -77,6 +79,22 @@ public class Enemy : MonoBehaviour
             _healthBar.minimum = 0;
             _healthBar.maximum = _maxHp;
             _healthBar.current = _maxHp;
+        }
+
+        switch (_enemyColor)
+        {
+            case ColorType.Red:
+                sliderImage.color = Color.red;
+                break;
+            case ColorType.Blue:
+                sliderImage.color = Color.blue;
+                break;
+            case ColorType.Yellow:
+                sliderImage.color = Color.yellow;
+                break;
+            default:
+                sliderImage.color = Color.black;
+                break;
         }
     }
 

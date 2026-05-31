@@ -316,7 +316,25 @@ public class Boss : Enemy
         SetBossColor(_forms[index].color);
     }
 
-    private void SetBossColor(ColorType colorType) => SetEnemyColor(colorType);
+    private void SetBossColor(ColorType colorType)
+    {
+        SetEnemyColor(colorType);
+        switch (EnemyColor)
+        {
+            case ColorType.Red:
+                sliderImage.color = Color.red;
+                break;
+            case ColorType.Blue:
+                sliderImage.color = Color.blue;
+                break;
+            case ColorType.Yellow:
+                sliderImage.color = Color.yellow;
+                break;
+            default:
+                sliderImage.color = Color.black;
+                break;
+        }
+    }
 
     private float GetHpPercent() => CurrentHp / MaxHp;
 }
