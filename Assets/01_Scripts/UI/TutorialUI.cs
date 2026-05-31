@@ -53,9 +53,11 @@ public class TutorialUI : MonoBehaviour
                         break;
                     case 6:
                         enemyArrow.SetActive(false);
-                        foreach (Enemy enemy in enemies)
+                        Vector3 spawnBase = _enemyManager.GetSpawnLineCenter().position;
+                        for (int i = 0; i < enemies.Length; i++)
                         {
-                            Instantiate(enemy.gameObject, _enemyManager.GetSpawnLineCenter().position, Quaternion.identity);
+                            float offset = (i - (enemies.Length - 1) / 2f) * 3f;
+                            Instantiate(enemies[i].gameObject, spawnBase + Vector3.right * offset, Quaternion.identity);
                         }
                         break;
                 }
