@@ -29,7 +29,7 @@ public class WaveInfoUI : MonoBehaviour
     
     public void SetWaveCount(int waveCount)
     {
-        waveCountText.text=(waveCount+1).ToString();
+        waveCountText.text=(waveCount).ToString();
 
         if (waveCount == 0) return;
         

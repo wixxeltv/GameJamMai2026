@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
     private int _currentWave;
     private int _enemiesKilled;
     private bool _isTransitioning;
-    private const string TUTORIAL_COMPLETED_KEY = "TutorialCompleted";
+    private bool _tutorialCompletedThisSession; // Track for current session only
 
     private TutorialUI _tutorialUI;
     private WaveInfoUI _waveInfoUI;
@@ -58,15 +58,15 @@ public class WaveManager : MonoBehaviour
         Wave wave = waves[_currentWave];
         _waveInfoUI?.SetWaveCount(_currentWave);
 
-        // Check if tutorial should be skipped
+        // Check if tutorial should be skipped for this session
         if (wave.isTutorial)
         {
-            if (IsTutorialCompleted())
+            if (_tutorialCompletedThisSession)
             {
-                // Skip tutorial - mark enemies as killed to end wave immediately
-                Debug.Log("Tutorial already completed, skipping...");
+                // Skip tutorial - auto-complete it
+                Debug.Log("Tutorial already completed this session, skipping...");
                 _tutorialUI?.gameObject.SetActive(false);
-                _enemiesKilled = wave.enemeisToKill; // Auto-complete tutorial wave
+                _enemiesKilled = wave.enemeisToKill;
             }
             else
             {
@@ -132,10 +132,9 @@ public class WaveManager : MonoBehaviour
         AudioManager.Instance.PlaySfx(_waveSound, 100f);
         AudioManager.Instance.PlaySfx(_babyCelebration, 100f);
         
-        // Mark tutorial as completed if current wave is tutorial
         if (waves[_currentWave].isTutorial)
         {
-            SetTutorialCompleted();
+            _tutorialCompletedThisSession = true;
         }
         
         float timer = _timeBetweenWaves;
@@ -162,24 +161,5 @@ public class WaveManager : MonoBehaviour
     { 
         _enemiesKilled++;
         _waveInfoUI?.SetEnemiesLeft(waves[_currentWave].enemeisToKill-_enemiesKilled);
-    }
-
-    // Tutorial persistence methods
-    private bool IsTutorialCompleted()
-    {
-        return PlayerPrefs.GetInt(TUTORIAL_COMPLETED_KEY, 0) == 1;
-    }
-
-    private void SetTutorialCompleted()
-    {
-        PlayerPrefs.SetInt(TUTORIAL_COMPLETED_KEY, 1);
-        PlayerPrefs.Save();
-    }
-
-    // Optional: Method to reset tutorial (for testing or settings menu)
-    public void ResetTutorial()
-    {
-        PlayerPrefs.SetInt(TUTORIAL_COMPLETED_KEY, 0);
-        PlayerPrefs.Save();
     }
 }
