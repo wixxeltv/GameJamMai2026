@@ -572,6 +572,58 @@ PrefabInstance:
       propertyPath: happyvoicelineSFX
       value: 
       objectReference: {fileID: 8300000, guid: f7adce634493f2c4caa2cb2c93fb65d5, type: 3}
+    - target: {fileID: 6198067830307864039, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: stopAction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198067830307864039, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: ShapeModule.type
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198067830307864039, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: emitterVelocityMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198067830307864039, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: EmissionModule.m_BurstCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198067830307864039, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198067830307864039, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198067830307864039, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198067830307864039, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198067830307864039, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198067830307864039, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198067830307864039, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: EmissionModule.rateOverDistance.minScalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122949048447231763, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0020000339
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122949048447231763, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
