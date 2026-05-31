@@ -17,6 +17,7 @@ public class Boss : Enemy
     [SerializeField] private AudioClip phase3SFX;
 
     [Header("Formes (modèles + couleurs)")] [SerializeField]
+    private Material[] _materials;
     private BossForm[] _forms;
 
     private ProgressBar _progressBar;
