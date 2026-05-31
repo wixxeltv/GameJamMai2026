@@ -167,6 +167,9 @@ MonoBehaviour:
   _moveSpeed: 5
   _firePoint: {fileID: 3213542910495621614}
   _fireRate: 0.2
+  objectToWobble: {fileID: 3213542910495621614}
+  wobbleSpeed: 10
+  wobbleAmount: 5
 --- !u!114 &4729680092311754354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +311,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: deb779e2-ef7d-4f15-8f36-61852ad74d4e
     m_ActionName: 'Player/ComboRight[/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ffc7b855-d514-4d97-a066-5573b3876512
+    m_ActionName: 'Player/Pause[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 

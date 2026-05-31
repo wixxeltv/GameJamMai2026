@@ -9,6 +9,11 @@ public class PlayerController : MonoBehaviour
     [Header("Shooting")]
     [SerializeField] private Transform _firePoint;
     [SerializeField] private float _fireRate = 0.2f;
+    
+    [Header("Wobble")]
+    [SerializeField] private Transform objectToWobble;
+    [SerializeField] private float wobbleSpeed = 10f;
+    [SerializeField] private float wobbleAmount = 5f;
 
     private PlayerColorController _colorController;
     private PlayerFeedback _playerFeedback;
@@ -18,11 +23,17 @@ public class PlayerController : MonoBehaviour
     private bool _isFiring;
     private float _nextFireTime;
 
+    private Quaternion _initialWobbleRotation;
+    private Vector3 _movement;
+    
     private void Awake()
     {
         _colorController = GetComponent<PlayerColorController>();
         _playerFeedback = GetComponent<PlayerFeedback>();
         _rb = GetComponent<Rigidbody>();
+        
+        if (objectToWobble != null)
+            _initialWobbleRotation = objectToWobble.localRotation;
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -39,6 +50,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         HandleShooting();
+        
+        _movement = new Vector3(_moveInput.x, 0f, _moveInput.y).normalized * _moveSpeed;
     }
 
     private void FixedUpdate()
@@ -51,6 +64,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        HandleWobble();
+    }
+
+    private void HandleWobble()
+    {
+        if (objectToWobble == null) return;
+
+        if (_movement.magnitude > 0.1f)
+        {
+            float wobbleAngle = Mathf.Sin(Time.time * wobbleSpeed) * wobbleAmount;
+            objectToWobble.localRotation = _initialWobbleRotation * Quaternion.Euler(0f, 0f, wobbleAngle);
+        }
+        else
+        {
+            objectToWobble.localRotation = Quaternion.Lerp(
+                objectToWobble.localRotation,
+                _initialWobbleRotation,
+                Time.deltaTime * wobbleSpeed
+            );
+        }
+    }
+    
     private void HandleMovement()
     {
         float speed = _moveSpeed * (_colorController != null ? _colorController.SpeedMultiplier : 1f);
