@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -22,7 +23,15 @@ public class RoundCompletionUI : MonoBehaviour
         _waveManager.OnWaveTimerTick.AddListener(OnWaveTimerTick);
         _transparency = completionPanel.color.a;
     }
-    
+
+    public void Update()
+    {
+        if (_waveManager._waitingForDialogue)
+        {
+            completionPanel.gameObject.SetActive(false);
+        }
+    }
+
     private void OnWaveStarted(int round)
     {
         Debug.Log("Wave has been called");

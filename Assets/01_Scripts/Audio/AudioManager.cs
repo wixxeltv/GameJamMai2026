@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] public AudioClip bossBGM;
     [SerializeField] public AudioClip mainmenuBGM;
     [SerializeField] public AudioClip tutorialBGM;
+    [SerializeField] public AudioClip dialogueBGM;
     [SerializeField] public AudioClip creditsBGM;
     
     public static AudioManager Instance;

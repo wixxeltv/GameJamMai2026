@@ -44,14 +44,14 @@ public class TutorialUI : MonoBehaviour
                 tutorialUI[displayCount].SetActive(true);
                 switch (displayCount)
                 {
-                    case 1:
+                    case 2:
                         colorArrow.SetActive(true);
                         break;
-                    case 3:
+                    case 5:
                         colorArrow.SetActive(false);
                         enemyArrow.SetActive(true);
                         break;
-                    case 4:
+                    case 6:
                         enemyArrow.SetActive(false);
                         foreach (Enemy enemy in enemies)
                         {
