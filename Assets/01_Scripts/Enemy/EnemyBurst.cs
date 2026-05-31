@@ -97,7 +97,7 @@ public class EnemyBurst : Enemy
             {
                 if (!IsAlive) break;
                 float angle = -halfSpread + _spreadAngle * i;
-                Instantiate(_bulletPrefab, transform.position, baseRot * Quaternion.Euler(0f, angle, 0f));
+                Instantiate(_bulletPrefab, transform.position, baseRot * Quaternion.Euler(0f, angle, 0f), transform);
                 yield return new WaitForSeconds(_timeBetweenBullets);
             }
         }

@@ -77,6 +77,6 @@ public class EnemyShooter : Enemy
     {
         if (_bulletPrefab == null) return;
         Vector3 dir = (_player.position - transform.position).normalized;
-        Instantiate(_bulletPrefab, transform.position, Quaternion.LookRotation(dir));
+        Instantiate(_bulletPrefab, transform.position, Quaternion.LookRotation(dir), transform);
     }
 }

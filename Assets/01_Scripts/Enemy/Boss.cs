@@ -226,7 +226,7 @@ public class Boss : Enemy
         for (int i = 0; i < _spiralBulletsPerVolley; i++)
         {
             float angle = _volleyAngle + angleStep * i;
-            Instantiate(_bulletPrefabRed, _firePoint.position, Quaternion.Euler(0f, angle, 0f));
+            Instantiate(_bulletPrefabRed, _firePoint.position, Quaternion.Euler(0f, angle, 0f), transform);
         }
 
         _volleyAngle += 15f;
@@ -238,7 +238,7 @@ public class Boss : Enemy
         Vector3 dir = (_player.position - _firePoint.position).normalized;
         if (count == 1)
         {
-            Instantiate(_bulletPrefabYellow, _firePoint.position, Quaternion.LookRotation(dir));
+            Instantiate(_bulletPrefabYellow, _firePoint.position, Quaternion.LookRotation(dir), transform);
         }
         else
         {
@@ -248,7 +248,7 @@ public class Boss : Enemy
             {
                 float angle = -half + spread * i;
                 Instantiate(_bulletPrefabYellow, _firePoint.position,
-                    Quaternion.LookRotation(dir) * Quaternion.Euler(0f, angle, 0f));
+                    Quaternion.LookRotation(dir) * Quaternion.Euler(0f, angle, 0f), transform);
             }
         }
     }
@@ -262,7 +262,7 @@ public class Boss : Enemy
         for (int i = 0; i < _burstBulletsCount; i++)
         {
             float angle = -halfSpread + _burstSpreadAngle * i;
-            Instantiate(_bulletPrefabBlue, _firePoint.position, baseRot * Quaternion.Euler(0f, angle, 0f));
+            Instantiate(_bulletPrefabBlue, _firePoint.position, baseRot * Quaternion.Euler(0f, angle, 0f), transform);
             yield return new WaitForSeconds(_burstTimeBetweenBullets);
         }
     }
@@ -282,7 +282,7 @@ public class Boss : Enemy
         for (int i = 0; i < _rageBulletsCount; i++)
         {
             float angle = angleStep * i;
-            Instantiate(prefab, _firePoint.position, Quaternion.Euler(0f, angle, 0f));
+            Instantiate(prefab, _firePoint.position, Quaternion.Euler(0f, angle, 0f), transform);
         }
 
         yield return null;

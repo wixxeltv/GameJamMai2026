@@ -78,7 +78,7 @@ public class EnemySpiral : Enemy
         {
             float angle = _volleyAngle + angleStep * i;
             Quaternion rot = Quaternion.Euler(0f, angle, 0f);
-            Instantiate(_bulletPrefab, transform.position, rot);
+            Instantiate(_bulletPrefab, transform.position, rot, transform);
         }
 
         _volleyAngle += 15f;
