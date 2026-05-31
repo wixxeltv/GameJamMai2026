@@ -247,7 +247,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5a537c6ebc771f14c86416a912c7cbb3, type: 3}
   - {fileID: 8300000, guid: 6bf097d6f396e1a40b24c091ec952240, type: 3}
   sliderImage: {fileID: 7455399230761188491}
-  _bulletPrefab: {fileID: 1891232714594278134, guid: 7240a521f6407234ea301625cda78642, type: 3}
+  _bulletPrefab: {fileID: 3160689916473225684, guid: 84c7e2c71769f3749b474fdc8d9075f1, type: 3}
   _bulletsPerBurst: 4
   _timeBetweenBullets: 0.1
   _burstInterval: 3
