@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4124433855111966746}
   - component: {fileID: 4240338503179665409}
   - component: {fileID: 6087750457140485272}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HomingBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,3 +128,4 @@ MonoBehaviour:
   _speed: 18
   _turnSpeed: 250
   _lifetime: 4
+  _hitEffect: {fileID: 0}

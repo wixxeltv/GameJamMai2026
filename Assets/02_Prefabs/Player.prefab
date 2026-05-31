@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2126632471896331547}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EffectPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 7073749689684157899}
   - component: {fileID: 340845693342667369}
   - component: {fileID: 7916587086314358157}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -379,6 +379,7 @@ MonoBehaviour:
   OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
+  respawnPosition: {fileID: 0}
 --- !u!54 &7916587086314358157
 Rigidbody:
   m_ObjectHideFlags: 0
