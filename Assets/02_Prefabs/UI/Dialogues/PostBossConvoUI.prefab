@@ -2621,6 +2621,7 @@ MonoBehaviour:
   - {fileID: 8815191713819247992}
   backgroundPanel: {fileID: 4123207020743265135}
   panelSFX: {fileID: 8300000, guid: 83febc00fa74d9645bf25616a5aeb211, type: 3}
+  deathscreamSFX: {fileID: 8300000, guid: f541a33ad5b691e41be25d4f6b6dc4bd, type: 3}
   brogleImage: {fileID: 7608153430561017141}
   kidImage: {fileID: 3326915380387657422}
   noTalkingColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}

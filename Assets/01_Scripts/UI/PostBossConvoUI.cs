@@ -8,6 +8,7 @@ public class PostBossConvoUI : MonoBehaviour
     [SerializeField] private GameObject[] dialogueUI;
     [SerializeField] private GameObject backgroundPanel;
     [SerializeField] private AudioClip panelSFX;
+    [SerializeField] private AudioClip deathscreamSFX;
     
     [SerializeField] private Image brogleImage;
     [SerializeField] private Image kidImage;
@@ -102,6 +103,7 @@ public class PostBossConvoUI : MonoBehaviour
             
             if (displayCount >= dialogueUI.Length)
             {
+                AudioManager.Instance.PlaySfx(deathscreamSFX, 100f);
                 inDialogue = false;
                 _brogleTalking = false;
                 _kidTalking = false;

@@ -35,6 +35,7 @@ public class RoundCompletionUI : MonoBehaviour
 
     private void OnWaveStarted(int round)
     {
+        GameManager.Instance.EndConversation();
         Debug.Log("Wave has been called");
         completionPanel.gameObject.SetActive(false);
         _roundcount = round;
@@ -42,6 +43,7 @@ public class RoundCompletionUI : MonoBehaviour
     
     private void OnWaveTimerTick(float waitTime)
     {
+        GameManager.Instance.StartConversation();
         if (_fadeCoroutine == null && waitTime > 4.5f)
         {
             _fadeCoroutine = StartCoroutine(DoFadeOut());
