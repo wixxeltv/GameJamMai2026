@@ -4,6 +4,10 @@ using UnityEngine.Events;
 
 public class WaveManager : MonoBehaviour
 {
+    [SerializeField] private Light _light;
+    [SerializeField] private Color _bossLight;
+    [SerializeField] private Color _normalLight;
+    
     [Header("Waves")]
     [SerializeField] private Wave[] waves;
     [SerializeField] private float _timeBetweenWaves = 5f;
@@ -149,6 +153,8 @@ public class WaveManager : MonoBehaviour
     private void StartBossFight(Wave wave)
     {
         AudioManager.Instance.ChangeBGM(AudioManager.Instance.bossBGM);
+        _light.color = _bossLight;
+        
         _bossHealthUI?.SetActive(true);
         _enemyManager.SetSpawning(false);
         _enemyManager.SpawnBoss(wave.enemies[0]);
@@ -272,6 +278,7 @@ public class WaveManager : MonoBehaviour
         _isTransitioning = false;
         waitingForDialogue = false;
         _enemiesKilled = 0;
+        _light.color = _normalLight;
         
         _bossHealthUI?.SetActive(false);
         _enemyManager.SetSpawning(false);

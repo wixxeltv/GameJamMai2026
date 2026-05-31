@@ -752,9 +752,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38ba99229664024285345f8b8a37e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  _light: {fileID: 1705226185}
+  _bossLight: {r: 1, g: 0.4745098, b: 0.46666667, a: 1}
+  _normalLight: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   waves:
   - {fileID: 11400000, guid: ddb38568fdf1fca4f80b8be6eda29b57, type: 2}
   - {fileID: 11400000, guid: 97b6a3830f2a2d341aa9439ad175220f, type: 2}
+  - {fileID: 11400000, guid: e5e4e717e08ea9d4eb6df2bc00c6fd15, type: 2}
+  - {fileID: 11400000, guid: b4bdeda8804181f4bbc7817ca70549f4, type: 2}
+  - {fileID: 11400000, guid: 225178cc8bc96864b8b69b7c8e7268e9, type: 2}
+  - {fileID: 11400000, guid: 9a8380e0d9090ac4b93af3b5604a1b34, type: 2}
   - {fileID: 11400000, guid: 6227a117f3f2ca54a9f8d0bec8cba486, type: 2}
   _timeBetweenWaves: 5
   _waveSound: {fileID: 8300000, guid: ea2726bce9819454b9967f24d6bbbba9, type: 3}
@@ -832,7 +839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _deathScreen: {fileID: 363337605}
-  _pauseMenu: {fileID: 0}
+  _pauseMenu: {fileID: 1185817889702245921}
 --- !u!1 &710319394
 GameObject:
   m_ObjectHideFlags: 0
@@ -3627,12 +3634,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4181955998797371764, guid: 2d054e7482512a94495eea5f0f51a9e8, type: 3}
   m_PrefabInstance: {fileID: 1185817889702245919}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1185817889702245921}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cabab7c7db88d824fb5c2c9e350f97cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenuUI
+--- !u!1 &1185817889702245921 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2165110228502407030, guid: 2d054e7482512a94495eea5f0f51a9e8, type: 3}
+  m_PrefabInstance: {fileID: 1185817889702245919}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1652716705088857568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3918,6 +3930,14 @@ PrefabInstance:
       propertyPath: panelSFX
       value: 
       objectReference: {fileID: 8300000, guid: 83febc00fa74d9645bf25616a5aeb211, type: 3}
+    - target: {fileID: 3502134245645582973, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706552502098370170, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4786937120372575206, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3997,6 +4017,14 @@ PrefabInstance:
     - target: {fileID: 4786937120372575206, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5119763598251303358, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214844410512001687, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
