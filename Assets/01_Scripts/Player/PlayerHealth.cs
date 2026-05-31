@@ -19,6 +19,8 @@ public class PlayerHealth : MonoBehaviour
     private float _currentHp;
     private float _invincibilityTimer;
     
+    [SerializeField] private AudioClip happyvoicelineSFX;
+    [SerializeField] private AudioClip healSFX;
     [SerializeField] private Transform respawnPosition;
     
     private ProgressBar _progressBar;
@@ -57,6 +59,8 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(float amount)
     {
         _currentHp = Mathf.Min(_currentHp + amount, _maxHp);
+        AudioManager.Instance.PlaySfx(healSFX);
+        AudioManager.Instance.PlaySfx(happyvoicelineSFX);
         OnHealthChanged?.Invoke(_currentHp);
     }
 

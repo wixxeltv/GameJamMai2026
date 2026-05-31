@@ -553,9 +553,17 @@ PrefabInstance:
       value: TutorialUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4877249434189982398, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: healSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: e7878bcfa98cbad48b2f20af1451e1b9, type: 3}
+    - target: {fileID: 4877249434189982398, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
       propertyPath: respawnPosition
       value: 
       objectReference: {fileID: 1976773477}
+    - target: {fileID: 4877249434189982398, guid: 7b99436927a0d5c4684d1c6d0c9d81f5, type: 3}
+      propertyPath: happyvoicelineSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: f7adce634493f2c4caa2cb2c93fb65d5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
