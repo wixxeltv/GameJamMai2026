@@ -31,10 +31,7 @@ public class ComboSystem : MonoBehaviour
         _colorController = GetComponent<PlayerColorController>();
     }
 
-    private void Start()
-    {
-        GenerateCombos(1);
-    }
+    private void Start() { }
 
     private void Update()
     {

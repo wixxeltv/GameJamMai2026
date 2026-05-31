@@ -498,6 +498,8 @@ MonoBehaviour:
   objectToWobble: {fileID: 7838782963715546510}
   wobbleSpeed: 10
   wobbleAmount: 5
+  _dropPrefab: {fileID: 0}
+  _dropChance: 0.25
   _maxHp: 100
   _moveSpeed: 1
   _score: 50
@@ -523,8 +525,8 @@ MonoBehaviour:
   _bulletPrefabYellow: {fileID: 8113329104005296061, guid: a59801c9b656c01468e4165f9eba546b, type: 3}
   _bulletPrefabBlue: {fileID: 3160689916473225684, guid: 84c7e2c71769f3749b474fdc8d9075f1, type: 3}
   _firePoint: {fileID: 6217599684940511848}
-  _figureEightWidth: 5
-  _figureEightHeight: 4
+  _figureEightWidth: 4
+  _figureEightHeight: 4.5
   _figureEightSpeedPhase1: 0.5
   _figureEightSpeedPhase2: 0.8
   _figureEightSpeedPhase3: 1

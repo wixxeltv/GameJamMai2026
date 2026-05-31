@@ -75,6 +75,7 @@ public class Enemy : MonoBehaviour
     {
         if (!_isDying)
         {
+            transform.position = new Vector3(transform.position.x, _startY, transform.position.z);
             _movement = (transform.position - _lastPosition) / Time.deltaTime;
             _lastPosition = transform.position;
             HandleWobble();

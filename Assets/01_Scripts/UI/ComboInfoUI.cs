@@ -19,17 +19,22 @@ public class ComboInfoUI : MonoBehaviour
     {
         _comboSystem = FindFirstObjectByType<ComboSystem>();
         _waveManager = FindFirstObjectByType<WaveManager>();
-        
+
         foreach (var slot in comboSlots)
         {
             slot.SetArrow(arrowImages);
         }
-        
+
         _comboSystem.OnCombosGenerated.AddListener(OnCombosGenerated);
         _comboSystem.OnBufferChanged.AddListener(OnBufferChanged);
         _comboSystem.OnColorSwitched.AddListener(OnColorSwitched);
         _comboSystem.OnBufferReset.AddListener(OnBufferReset);
         _waveManager.OnWaveStarted.AddListener(OnValueReset);
+    }
+
+    private void Start()
+    {
+        _comboSystem.GenerateCombos(1);
     }
 
     public void OnColorSwitched(ColorType color)

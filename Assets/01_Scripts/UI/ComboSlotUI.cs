@@ -23,7 +23,7 @@ public class ComboSlotUI : MonoBehaviour
     private Vector2 originalSize;
     private int _previousBufferCount = 0;
 
-    private void Start()
+    private void Awake()
     {
         originalSize = backgroundImage.sizeDelta;
     }
