@@ -325,6 +325,11 @@ MonoBehaviour:
   _score: 100
   _wrongColorDamageMultiplier: 0.05
   _wrongColorKnockbackMultiplier: 0.1
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _wallAvoidRadius: 1.5
+  _wallAvoidStrength: 5
   _isColorless: 0
   _enemyColor: 0
   deathSounds:
