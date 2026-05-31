@@ -20,6 +20,7 @@ public class WaveManager : MonoBehaviour
     private int _enemiesKilled;
     private bool _isTransitioning;
 
+    private TutorialUI _tutorialUI;
     private WaveInfoUI _waveInfoUI;
     private EnemyManager _enemyManager;
     private ComboSystem _comboSystem;
@@ -35,6 +36,7 @@ public class WaveManager : MonoBehaviour
         _waveInfoUI = FindFirstObjectByType<WaveInfoUI>();
         _enemyManager = FindFirstObjectByType<EnemyManager>();
         _comboSystem = FindFirstObjectByType<ComboSystem>();
+        _tutorialUI = FindFirstObjectByType<TutorialUI>();
         AudioManager.Instance.PlayMusic(AudioManager.Instance.attackBGM, 80f);
         StartWave();
     }
@@ -56,6 +58,15 @@ public class WaveManager : MonoBehaviour
         Wave wave = waves[_currentWave];
         _waveInfoUI?.SetWaveCount(_currentWave);
 
+        if (wave.isTutorial)
+        {
+            _tutorialUI.StartTutorial();
+            _enemyManager.SetSpawning(false);
+        }
+        else
+        {
+            _tutorialUI.gameObject.SetActive(false);
+        }
         if (wave.isBoss)
         {
             _waveInfoUI?.SetEnemiesLeft(1);
@@ -93,7 +104,7 @@ public class WaveManager : MonoBehaviour
     
     public void ResetWaveCount()
     {
-        _currentWave = -1;
+        _currentWave = 0;
         _enemyManager.SetSpawning(false);
         _enemyManager.KillAllEnemies();
         StartWave();

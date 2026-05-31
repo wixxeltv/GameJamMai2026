@@ -15,6 +15,8 @@ public class EnemyManager : MonoBehaviour
     private float _timer;
     private int _maxEnemies = 999;
 
+    public Transform GetSpawnLineCenter() => _spawnLineCenter;
+
     public float SpawnInterval
     {
         get => _spawnInterval;
