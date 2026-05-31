@@ -10,6 +10,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float wobbleAmount = 5f;
     private Quaternion _initialWobbleRotation;
 
+    [Header("Drop")]
+    [SerializeField] private GameObject _dropPrefab;
+    [Range(0f, 1f)] [SerializeField] private float _dropChance = 0.25f;
+
     [Header("Stats")] [SerializeField] protected float _maxHp = 30f;
     [SerializeField] protected float _moveSpeed = 3f;
     [SerializeField] protected int _score = 0;
@@ -135,6 +139,8 @@ public class Enemy : MonoBehaviour
         foreach (var b in _spawnedBullets)
             if (b != null) Destroy(b);
         _spawnedBullets.Clear();
+        if (_dropPrefab != null && Random.value <= _dropChance)
+            Instantiate(_dropPrefab, transform.position, _dropPrefab.transform.rotation);
         int rand = Random.Range(0, deathSounds.Length);
         if(deathSounds.Length>0) AudioManager.Instance.PlaySfx(deathSounds[rand]);
         _enemyFeedback?.DeathEffect();

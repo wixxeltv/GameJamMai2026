@@ -187,10 +187,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 1993209083}
   targetPoint: {fileID: 1791336967}
   speed: 2
-  floor:
-  - {fileID: 1164816953441248714, guid: 59c5ee54078f1b64b8ed83d51a85bf0f, type: 3}
-  - {fileID: 1164816953441248714, guid: 5a6afa9b29fd5f341aac01a3f1af0626, type: 3}
-  - {fileID: 1164816953441248714, guid: 4b136ec4fd907504c98b5c20766a7dfa, type: 3}
+  floorPrefabs: []
 --- !u!4 &522003051
 Transform:
   m_ObjectHideFlags: 0
@@ -381,7 +378,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6227a117f3f2ca54a9f8d0bec8cba486, type: 2}
   _timeBetweenWaves: 5
   _waveSound: {fileID: 0}
+  _babyCelebration: {fileID: 0}
+  _bossHealthUI: {fileID: 0}
+  _creditsCanvas: {fileID: 0}
   OnWaveStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWaveEnd:
     m_PersistentCalls:
       m_Calls: []
   OnWaveTimerTick:
@@ -390,6 +393,7 @@ MonoBehaviour:
   OnAllWavesCompleted:
     m_PersistentCalls:
       m_Calls: []
+  waitingForDialogue: 0
 --- !u!4 &645661855
 Transform:
   m_ObjectHideFlags: 0
@@ -942,6 +946,11 @@ MonoBehaviour:
   sfxSource: {fileID: 1014009808}
   attackBGM: {fileID: 0}
   bossBGM: {fileID: 0}
+  mainmenuBGM: {fileID: 0}
+  tutorialBGM: {fileID: 0}
+  dialogueBGM: {fileID: 0}
+  creditsBGM: {fileID: 0}
+  resolutionBGM: {fileID: 0}
 --- !u!4 &1014009811
 Transform:
   m_ObjectHideFlags: 0

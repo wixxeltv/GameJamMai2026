@@ -54,6 +54,12 @@ public class PlayerHealth : MonoBehaviour
         if (_currentHp <= 0f) Die();
     }
 
+    public void Heal(float amount)
+    {
+        _currentHp = Mathf.Min(_currentHp + amount, _maxHp);
+        OnHealthChanged?.Invoke(_currentHp);
+    }
+
     public void ResetHealth()
     {
         StopAllCoroutines();

@@ -228,6 +228,8 @@ MonoBehaviour:
   objectToWobble: {fileID: 6919191030823372417}
   wobbleSpeed: 10
   wobbleAmount: 5
+  _dropPrefab: {fileID: 8418686420305821274, guid: a3631c7fdb03a5d4892dba197b942722, type: 3}
+  _dropChance: 0.25
   _maxHp: 30
   _moveSpeed: 3
   _score: 100
