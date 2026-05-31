@@ -60,7 +60,7 @@ public class SceneTransitionUI : MonoBehaviour
         while (t < 1f)
         {
             fadeImage.color = Color.Lerp(startColor, endColor, t);
-            t += Time.deltaTime / fadeOutDuration;
+            t += Time.deltaTime / 2.5f;
             yield return null;
         }
 
