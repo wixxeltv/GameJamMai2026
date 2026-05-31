@@ -690,7 +690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
   _spawnLineCenter: {fileID: 303950972}
-  _spawnLineWidth: 20
+  _spawnLineWidth: 15
 --- !u!114 &685856698
 MonoBehaviour:
   m_ObjectHideFlags: 0

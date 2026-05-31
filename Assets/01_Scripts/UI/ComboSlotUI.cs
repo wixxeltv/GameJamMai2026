@@ -81,11 +81,11 @@ public class ComboSlotUI : MonoBehaviour
     {
         if (_currentCombo == null) return;
         
-        if (buffer.Count != _previousBufferCount)
+        if (buffer.Count > 0 && buffer.Count != _previousBufferCount)
         {
             AudioManager.Instance.PlaySfx(inputPressedSFX, 100f);
-            _previousBufferCount = buffer.Count;
         }
+        _previousBufferCount = buffer.Count;
         
         for (int i = 0; i < arrowSlots.Length; i++)
         {
@@ -94,21 +94,20 @@ public class ComboSlotUI : MonoBehaviour
         }
         
         int matches = 0;
-        int offset = buffer.Count - _currentCombo.Count;
-        if (offset < 0) offset = 0;
-        
-        for (int i = 0; i < _currentCombo.Count && (offset + i) < buffer.Count; i++)
+        for (int startInBuffer = 0; startInBuffer < buffer.Count; startInBuffer++)
         {
-            if (buffer[offset + i] == _currentCombo[i])
+            int consecutive = 0;
+            for (int i = 0; startInBuffer + i < buffer.Count && i < _currentCombo.Count; i++)
             {
-                matches = i + 1;
+                if (buffer[startInBuffer + i] == _currentCombo[i])
+                    consecutive++;
+                else
+                    break;
             }
-            else
-            {
-                break;
-            }
+            if (startInBuffer + consecutive == buffer.Count)
+                matches = Mathf.Max(matches, consecutive);
         }
-        
+
         for (int i = 0; i < matches && i < arrowSlots.Length; i++)
         {
             arrowSlots[i].color = pressedColor;

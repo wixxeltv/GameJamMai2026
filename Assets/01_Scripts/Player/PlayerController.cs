@@ -36,6 +36,12 @@ public class PlayerController : MonoBehaviour
             _initialWobbleRotation = objectToWobble.localRotation;
     }
 
+    private void OnEnable()
+    {
+        _isFiring = false;
+        _moveInput = Vector2.zero;
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();

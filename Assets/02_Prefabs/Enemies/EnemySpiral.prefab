@@ -331,7 +331,7 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 1891232714594278134, guid: ad4a771d8c72f9449aa418ebc6546d8a, type: 3}
   _bulletsPerVolley: 3
   _fireInterval: 3
-  _orbitRadius: 3
+  _orbitRadius: 6
   _orbitSpeed: 45
   _orbitSpeedCharge: 120
   _chargeUpDuration: 0.6

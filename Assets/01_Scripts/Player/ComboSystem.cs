@@ -120,6 +120,7 @@ public class ComboSystem : MonoBehaviour
 
             _colorController?.SwitchToColor(kvp.Key);
             _inputBuffer.Clear();
+            OnBufferReset?.Invoke();
             OnColorSwitched?.Invoke(kvp.Key);
             return;
         }

@@ -86,7 +86,7 @@ MonoBehaviour:
   sliderImage: {fileID: 2938044464842805643}
   _bulletPrefab: {fileID: 1891232714594278134, guid: 7240a521f6407234ea301625cda78642, type: 3}
   _fireInterval: 2
-  _preferredDistance: 4
+  _preferredDistance: 8
   _distanceThreshold: 2
   _strafeChangeInterval: 2
   _movementSmoothing: 4
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyFeedback
   shootPoint: {fileID: 500963670527184025}
-  appearance: {fileID: 0}
+  appearance: {fileID: 2121746088082184030}
   healthUI: {fileID: 5866019425506895539}
   deathSfx: {fileID: 8300000, guid: c2806d4fef45e7a4fa949eb3d6b2441d, type: 3}
   deathParticles: {fileID: 8791802859067835849, guid: ae07f2a45f14a82428409cfe410e6002, type: 3}
@@ -645,5 +645,10 @@ PrefabInstance:
 --- !u!4 &1601632748601527780 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1801447285715221281, guid: 86dd9d86775ed2f44927522d52a8609a, type: 3}
+  m_PrefabInstance: {fileID: 1097227653483820741}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2121746088082184030 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1318383090583069083, guid: 86dd9d86775ed2f44927522d52a8609a, type: 3}
   m_PrefabInstance: {fileID: 1097227653483820741}
   m_PrefabAsset: {fileID: 0}
