@@ -690,7 +690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
   _spawnLineCenter: {fileID: 303950972}
-  _spawnLineWidth: 15
+  _spawnLineWidth: 5
 --- !u!114 &685856698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1576,6 +1576,10 @@ PrefabInstance:
     - target: {fileID: 5194857688085117184, guid: 780047f7297a5d347af42523e2283c4d, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5194857688085117184, guid: 780047f7297a5d347af42523e2283c4d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6714117276717430693, guid: 780047f7297a5d347af42523e2283c4d, type: 3}
       propertyPath: m_IsTrigger

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
@@ -14,6 +15,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected int _score = 0;
     [SerializeField] private float _wrongColorDamageMultiplier = 0.1f;
     [SerializeField] private float _wrongColorKnockbackMultiplier = 0.3f;
+
+    [Header("Wall Avoidance")]
+    [SerializeField] private LayerMask _wallLayer;
+    [SerializeField] private float _wallAvoidRadius = 1.5f;
+    [SerializeField] private float _wallAvoidStrength = 5f;
 
     [Header("Couleur")] [SerializeField] private bool _isColorless = false;
     [SerializeField] private ColorType _enemyColor = ColorType.Red;
@@ -39,6 +45,7 @@ public class Enemy : MonoBehaviour
 
     private bool _isDying;
     private EnemyFeedbackBase _enemyFeedback;
+    private List<GameObject> _spawnedBullets = new List<GameObject>();
     [SerializeField] protected Image sliderImage;
 
     protected virtual void Awake()
@@ -115,11 +122,19 @@ public class Enemy : MonoBehaviour
         if (_currentHp <= 0f) Die();
     }
 
+    protected void TrackBullet(GameObject bullet)
+    {
+        if (bullet != null) _spawnedBullets.Add(bullet);
+    }
+
     protected virtual void Die()
     {
         if (_isDying) return;
         _isDying = true;
         if (_collider) _collider.enabled = false;
+        foreach (var b in _spawnedBullets)
+            if (b != null) Destroy(b);
+        _spawnedBullets.Clear();
         int rand = Random.Range(0, deathSounds.Length);
         if(deathSounds.Length>0) AudioManager.Instance.PlaySfx(deathSounds[rand]);
         _enemyFeedback?.DeathEffect();
@@ -157,6 +172,22 @@ public class Enemy : MonoBehaviour
                 Time.deltaTime * wobbleSpeed
             );
         }
+    }
+
+    protected Vector3 GetWallAvoidanceForce()
+    {
+        Vector3 force = Vector3.zero;
+        Collider[] hits = Physics.OverlapSphere(transform.position, _wallAvoidRadius, _wallLayer);
+        foreach (Collider col in hits)
+        {
+            Vector3 closest = col.ClosestPoint(transform.position);
+            Vector3 away = transform.position - closest;
+            away.y = 0f;
+            float dist = away.magnitude;
+            if (dist > 0f)
+                force += away.normalized * (_wallAvoidStrength / Mathf.Max(dist, 0.01f));
+        }
+        return force;
     }
 
     protected Vector3 GetSeparationForce(float radius = 2f, float strength = 3f)

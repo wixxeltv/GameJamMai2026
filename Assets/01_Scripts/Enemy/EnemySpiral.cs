@@ -66,7 +66,7 @@ public class EnemySpiral : Enemy
         else
             dir = (targetPos - transform.position).normalized;
 
-        transform.position += (dir * _moveSpeed + GetSeparationForce()) * Time.deltaTime;
+        transform.position += (dir * _moveSpeed + GetSeparationForce() + GetWallAvoidanceForce()) * Time.deltaTime;
     }
 
     private void FireVolley()
@@ -78,7 +78,7 @@ public class EnemySpiral : Enemy
         {
             float angle = _volleyAngle + angleStep * i;
             Quaternion rot = Quaternion.Euler(0f, angle, 0f);
-            Instantiate(_bulletPrefab, transform.position, rot, transform);
+            TrackBullet(Instantiate(_bulletPrefab, transform.position, rot));
         }
 
         _volleyAngle += 15f;

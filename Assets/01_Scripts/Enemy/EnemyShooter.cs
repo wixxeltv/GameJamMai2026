@@ -68,7 +68,7 @@ public class EnemyShooter : Enemy
             }
         }
 
-        Vector3 desiredVelocity = dir * _moveSpeed + GetSeparationForce();
+        Vector3 desiredVelocity = dir * _moveSpeed + GetSeparationForce() + GetWallAvoidanceForce();
         _currentVelocity = Vector3.Lerp(_currentVelocity, desiredVelocity, _movementSmoothing * Time.deltaTime);
         transform.position += _currentVelocity * Time.deltaTime;
     }
@@ -76,7 +76,9 @@ public class EnemyShooter : Enemy
     private void Shoot()
     {
         if (_bulletPrefab == null) return;
-        Vector3 dir = (_player.position - transform.position).normalized;
-        Instantiate(_bulletPrefab, transform.position, Quaternion.LookRotation(dir), transform);
+        Vector3 dir2 = _player.position - transform.position;
+        dir2.y = 0f;
+        dir2.Normalize();
+        TrackBullet(Instantiate(_bulletPrefab, transform.position, Quaternion.LookRotation(dir2)));
     }
 }

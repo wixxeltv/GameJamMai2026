@@ -88,7 +88,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5a537c6ebc771f14c86416a912c7cbb3, type: 3}
   - {fileID: 8300000, guid: 6bf097d6f396e1a40b24c091ec952240, type: 3}
   sliderImage: {fileID: 2938044464842805643}
-  _bulletPrefab: {fileID: 1891232714594278134, guid: 7240a521f6407234ea301625cda78642, type: 3}
+  _bulletPrefab: {fileID: 8113329104005296061, guid: a59801c9b656c01468e4165f9eba546b, type: 3}
   _fireInterval: 2
   _preferredDistance: 8
   _distanceThreshold: 2

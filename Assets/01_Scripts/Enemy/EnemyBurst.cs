@@ -42,7 +42,7 @@ public class EnemyBurst : Enemy
             Vector3 dir = dist > _preferredDistance
                 ? (_player.position - transform.position).normalized
                 : Vector3.zero;
-            Vector3 desired = dir * _moveSpeed + GetSeparationForce();
+            Vector3 desired = dir * _moveSpeed + GetSeparationForce() + GetWallAvoidanceForce();
             _currentVelocity = Vector3.Lerp(_currentVelocity, desired, _movementSmoothing * Time.deltaTime);
             transform.position += _currentVelocity * Time.deltaTime;
 
@@ -97,7 +97,7 @@ public class EnemyBurst : Enemy
             {
                 if (!IsAlive) break;
                 float angle = -halfSpread + _spreadAngle * i;
-                Instantiate(_bulletPrefab, transform.position, baseRot * Quaternion.Euler(0f, angle, 0f), transform);
+                TrackBullet(Instantiate(_bulletPrefab, transform.position, baseRot * Quaternion.Euler(0f, angle, 0f)));
                 yield return new WaitForSeconds(_timeBetweenBullets);
             }
         }
