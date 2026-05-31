@@ -97,7 +97,7 @@ public class ComboInfoUI : MonoBehaviour
     
     private void OnValueReset(int round)
     {
-        if(round != 0) return;
+        if(round != -1) return;
         
         foreach (var slot in comboSlots)
         {
