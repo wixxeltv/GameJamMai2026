@@ -42,7 +42,7 @@ public class RoundCompletionUI : MonoBehaviour
         }
         Debug.Log("Timer has been called");
         completionPanel.gameObject.SetActive(true);
-        roundText.text="Round "+(_roundcount+1)+" Completed";
+        roundText.text="Round "+(_roundcount)+" Completed";
         countdownText.text=((int)waitTime).ToString();
     }
     

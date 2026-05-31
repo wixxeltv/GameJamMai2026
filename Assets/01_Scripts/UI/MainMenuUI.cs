@@ -8,6 +8,7 @@ public class MainMenuUI : MonoBehaviour
     private void Start()
     {
         _sceneTransition = FindFirstObjectByType<SceneTransitionUI>();
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.mainmenuBGM, 100f);
     }
     public void StartGame()
     {
