@@ -11,50 +11,55 @@ public class Boss : Enemy
         public Color visualColor;
     }
 
-    [Header("AudioClips")]
-    [SerializeField] private AudioClip phase2SFX;
-    [SerializeField] private AudioClip phase3SFX;
-    
-    [Header("Formes (modèles + couleurs)")]
-    [SerializeField] private BossForm[] _forms;
+    [Header("AudioClips")] [SerializeField]
+    private AudioClip phase2SFX;
 
-    [Header("Bullets")]
-    [SerializeField] private GameObject _bulletPrefabRed;
+    [SerializeField] private AudioClip phase3SFX;
+
+    [Header("Formes (modèles + couleurs)")] [SerializeField]
+    private BossForm[] _forms;
+
+    private ProgressBar _progressBar;
+
+    [Header("Bullets")] [SerializeField] private GameObject _bulletPrefabRed;
     [SerializeField] private GameObject _bulletPrefabYellow;
     [SerializeField] private GameObject _bulletPrefabBlue;
     [SerializeField] private Transform _firePoint;
 
-    [Header("Mouvement en 8")]
-    [SerializeField] private float _figureEightWidth = 8f;
+    [Header("Mouvement en 8")] [SerializeField]
+    private float _figureEightWidth = 8f;
+
     [SerializeField] private float _figureEightHeight = 4f;
     [SerializeField] private float _figureEightSpeedPhase1 = 0.6f;
     [SerializeField] private float _figureEightSpeedPhase2 = 1.0f;
     [SerializeField] private float _figureEightSpeedPhase3 = 1.8f;
     [SerializeField] private Vector3 _centerOffset = Vector3.zero;
 
-    [Header("Tir - Rouge (Spiral)")]
-    [SerializeField] private int _spiralBulletsPerVolley = 5;
+    [Header("Tir - Rouge (Spiral)")] [SerializeField]
+    private int _spiralBulletsPerVolley = 5;
+
     [SerializeField] private float _spiralFireInterval = 1.5f;
 
-    [Header("Tir - Jaune (Shooter)")]
-    [SerializeField] private float _shooterFireInterval = 1.2f;
+    [Header("Tir - Jaune (Shooter)")] [SerializeField]
+    private float _shooterFireInterval = 1.2f;
 
-    [Header("Tir - Bleu (Burst)")]
-    [SerializeField] private int _burstBulletsCount = 5;
+    [Header("Tir - Bleu (Burst)")] [SerializeField]
+    private int _burstBulletsCount = 5;
+
     [SerializeField] private float _burstSpreadAngle = 20f;
     [SerializeField] private float _burstFireInterval = 2f;
     [SerializeField] private float _burstTimeBetweenBullets = 0.08f;
 
-    [Header("Phases")]
-    [SerializeField] private float _colorSwitchInterval = 6f;
+    [Header("Phases")] [SerializeField] private float _colorSwitchInterval = 6f;
     [SerializeField] private int _rageBulletsCount = 12;
     [SerializeField] private float _phase3IntervalMultiplier = 0.55f;
     [SerializeField] private int _phase3SwitchEveryNShots = 4;
     [Range(0f, 1f)] [SerializeField] private float _phase2HpThreshold = 0.6f;
     [Range(0f, 1f)] [SerializeField] private float _phase3HpThreshold = 0.2f;
 
-    [Header("Transition de phase")]
-    [SerializeField] private float _transitionDuration = 1.5f;
+    [Header("Transition de phase")] [SerializeField]
+    private float _transitionDuration = 1.5f;
+
     [SerializeField] private float _transitionVibrateAmount = 0.3f;
     [SerializeField] private float _transitionShakeMagnitude = 0.25f;
     [SerializeField] private float _chaosShakeMagnitude = 0.55f;
@@ -69,6 +74,9 @@ public class Boss : Enemy
 
     protected override void Start()
     {
+        _progressBar = GameObject.FindGameObjectsWithTag("BossHealthBar")[0].GetComponent<ProgressBar>();
+        _progressBar.maximum = MaxHp;
+        _progressBar.current = MaxHp;
         base.Start();
         _spawnCenter = transform.position;
         InitRandomForm();
@@ -77,6 +85,7 @@ public class Boss : Enemy
 
     private void Update()
     {
+        _progressBar.current = CurrentHp;
         if (!IsAlive) return;
         MoveFigureEight();
     }
@@ -128,7 +137,12 @@ public class Boss : Enemy
 
         while (elapsed < _transitionDuration)
         {
-            if (!IsAlive) { _isTransitioning = false; yield break; }
+            if (!IsAlive)
+            {
+                _isTransitioning = false;
+                yield break;
+            }
+
             elapsed += Time.deltaTime;
             Vector3 shake = Random.insideUnitSphere * _transitionVibrateAmount;
             shake.y = 0f;
@@ -214,6 +228,7 @@ public class Boss : Enemy
             float angle = _volleyAngle + angleStep * i;
             Instantiate(_bulletPrefabRed, _firePoint.position, Quaternion.Euler(0f, angle, 0f));
         }
+
         _volleyAngle += 15f;
     }
 
@@ -232,7 +247,8 @@ public class Boss : Enemy
             for (int i = 0; i < count; i++)
             {
                 float angle = -half + spread * i;
-                Instantiate(_bulletPrefabYellow, _firePoint.position, Quaternion.LookRotation(dir) * Quaternion.Euler(0f, angle, 0f));
+                Instantiate(_bulletPrefabYellow, _firePoint.position,
+                    Quaternion.LookRotation(dir) * Quaternion.Euler(0f, angle, 0f));
             }
         }
     }
@@ -256,9 +272,9 @@ public class Boss : Enemy
         if (_firePoint == null) yield break;
         GameObject prefab = EnemyColor switch
         {
-            ColorType.Red    => _bulletPrefabRed,
+            ColorType.Red => _bulletPrefabRed,
             ColorType.Yellow => _bulletPrefabYellow,
-            _                => _bulletPrefabBlue
+            _ => _bulletPrefabBlue
         };
         if (prefab == null) yield break;
 
@@ -268,6 +284,7 @@ public class Boss : Enemy
             float angle = angleStep * i;
             Instantiate(prefab, _firePoint.position, Quaternion.Euler(0f, angle, 0f));
         }
+
         yield return null;
     }
 
@@ -300,8 +317,11 @@ public class Boss : Enemy
     {
         if (_forms == null || _forms.Length == 0) return;
         int newIndex;
-        do { newIndex = Random.Range(0, _forms.Length); }
-        while (newIndex == _currentFormIndex && _forms.Length > 1);
+        do
+        {
+            newIndex = Random.Range(0, _forms.Length);
+        } while (newIndex == _currentFormIndex && _forms.Length > 1);
+
         _currentFormIndex = newIndex;
         ApplyForm(_currentFormIndex);
     }
@@ -315,10 +335,11 @@ public class Boss : Enemy
             if (i == index)
             {
                 var r = _forms[i].model.GetComponent<Renderer>()
-                     ?? _forms[i].model.GetComponentInChildren<Renderer>();
+                        ?? _forms[i].model.GetComponentInChildren<Renderer>();
                 if (r != null) r.SetPropertyBlock(null);
             }
         }
+
         SetBossColor(_forms[index].color);
     }
 
@@ -328,13 +349,13 @@ public class Boss : Enemy
         switch (EnemyColor)
         {
             case ColorType.Red:
-                sliderImage.color = Color.red;
+                _progressBar.SetSliderColor(Color.red);
                 break;
             case ColorType.Blue:
-                sliderImage.color = Color.blue;
+                _progressBar.SetSliderColor(Color.blue);
                 break;
             case ColorType.Yellow:
-                sliderImage.color = Color.yellow;
+                _progressBar.SetSliderColor(Color.yellow);
                 break;
             default:
                 sliderImage.color = Color.black;

@@ -8,6 +8,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float _timeBetweenWaves = 5f;
     [SerializeField] private AudioClip _waveSound;
     [SerializeField] private AudioClip _babyCelebration;
+    [SerializeField] private GameObject _bossHealthUI;
 
     public UnityEvent<int> OnWaveStarted;
     public UnityEvent OnWaveEnd;
@@ -84,6 +85,7 @@ public class WaveManager : MonoBehaviour
         {
             _waveInfoUI?.SetEnemiesLeft(1);
             if (AudioManager.Instance) AudioManager.Instance.ChangeBGM(AudioManager.Instance.bossBGM);
+            _bossHealthUI?.SetActive(true);
             _enemyManager.SetSpawning(false);
             _enemyManager.SpawnBoss(wave.enemies[0]);
         }
@@ -106,6 +108,7 @@ public class WaveManager : MonoBehaviour
         _currentWave = 0;
         _isTransitioning = false;
         _enemiesKilled = 0;
+        _bossHealthUI?.SetActive(false);
         _enemyManager.SetSpawning(false);
         _enemyManager.KillAllEnemies();
         

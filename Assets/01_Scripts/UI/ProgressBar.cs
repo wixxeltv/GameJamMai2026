@@ -26,4 +26,9 @@ public class ProgressBar : MonoBehaviour
         float fillAmount = currentOffset / maximumOffset;
         slider.value = Mathf.MoveTowards(slider.value, fillAmount, fillSpeed * Time.deltaTime);
     }
+
+    public void SetSliderColor(Color color)
+    {
+        slider.fillRect.gameObject.GetComponent<Image>().color = color;
+    }
 }

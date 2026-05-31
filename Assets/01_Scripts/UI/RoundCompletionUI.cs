@@ -36,7 +36,7 @@ public class RoundCompletionUI : MonoBehaviour
         {
             _fadeCoroutine = StartCoroutine(DoFadeOut());
         }
-        else if (_fadeCoroutine == null && waitTime < 1.1f)
+        else if (_fadeCoroutine == null && waitTime < 0.95f)
         {
             _fadeCoroutine = StartCoroutine(DoFadeIn());
         }
