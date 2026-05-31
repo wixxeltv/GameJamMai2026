@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
 
     [Header("Couleur")] [SerializeField] private bool _isColorless = false;
     [SerializeField] private ColorType _enemyColor = ColorType.Red;
+    
+    [SerializeField] private AudioClip[] deathSounds;
 
     public bool IsColorless => _isColorless;
     public ColorType EnemyColor => _enemyColor;
@@ -118,6 +120,8 @@ public class Enemy : MonoBehaviour
         if (_isDying) return;
         _isDying = true;
         if (_collider) _collider.enabled = false;
+        int rand = Random.Range(0, deathSounds.Length);
+        if(deathSounds.Length>0) AudioManager.Instance.PlaySfx(deathSounds[rand]);
         _enemyFeedback?.DeathEffect();
         WaveManager.Instance.EnemyKilled();
         ScoreManager.Instance.IncreaseScore(_score);

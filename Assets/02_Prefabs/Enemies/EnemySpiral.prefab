@@ -327,6 +327,10 @@ MonoBehaviour:
   _wrongColorKnockbackMultiplier: 0.1
   _isColorless: 0
   _enemyColor: 0
+  deathSounds:
+  - {fileID: 8300000, guid: fc5321c5df67f63429f9aeeeba1e3208, type: 3}
+  - {fileID: 8300000, guid: 5a537c6ebc771f14c86416a912c7cbb3, type: 3}
+  - {fileID: 8300000, guid: 6bf097d6f396e1a40b24c091ec952240, type: 3}
   sliderImage: {fileID: 4189974715549317048}
   _bulletPrefab: {fileID: 1891232714594278134, guid: ad4a771d8c72f9449aa418ebc6546d8a, type: 3}
   _bulletsPerVolley: 3
