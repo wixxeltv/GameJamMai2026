@@ -41,8 +41,6 @@ public class PlayerFeedback : MonoBehaviour
     
     public void DeathEffect()
     {
-        // var effect= Instantiate(shootParticles, shootPoint.transform.position, Quaternion.identity, shootPoint.transform);
-        // effect.Play();
         if (AudioManager.Instance) AudioManager.Instance.PlaySfx(deathSFX, 100f);
     }
     
@@ -59,7 +57,6 @@ public class PlayerFeedback : MonoBehaviour
     private IEnumerator BlinkCoroutine(float duration)
     {
         _isBlinking = true;
-        // Capture the current color at blink start so the correct color is restored afterward
         _originalColor = _material.HasProperty("_BaseColor")
             ? _material.GetColor("_BaseColor")
             : _material.color;
