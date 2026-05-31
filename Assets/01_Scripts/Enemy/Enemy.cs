@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
     private Collider _collider;
     private float _startY;
     protected Vector3 _movement;
+    private Vector3 _lastPosition;
 
     private bool _isDying;
     private EnemyFeedbackBase _enemyFeedback;
@@ -61,7 +62,8 @@ public class Enemy : MonoBehaviour
     {
         if (!_isDying)
         {
-            transform.position = new Vector3(transform.position.x, _startY, transform.position.z);
+            _movement = (transform.position - _lastPosition) / Time.deltaTime;
+            _lastPosition = transform.position;
             HandleWobble();
         }
     }
@@ -136,14 +138,20 @@ public class Enemy : MonoBehaviour
 
         if (_movement.magnitude > 0.1f)
         {
+            // ✅ Use unscaled time if game can be paused
             float wobbleAngle = Mathf.Sin(Time.time * wobbleSpeed) * wobbleAmount;
-
+        
+            // ✅ Apply rotation in local space
             objectToWobble.localRotation = _initialWobbleRotation * Quaternion.Euler(0f, 0f, wobbleAngle);
         }
         else
         {
-            objectToWobble.localRotation = Quaternion.Lerp(objectToWobble.localRotation, _initialWobbleRotation,
-                Time.deltaTime * wobbleSpeed);
+            // ✅ Return to initial rotation smoothly
+            objectToWobble.localRotation = Quaternion.Lerp(
+                objectToWobble.localRotation, 
+                _initialWobbleRotation,
+                Time.deltaTime * wobbleSpeed
+            );
         }
     }
 
