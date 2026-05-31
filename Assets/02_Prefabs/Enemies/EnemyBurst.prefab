@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 7044245187979812364}
   - component: {fileID: 2205831173434343607}
   - component: {fileID: 812292753611418519}
+  - component: {fileID: 42756210775657101}
   m_Layer: 0
   m_Name: EnemyBurst
   m_TagString: Enemy
@@ -273,7 +274,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &2205831173434343607
 MonoBehaviour:
@@ -314,6 +315,27 @@ MonoBehaviour:
   maximum: 0
   current: 0
   fillSpeed: 3
+--- !u!135 &42756210775657101
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6459444772088680020}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8152539817744429615
 GameObject:
   m_ObjectHideFlags: 0

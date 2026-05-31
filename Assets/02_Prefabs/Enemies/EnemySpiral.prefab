@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 3768366025319557466}
   - component: {fileID: 1483000801193839578}
   - component: {fileID: 161324275286849329}
+  - component: {fileID: 398863409907231123}
   m_Layer: 0
   m_Name: EnemySpiral
   m_TagString: Enemy
@@ -330,7 +331,7 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 1891232714594278134, guid: ad4a771d8c72f9449aa418ebc6546d8a, type: 3}
   _bulletsPerVolley: 3
   _fireInterval: 3
-  _orbitRadius: 8
+  _orbitRadius: 3
   _orbitSpeed: 45
   _orbitSpeedCharge: 120
   _chargeUpDuration: 0.6
@@ -360,7 +361,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &1483000801193839578
 MonoBehaviour:
@@ -401,6 +402,27 @@ MonoBehaviour:
   maximum: 0
   current: 0
   fillSpeed: 3
+--- !u!135 &398863409907231123
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960477483656243242}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6792266798257104227
 GameObject:
   m_ObjectHideFlags: 0

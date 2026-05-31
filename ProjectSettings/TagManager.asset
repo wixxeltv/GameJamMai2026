@@ -8,14 +8,15 @@ TagManager:
   - Enemy
   - Slot
   - BossHealthBar
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - Bullet
   - 
   - 
   - 
