@@ -10,6 +10,7 @@ public class HomingBullet : MonoBehaviour
     public ColorType BulletColor { get; set; } = ColorType.Yellow;
 
     [SerializeField] private ParticleSystem _hitEffect;
+    [SerializeField] private AudioClip _hitSFX;
 
     private Transform _target;
 
@@ -43,6 +44,7 @@ public class HomingBullet : MonoBehaviour
         {
             enemy.TakeDamage(Damage, BulletColor, transform.position);
             SpawnHitEffect();
+            if (_hitSFX && AudioManager.Instance) AudioManager.Instance.PlaySfx(_hitSFX);
             Destroy(gameObject);
         }
     }

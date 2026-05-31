@@ -500,7 +500,7 @@ MonoBehaviour:
   wobbleAmount: 5
   _dropPrefab: {fileID: 0}
   _dropChance: 0
-  _maxHp: 100
+  _maxHp: 1000
   _moveSpeed: 1
   _score: 50
   _wrongColorDamageMultiplier: 0.1

@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float _speed = 20f;
     [SerializeField] private float _lifetime = 3f;
     [SerializeField] private ParticleSystem _hitEffect;
+    [SerializeField] private AudioClip _hitSFX;
     public float Damage { get; set; } = 10f;
     public ColorType BulletColor { get; set; } = ColorType.Red;
 
@@ -24,6 +25,7 @@ public class Bullet : MonoBehaviour
         {
             enemy.TakeDamage(Damage, BulletColor, transform.position);
             SpawnHitEffect();
+            if (_hitSFX && AudioManager.Instance) AudioManager.Instance.PlaySfx(_hitSFX);
             Destroy(gameObject);
         }
     }
