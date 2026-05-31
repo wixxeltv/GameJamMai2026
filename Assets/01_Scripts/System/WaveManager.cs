@@ -73,6 +73,7 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.State != GameState.Gameplay) return;
         if (_isTransitioning || waitingForDialogue) return;
         if (_currentWave >= waves.Length) return;
 
