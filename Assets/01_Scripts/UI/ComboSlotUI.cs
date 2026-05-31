@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ComboSlotUI : MonoBehaviour
@@ -21,8 +20,8 @@ public class ComboSlotUI : MonoBehaviour
 
     private List<ComboSystem.ComboType> _currentCombo;
     private int increaseValue = 55;
-
     private Vector2 originalSize;
+    private int _previousBufferCount = 0;
 
     private void Start()
     {
@@ -37,14 +36,29 @@ public class ComboSlotUI : MonoBehaviour
     public void UpdateSlots(List<ComboSystem.ComboType> combos)
     {
         _currentCombo = combos;
+        
+        Vector2 size = originalSize;
         if (combos.Count > 1)
         {
-            Vector2 size = backgroundImage.sizeDelta;
-            backgroundImage.sizeDelta = new Vector2(size.x+55, size.y);
+            size.x += increaseValue * (combos.Count - 1);
         }
+        backgroundImage.sizeDelta = size;
+        
+        foreach (var slot in arrowSlots)
+        {
+            slot.gameObject.SetActive(false);
+            slot.color = unpressedColor;
+        }
+        foreach (var slot in comboSlots)
+        {
+            slot.gameObject.SetActive(false);
+        }
+        
         for (int i = 0; i < combos.Count; i++)
         {
             arrowSlots[i].gameObject.SetActive(true);
+            comboSlots[i].gameObject.SetActive(true);
+            
             switch (combos[i])
             {
                 case ComboSystem.ComboType.ArrowUp:
@@ -67,11 +81,16 @@ public class ComboSlotUI : MonoBehaviour
     {
         if (_currentCombo == null) return;
         
-        AudioManager.Instance.PlaySfx(inputPressedSFX, 100f);
-        
-        for (int i = 0; i < _currentCombo.Count && i < arrowSlots.Length; i++)
+        if (buffer.Count != _previousBufferCount)
         {
-            arrowSlots[i].color = unpressedColor;
+            AudioManager.Instance.PlaySfx(inputPressedSFX, 100f);
+            _previousBufferCount = buffer.Count;
+        }
+        
+        for (int i = 0; i < arrowSlots.Length; i++)
+        {
+            if (arrowSlots[i].gameObject.activeSelf)
+                arrowSlots[i].color = unpressedColor;
         }
         
         int matches = 0;
@@ -82,7 +101,7 @@ public class ComboSlotUI : MonoBehaviour
         {
             if (buffer[offset + i] == _currentCombo[i])
             {
-                matches++;
+                matches = i + 1;
             }
             else
             {
@@ -96,13 +115,29 @@ public class ComboSlotUI : MonoBehaviour
         }
     }
 
+    public void ResetSlotColors()
+    {
+        for (int i = 0; i < arrowSlots.Length; i++)
+        {
+            if (arrowSlots[i].gameObject.activeSelf)
+                arrowSlots[i].color = unpressedColor;
+        }
+    }
+
     public void ResetSlots()
     {
         backgroundImage.sizeDelta = originalSize;
-        for (int i = 1; i < arrowSlots.Length; i++)
+        _previousBufferCount = 0;
+        
+        for (int i = 0; i < arrowSlots.Length; i++)
         {
             arrowSlots[i].gameObject.SetActive(false);
             arrowSlots[i].color = unpressedColor;
+        }
+        
+        for (int i = 0; i < comboSlots.Length; i++)
+        {
+            comboSlots[i].gameObject.SetActive(false);
         }
     }
 }

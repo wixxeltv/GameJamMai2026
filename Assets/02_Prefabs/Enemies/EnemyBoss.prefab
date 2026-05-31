@@ -505,6 +505,8 @@ MonoBehaviour:
   _isColorless: 0
   _enemyColor: 0
   sliderImage: {fileID: 1304484777164429968}
+  phase2SFX: {fileID: 8300000, guid: f252a6f9e623dc14380011b16e040284, type: 3}
+  phase3SFX: {fileID: 8300000, guid: 378069d08565ea045a599e89076dc4c3, type: 3}
   _forms:
   - model: {fileID: 3850296628441634321}
     color: 0

@@ -6,6 +6,7 @@ public class PlayerInfoUI : MonoBehaviour
 {
     private PlayerColorController _playerColorController;
     [SerializeField] private Image[] slots;
+    [SerializeField] private Image[] backgroundArrows;
     private int _previousSelectedSlot;
     
     [Header("Animation Settings")]
@@ -23,20 +24,24 @@ public class PlayerInfoUI : MonoBehaviour
     {
         slots[_previousSelectedSlot].color = Color.white;
         slots[_previousSelectedSlot].transform.localScale = Vector3.one;
+        backgroundArrows[_previousSelectedSlot].color = Color.white;
         switch (_playerColorController.CurrentColor)
         {
             case ColorType.Red:
                 slots[0].color = Color.gray;
+                backgroundArrows[0].color = Color.gray;
                 StartCoroutine(PulsePanelAnimation(slots[0].gameObject));
                 _previousSelectedSlot = 0;
                 break;
             case ColorType.Blue:
                 slots[1].color = Color.gray;
+                backgroundArrows[1].color = Color.gray;
                 StartCoroutine(PulsePanelAnimation(slots[1].gameObject));
                 _previousSelectedSlot = 1;
                 break;
             case ColorType.Yellow:
                 slots[2].color = Color.gray;
+                backgroundArrows[2].color = Color.gray;
                 StartCoroutine(PulsePanelAnimation(slots[2].gameObject));
                 _previousSelectedSlot = 2;
                 break;

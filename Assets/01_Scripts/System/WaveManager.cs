@@ -19,6 +19,7 @@ public class WaveManager : MonoBehaviour
     private int _currentWave;
     private int _enemiesKilled;
     private bool _isTransitioning;
+    private const string TUTORIAL_COMPLETED_KEY = "TutorialCompleted";
 
     private TutorialUI _tutorialUI;
     private WaveInfoUI _waveInfoUI;
@@ -57,16 +58,28 @@ public class WaveManager : MonoBehaviour
         Wave wave = waves[_currentWave];
         _waveInfoUI?.SetWaveCount(_currentWave);
 
+        // Check if tutorial should be skipped
         if (wave.isTutorial)
         {
-            _tutorialUI.StartTutorial();
-            _enemyManager.SetSpawning(false);
+            if (IsTutorialCompleted())
+            {
+                // Skip tutorial - mark enemies as killed to end wave immediately
+                Debug.Log("Tutorial already completed, skipping...");
+                _tutorialUI?.gameObject.SetActive(false);
+                _enemiesKilled = wave.enemeisToKill; // Auto-complete tutorial wave
+            }
+            else
+            {
+                _tutorialUI.StartTutorial();
+                _enemyManager.SetSpawning(false);
+            }
         }
         else if(!wave.isTutorial && _currentWave == 1)
         {
             _tutorialUI.gameObject.SetActive(false);
             AudioManager.Instance.ChangeBGM(AudioManager.Instance.attackBGM);
         }
+        
         if (wave.isBoss)
         {
             _waveInfoUI?.SetEnemiesLeft(1);
@@ -118,6 +131,13 @@ public class WaveManager : MonoBehaviour
         _enemyManager.KillAllEnemies();
         AudioManager.Instance.PlaySfx(_waveSound, 100f);
         AudioManager.Instance.PlaySfx(_babyCelebration, 100f);
+        
+        // Mark tutorial as completed if current wave is tutorial
+        if (waves[_currentWave].isTutorial)
+        {
+            SetTutorialCompleted();
+        }
+        
         float timer = _timeBetweenWaves;
         while (timer > 0f)
         {
@@ -142,5 +162,24 @@ public class WaveManager : MonoBehaviour
     { 
         _enemiesKilled++;
         _waveInfoUI?.SetEnemiesLeft(waves[_currentWave].enemeisToKill-_enemiesKilled);
+    }
+
+    // Tutorial persistence methods
+    private bool IsTutorialCompleted()
+    {
+        return PlayerPrefs.GetInt(TUTORIAL_COMPLETED_KEY, 0) == 1;
+    }
+
+    private void SetTutorialCompleted()
+    {
+        PlayerPrefs.SetInt(TUTORIAL_COMPLETED_KEY, 1);
+        PlayerPrefs.Save();
+    }
+
+    // Optional: Method to reset tutorial (for testing or settings menu)
+    public void ResetTutorial()
+    {
+        PlayerPrefs.SetInt(TUTORIAL_COMPLETED_KEY, 0);
+        PlayerPrefs.Save();
     }
 }

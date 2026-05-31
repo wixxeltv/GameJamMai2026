@@ -1429,6 +1429,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7073749689684157899, guid: 780047f7297a5d347af42523e2283c4d, type: 3}
+      propertyPath: deathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: cad6fe0dbc54e4a47969e5217a7cee60, type: 3}
     - target: {fileID: 7916587086314358157, guid: 780047f7297a5d347af42523e2283c4d, type: 3}
       propertyPath: m_Constraints
       value: 116

@@ -11,6 +11,10 @@ public class Boss : Enemy
         public Color visualColor;
     }
 
+    [Header("AudioClips")]
+    [SerializeField] private AudioClip phase2SFX;
+    [SerializeField] private AudioClip phase3SFX;
+    
     [Header("Formes (modèles + couleurs)")]
     [SerializeField] private BossForm[] _forms;
 
@@ -99,10 +103,12 @@ public class Boss : Enemy
         _currentPhase = 1;
         yield return StartCoroutine(Phase1());
 
+        AudioManager.Instance.PlaySfx(phase2SFX, 100f);
         yield return StartCoroutine(PhaseTransition(chaos: false));
         _currentPhase = 2;
         yield return StartCoroutine(Phase2());
 
+        AudioManager.Instance.PlaySfx(phase3SFX, 100f);
         yield return StartCoroutine(PhaseTransition(chaos: true));
         _currentPhase = 3;
         yield return StartCoroutine(Phase3());
