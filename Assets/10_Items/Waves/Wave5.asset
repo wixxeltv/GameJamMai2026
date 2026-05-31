@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e24e60151b3484d942ce20d665752a, type: 3}
-  m_Name: Wave2
+  m_Name: Wave5
   m_EditorClassIdentifier: Assembly-CSharp::Wave
-  enemeisToKill: 10
-  spawnInterval: 2
+  enemeisToKill: 20
+  spawnInterval: 1
   enemies:
-  - {fileID: 2412643063995333145, guid: e7b2e928ab1a66549be398363e0f09e7, type: 3}
+  - {fileID: 3094351274075372918, guid: 97b4d6ff565932a479a45afacedc3cfb, type: 3}
   - {fileID: 8028507437721584375, guid: 9b90f4781afde1a4a8d2f498d6515ea1, type: 3}
   - {fileID: 2412643063995333145, guid: e7b2e928ab1a66549be398363e0f09e7, type: 3}
   isBoss: 0
   isTutorial: 0
-  maxEnemies: 5
+  maxEnemies: 6
