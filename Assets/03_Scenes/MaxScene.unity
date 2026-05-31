@@ -673,7 +673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9133783486286688249, guid: 636a3d7945d54864f885ceaced416fbe, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3922,22 +3922,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 174111272126554235, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2890737636520162401, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
-      propertyPath: panelSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 83febc00fa74d9645bf25616a5aeb211, type: 3}
-    - target: {fileID: 3502134245645582973, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706552502098370170, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4786937120372575206, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4017,14 +4001,6 @@ PrefabInstance:
     - target: {fileID: 4786937120372575206, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5119763598251303358, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -120
-      objectReference: {fileID: 0}
-    - target: {fileID: 8214844410512001687, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1261,7 +1261,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: -200}
+  m_AnchoredPosition: {x: 100, y: -175}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1108103795230101884
@@ -1330,7 +1330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpDownArrowUI
   arrow: {fileID: 5746394503042216002}
-  bounceHeight: 50
+  bounceHeight: 15
   bounceSpeed: 5
 --- !u!1 &3625151158255022169
 GameObject:
@@ -1923,7 +1923,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: 175}
+  m_AnchoredPosition: {x: -100, y: 150}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6122437237626417040
@@ -1992,7 +1992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpDownArrowUI
   arrow: {fileID: 3550553024180687588}
-  bounceHeight: 50
+  bounceHeight: 15
   bounceSpeed: 5
 --- !u!1 &4759578064689075016
 GameObject:
@@ -2060,7 +2060,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: The input combo for each color will <color="red">increase each wave<color="black">
-    until a maximum of 5 inputs
+    until a maximum of 4 inputs
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
