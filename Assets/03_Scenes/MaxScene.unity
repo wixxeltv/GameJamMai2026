@@ -936,6 +936,9 @@ MonoBehaviour:
   sfxSource: {fileID: 710319395}
   attackBGM: {fileID: 8300000, guid: 8a7d305ca5fc0d14a9daabc618676fb9, type: 3}
   bossBGM: {fileID: 8300000, guid: 2dca478f30025d1448eadb1e2cb44982, type: 3}
+  mainmenuBGM: {fileID: 0}
+  tutorialBGM: {fileID: 8300000, guid: 44ef62fb062df2447a6b782e8d131caf, type: 3}
+  creditsBGM: {fileID: 0}
 --- !u!4 &710319398
 Transform:
   m_ObjectHideFlags: 0
@@ -3450,6 +3453,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2890737636520162401, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
+      propertyPath: panelSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 83febc00fa74d9645bf25616a5aeb211, type: 3}
     - target: {fileID: 4786937120372575206, guid: 0fcd6d35d7bdda14e85d56ff61e5425d, type: 3}
       propertyPath: m_Pivot.x
       value: 0

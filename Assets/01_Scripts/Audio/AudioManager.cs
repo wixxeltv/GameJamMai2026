@@ -10,6 +10,9 @@ public class AudioManager : MonoBehaviour
     [Header("Musics")]
     [SerializeField] public AudioClip attackBGM;
     [SerializeField] public AudioClip bossBGM;
+    [SerializeField] public AudioClip mainmenuBGM;
+    [SerializeField] public AudioClip tutorialBGM;
+    [SerializeField] public AudioClip creditsBGM;
     
     public static AudioManager Instance;
     

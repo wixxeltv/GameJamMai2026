@@ -65,9 +65,9 @@ public class ComboSlotUI : MonoBehaviour
     
     public void UpdateBuffer(List<ComboSystem.ComboType> buffer)
     {
-        Debug.Log("update buffer");
-        AudioManager.Instance.PlaySfx(inputPressedSFX, 100f);
         if (_currentCombo == null) return;
+        
+        AudioManager.Instance.PlaySfx(inputPressedSFX, 100f);
         
         for (int i = 0; i < _currentCombo.Count && i < arrowSlots.Length; i++)
         {
@@ -102,6 +102,7 @@ public class ComboSlotUI : MonoBehaviour
         for (int i = 1; i < arrowSlots.Length; i++)
         {
             arrowSlots[i].gameObject.SetActive(false);
+            arrowSlots[i].color = unpressedColor;
         }
     }
 }

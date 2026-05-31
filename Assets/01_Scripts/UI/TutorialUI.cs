@@ -23,6 +23,7 @@ public class TutorialUI : MonoBehaviour
 
     public void StartTutorial()
     {
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.tutorialBGM, 100f);
         tutorialUI[0].SetActive(true);
         inTutorial = true;
     }
@@ -54,7 +55,6 @@ public class TutorialUI : MonoBehaviour
                         enemyArrow.SetActive(false);
                         foreach (Enemy enemy in enemies)
                         {
-                            Debug.Log("An enemy was spawned");
                             Instantiate(enemy.gameObject, _enemyManager.GetSpawnLineCenter().position, Quaternion.identity);
                         }
                         break;

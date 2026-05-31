@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class RoundCompletionUI : MonoBehaviour
 
     private int _roundcount;
     private WaveManager _waveManager;
+    private Coroutine _fadeCoroutine;
+    private float _transparency;
     
     private void Start()
     {
@@ -17,6 +20,7 @@ public class RoundCompletionUI : MonoBehaviour
         
         _waveManager.OnWaveStarted.AddListener(OnWaveStarted);
         _waveManager.OnWaveTimerTick.AddListener(OnWaveTimerTick);
+        _transparency = completionPanel.color.a;
     }
     
     private void OnWaveStarted(int round)
@@ -28,9 +32,51 @@ public class RoundCompletionUI : MonoBehaviour
     
     private void OnWaveTimerTick(float waitTime)
     {
+        if (_fadeCoroutine == null && waitTime > 4.5f)
+        {
+            _fadeCoroutine = StartCoroutine(DoFadeOut());
+        }
+        else if (_fadeCoroutine == null && waitTime < 1.1f)
+        {
+            _fadeCoroutine = StartCoroutine(DoFadeIn());
+        }
         Debug.Log("Timer has been called");
         completionPanel.gameObject.SetActive(true);
         roundText.text="Round "+(_roundcount+1)+" Completed";
         countdownText.text=((int)waitTime).ToString();
+    }
+    
+    private IEnumerator DoFadeOut()
+    {
+        Color startColor = new Color(completionPanel.color.r, completionPanel.color.g, completionPanel.color.b, 0);;
+        Color endColor = new Color(completionPanel.color.r, completionPanel.color.g, completionPanel.color.b, _transparency); // fully opaque
+
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            completionPanel.color = Color.Lerp(startColor, endColor, t);
+            t += Time.deltaTime / 1;
+            yield return null;
+        }
+        _fadeCoroutine = null;
+    }
+
+    private IEnumerator DoFadeIn()
+    {
+        Color startcolor = new Color(completionPanel.color.r, completionPanel.color.g, completionPanel.color.b, _transparency);;
+        Color endcolor = new Color(completionPanel.color.r, completionPanel.color.g, completionPanel.color.b, 0);
+
+
+        float elapsed = 0f;
+        
+        while (elapsed < 1)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / 1;
+            completionPanel.color = Color.Lerp(startcolor, endcolor, t);
+            yield return null;
+        }
+        _fadeCoroutine = null;
     }
 }

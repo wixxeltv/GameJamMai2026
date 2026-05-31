@@ -37,7 +37,6 @@ public class WaveManager : MonoBehaviour
         _enemyManager = FindFirstObjectByType<EnemyManager>();
         _comboSystem = FindFirstObjectByType<ComboSystem>();
         _tutorialUI = FindFirstObjectByType<TutorialUI>();
-        AudioManager.Instance.PlayMusic(AudioManager.Instance.attackBGM, 80f);
         StartWave();
     }
 
@@ -63,9 +62,10 @@ public class WaveManager : MonoBehaviour
             _tutorialUI.StartTutorial();
             _enemyManager.SetSpawning(false);
         }
-        else
+        else if(!wave.isTutorial && _currentWave == 1)
         {
             _tutorialUI.gameObject.SetActive(false);
+            AudioManager.Instance.ChangeBGM(AudioManager.Instance.attackBGM);
         }
         if (wave.isBoss)
         {
