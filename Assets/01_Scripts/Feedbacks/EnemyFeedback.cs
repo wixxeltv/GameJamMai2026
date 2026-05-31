@@ -49,10 +49,10 @@ public class EnemyFeedback : EnemyFeedbackBase
     {
         if (deathParticles != null && shootPoint != null)
         {
-            var effect = Instantiate(deathParticles, shootPoint.transform.position, Quaternion.identity, shootPoint.transform);
+            var effect = Instantiate(deathParticles, shootPoint.transform.position, Quaternion.identity);
             effect.Play();
             if (AudioManager.Instance) AudioManager.Instance.PlaySfx(deathSfx, 100f);
-            while (effect.isPlaying)
+            while (effect != null && effect.isPlaying)
                 yield return null;
         }
         Destroy(gameObject);

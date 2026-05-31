@@ -153,7 +153,7 @@ public class WaveManager : MonoBehaviour
     private void StartBossFight(Wave wave)
     {
         AudioManager.Instance.ChangeBGM(AudioManager.Instance.bossBGM);
-        _light.color = _bossLight;
+        if (_light) _light.color = _bossLight;
         
         _bossHealthUI?.SetActive(true);
         _enemyManager.SetSpawning(false);
@@ -278,7 +278,7 @@ public class WaveManager : MonoBehaviour
         _isTransitioning = false;
         waitingForDialogue = false;
         _enemiesKilled = 0;
-        _light.color = _normalLight;
+        if (_light) _light.color = _normalLight;
         
         _bossHealthUI?.SetActive(false);
         _enemyManager.SetSpawning(false);
