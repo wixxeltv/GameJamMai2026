@@ -39,9 +39,9 @@ public class EnemyBurst : Enemy
         if (!_isActing)
         {
             float dist = Vector3.Distance(transform.position, _player.position);
-            Vector3 dir = dist > _preferredDistance
-                ? (_player.position - transform.position).normalized
-                : Vector3.zero;
+            Vector3 toPlayer = (_player.position - transform.position).normalized;
+            float distError = dist - _preferredDistance;
+            Vector3 dir = toPlayer * Mathf.Clamp(distError / (_preferredDistance * 0.5f), -1f, 1f);
             Vector3 desired = dir * _moveSpeed + GetSeparationForce() + GetWallAvoidanceForce();
             _currentVelocity = Vector3.Lerp(_currentVelocity, desired, _movementSmoothing * Time.deltaTime);
             transform.position += _currentVelocity * Time.deltaTime;

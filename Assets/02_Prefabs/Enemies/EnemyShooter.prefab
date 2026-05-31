@@ -150,6 +150,8 @@ MonoBehaviour:
   _wrongColorBlinkColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _knockbackForce: 10
   _knockbackDuration: 0.15
+  _renderers:
+  - {fileID: 464161734598932107}
 --- !u!114 &8514175209800320089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,6 +663,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86dd9d86775ed2f44927522d52a8609a, type: 3}
+--- !u!23 &464161734598932107 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 669675285024227406, guid: 86dd9d86775ed2f44927522d52a8609a, type: 3}
+  m_PrefabInstance: {fileID: 1097227653483820741}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1601632748601527780 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1801447285715221281, guid: 86dd9d86775ed2f44927522d52a8609a, type: 3}

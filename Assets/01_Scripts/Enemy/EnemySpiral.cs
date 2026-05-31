@@ -14,12 +14,15 @@ public class EnemySpiral : Enemy
     [SerializeField] private float _chargeUpDuration = 0.6f;
     [SerializeField] private float _minDistanceToPlayer = 4f;
 
+    [SerializeField] private float _movementSmoothing = 4f;
+
     private float _fireTimer;
     private float _volleyAngle;
     private float _orbitAngle;
     private float _currentOrbitSpeed;
     private bool _isCharging;
     private float _chargeTimer;
+    private Vector3 _currentVelocity;
 
     protected override void Start()
     {
@@ -66,7 +69,9 @@ public class EnemySpiral : Enemy
         else
             dir = (targetPos - transform.position).normalized;
 
-        transform.position += (dir * _moveSpeed + GetSeparationForce() + GetWallAvoidanceForce()) * Time.deltaTime;
+        Vector3 desired = dir * _moveSpeed + GetSeparationForce() + GetWallAvoidanceForce();
+        _currentVelocity = Vector3.Lerp(_currentVelocity, desired, _movementSmoothing * Time.deltaTime);
+        transform.position += _currentVelocity * Time.deltaTime;
     }
 
     private void FireVolley()

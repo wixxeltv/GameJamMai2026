@@ -18,21 +18,18 @@ public class PlayerFeedback : MonoBehaviour
     [SerializeField] private float _blinkInterval = 0.1f;
     [SerializeField] private Color _blinkColor = Color.white;
     
+    [Header("Blink Renderer")]
+    [SerializeField] private Renderer _renderer;
+
     private bool _isBlinking;
-    private Renderer _renderer;
     private Material _material;
     private Color _originalColor;
     private Coroutine _blinkCoroutine;
 
     void Start()
     {
-        _renderer = GetComponent<Renderer>();
         if (_renderer != null)
-        {
-            // Get the material instance to avoid modifying the shared material
             _material = _renderer.material;
-            _originalColor = _material.color;
-        }
     }
     
     public void ShootEffect()
@@ -52,21 +49,24 @@ public class PlayerFeedback : MonoBehaviour
     
     public void StartBlinking(float duration)
     {
-        if (_isBlinking && _material == null) return;
-        
+        if (_material == null) return;
+
         if (_blinkCoroutine != null)
-        {
             StopCoroutine(_blinkCoroutine);
-        }
         _blinkCoroutine = StartCoroutine(BlinkCoroutine(duration));
     }
-    
+
     private IEnumerator BlinkCoroutine(float duration)
     {
         _isBlinking = true;
+        // Capture the current color at blink start so the correct color is restored afterward
+        _originalColor = _material.HasProperty("_BaseColor")
+            ? _material.GetColor("_BaseColor")
+            : _material.color;
+
         float elapsedTime = 0f;
         bool isBlinkOn = false;
-        
+
         if (playerHitSFX != null && playerHitSFX.Length > 0 && AudioManager.Instance)
         {
             int random = Random.Range(0, playerHitSFX.Length);
@@ -75,16 +75,16 @@ public class PlayerFeedback : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            // Toggle between blink color and original color
-            _material.color = isBlinkOn ? _blinkColor : _originalColor;
-
+            Color c = isBlinkOn ? _blinkColor : _originalColor;
+            if (_material.HasProperty("_BaseColor")) _material.SetColor("_BaseColor", c);
+            _material.color = c;
             isBlinkOn = !isBlinkOn;
-            
+
             yield return new WaitForSeconds(_blinkInterval);
             elapsedTime += _blinkInterval;
         }
 
-        // Ensure we return to original color
+        if (_material.HasProperty("_BaseColor")) _material.SetColor("_BaseColor", _originalColor);
         _material.color = _originalColor;
         _isBlinking = false;
     }

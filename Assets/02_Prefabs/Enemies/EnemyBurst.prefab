@@ -302,10 +302,12 @@ MonoBehaviour:
   shootPoint: {fileID: 5497472780518207340}
   appearance: {fileID: 7732178331952192571}
   healthUI: {fileID: 5104723067049883225}
+  _renderer: {fileID: 928336527631419587}
   deathSfx: {fileID: 8300000, guid: c2806d4fef45e7a4fa949eb3d6b2441d, type: 3}
   deathParticles: {fileID: 8791802859067835849, guid: ae07f2a45f14a82428409cfe410e6002, type: 3}
   _blinkInterval: 0.1
   _blinkCount: 3
+  _blinkColor: {r: 1, g: 1, b: 1, a: 1}
   _wrongColorBlinkColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _knockbackForce: 10
   _knockbackDuration: 0.15
@@ -639,15 +641,60 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7840648046123342493, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a8523f0403ffda4ab0760d7950afe1b, type: 2}
+    - target: {fileID: -5439937001642120155, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c728e42c8a7ac74b9a0f5c3d4de7da1, type: 2}
+    - target: {fileID: -4046258953021152028, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a8523f0403ffda4ab0760d7950afe1b, type: 2}
+    - target: {fileID: -3244058163589021686, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c728e42c8a7ac74b9a0f5c3d4de7da1, type: 2}
+    - target: {fileID: -1482454143941793367, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4973fec0422a2eb40a91945da93bb77b, type: 2}
+    - target: {fileID: -1349192472581402448, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a8523f0403ffda4ab0760d7950afe1b, type: 2}
+    - target: {fileID: 203436160881238445, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a8523f0403ffda4ab0760d7950afe1b, type: 2}
     - target: {fileID: 919132149155446097, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
       propertyPath: m_Name
       value: Aubergine_01
       objectReference: {fileID: 0}
+    - target: {fileID: 5283771261602550469, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a8523f0403ffda4ab0760d7950afe1b, type: 2}
+    - target: {fileID: 9017442923973245867, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a8523f0403ffda4ab0760d7950afe1b, type: 2}
+    - target: {fileID: 9113564956029164732, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c728e42c8a7ac74b9a0f5c3d4de7da1, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
+--- !u!23 &928336527631419587 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1482454143941793367, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}
+  m_PrefabInstance: {fileID: 7462287459107643754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6919191030823372417 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5381994ec2d69ff44ba9302585500c7f, type: 3}

@@ -123,11 +123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f974fce56e6d4488066407e5c969ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBullet
-  _speed: 10
-  _lifetime: 5
-  _angularSpeed: 0
-  _damage: 10
-  _shrinkDuration: 0.15
+  _speed: 4
+  _lifetime: 3
+  _angularSpeed: 120
+  _damage: 5
+  _shrinkDuration: 0.2
   _hitEffect: {fileID: 4021103657954561960, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
 --- !u!54 &4511787761234433678
 Rigidbody:

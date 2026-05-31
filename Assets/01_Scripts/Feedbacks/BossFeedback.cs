@@ -11,8 +11,10 @@ public class BossFeedback : EnemyFeedbackBase
     [SerializeField] private Slider _healthUI;
 
     [Header("Blink")]
+    [SerializeField] private Renderer _blinkRenderer;
     [SerializeField] private float _blinkInterval = 0.05f;
     [SerializeField] private int _blinkCount = 3;
+    [SerializeField] private Color _blinkColor = Color.white;
 
     private static readonly int ColorProp = Shader.PropertyToID("_BaseColor");
 
@@ -29,11 +31,20 @@ public class BossFeedback : EnemyFeedbackBase
 
     public override void Blink(bool wrongColor = false)
     {
-        Renderer r = GetActiveRenderer();
+        Renderer r = _blinkRenderer != null ? _blinkRenderer : GetActiveRenderer();
         if (r == null) return;
         if (_blinkCoroutine != null) StopCoroutine(_blinkCoroutine);
         r.SetPropertyBlock(null);
-        _blinkCoroutine = StartCoroutine(BlinkCoroutine(r, wrongColor ? _wrongColorBlinkColor : Color.white));
+        _blinkCoroutine = StartCoroutine(BlinkCoroutine(r, wrongColor ? _wrongColorBlinkColor : _blinkColor));
+    }
+
+    public override void StartBlinking(float duration)
+    {
+        Renderer r = _blinkRenderer != null ? _blinkRenderer : GetActiveRenderer();
+        if (r == null) return;
+        if (_blinkCoroutine != null) StopCoroutine(_blinkCoroutine);
+        r.SetPropertyBlock(null);
+        _blinkCoroutine = StartCoroutine(DurationBlinkCoroutine(r, duration));
     }
 
     public override void DeathEffect()
@@ -58,6 +69,33 @@ public class BossFeedback : EnemyFeedbackBase
             r.SetPropertyBlock(null);
             yield return new WaitForSeconds(_blinkInterval);
         }
+    }
+
+    private IEnumerator DurationBlinkCoroutine(Renderer r, float duration)
+    {
+        float elapsed = 0f;
+        bool blinkOn = false;
+        while (elapsed < duration)
+        {
+            if (r == null || !r.gameObject.activeInHierarchy)
+            {
+                ResetAllPropertyBlocks();
+                yield break;
+            }
+            if (blinkOn)
+            {
+                _propBlock.SetColor(ColorProp, _blinkColor);
+                r.SetPropertyBlock(_propBlock);
+            }
+            else
+            {
+                r.SetPropertyBlock(null);
+            }
+            blinkOn = !blinkOn;
+            yield return new WaitForSeconds(_blinkInterval);
+            elapsed += _blinkInterval;
+        }
+        r.SetPropertyBlock(null);
     }
 
     private IEnumerator DeathRoutine()

@@ -8,6 +8,7 @@ public class EnemyFeedback : EnemyFeedbackBase
     [SerializeField] private GameObject shootPoint;
     [SerializeField] private GameObject appearance;
     [SerializeField] private Slider healthUI;
+    [SerializeField] private Renderer _renderer;
 
     [Header("FX")]
     [SerializeField] private AudioClip deathSfx;
@@ -16,6 +17,7 @@ public class EnemyFeedback : EnemyFeedbackBase
     [Header("Blink Settings")]
     [SerializeField] private float _blinkInterval = 0.05f;
     [SerializeField] private int _blinkCount = 3;
+    [SerializeField] private Color _blinkColor = Color.white;
     [SerializeField] private Color _wrongColorBlinkColor = Color.grey;
 
     private static readonly int ColorProp = Shader.PropertyToID("_BaseColor");
@@ -27,12 +29,11 @@ public class EnemyFeedback : EnemyFeedbackBase
     private Coroutine _deathCoroutine;
     private Coroutine _blinkCoroutine;
     private Coroutine _knockbackCoroutine;
-    private Renderer _renderer;
     private MaterialPropertyBlock _propBlock;
 
     void Start()
     {
-        _renderer = GetComponentInChildren<Renderer>();
+        if (_renderer == null) _renderer = GetComponentInChildren<Renderer>();
         _propBlock = new MaterialPropertyBlock();
     }
 
@@ -82,7 +83,15 @@ public class EnemyFeedback : EnemyFeedbackBase
         if (_renderer == null) return;
         if (_blinkCoroutine != null) StopCoroutine(_blinkCoroutine);
         _renderer.SetPropertyBlock(null);
-        _blinkCoroutine = StartCoroutine(BlinkCoroutine(wrongColor ? _wrongColorBlinkColor : Color.white));
+        _blinkCoroutine = StartCoroutine(BlinkCoroutine(wrongColor ? _wrongColorBlinkColor : _blinkColor));
+    }
+
+    public override void StartBlinking(float duration)
+    {
+        if (_renderer == null) return;
+        if (_blinkCoroutine != null) StopCoroutine(_blinkCoroutine);
+        _renderer.SetPropertyBlock(null);
+        _blinkCoroutine = StartCoroutine(DurationBlinkCoroutine(duration));
     }
 
     private IEnumerator BlinkCoroutine(Color blinkColor)
@@ -95,5 +104,27 @@ public class EnemyFeedback : EnemyFeedbackBase
             _renderer.SetPropertyBlock(null);
             yield return new WaitForSeconds(_blinkInterval);
         }
+    }
+
+    private IEnumerator DurationBlinkCoroutine(float duration)
+    {
+        float elapsed = 0f;
+        bool blinkOn = false;
+        while (elapsed < duration)
+        {
+            if (blinkOn)
+            {
+                _propBlock.SetColor(ColorProp, _blinkColor);
+                _renderer.SetPropertyBlock(_propBlock);
+            }
+            else
+            {
+                _renderer.SetPropertyBlock(null);
+            }
+            blinkOn = !blinkOn;
+            yield return new WaitForSeconds(_blinkInterval);
+            elapsed += _blinkInterval;
+        }
+        _renderer.SetPropertyBlock(null);
     }
 }

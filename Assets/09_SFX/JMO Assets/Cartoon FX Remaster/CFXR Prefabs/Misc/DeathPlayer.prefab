@@ -4589,7 +4589,7 @@ GameObject:
   - component: {fileID: 9157105887693424661}
   - component: {fileID: 114473157489228906}
   m_Layer: 0
-  m_Name: CFXR Magic Poof
+  m_Name: DeathPlayer
   m_TagString: FxTemporaire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
