@@ -323,8 +323,7 @@ public class Boss : Enemy
     private void ApplyMaterial(int index)
     {
         _meshRenderer.material = _materials[index];
-    
-        // Determine color type based on material index (0=Red, 1=Yellow, 2=Blue or customize)
+        
         ColorType materialColor = index switch
         {
             0 => ColorType.Red,

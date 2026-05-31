@@ -7,6 +7,7 @@ public class HealthPickup : MonoBehaviour
     [SerializeField] private float _lifetime = 10f;
     [SerializeField] private ParticleSystem _pickupEffect;
     [SerializeField] private ParticleSystem _despawnEffect;
+    [SerializeField] private AudioClip _pickupSFX;
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class HealthPickup : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         other.GetComponent<PlayerHealth>()?.Heal(_healAmount);
         SpawnEffect(_pickupEffect);
+        if (_pickupSFX && AudioManager.Instance) AudioManager.Instance.PlaySfx(_pickupSFX);
         Destroy(gameObject);
     }
 

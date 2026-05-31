@@ -57,7 +57,7 @@ public class EnemyShooter : Enemy
         }
         else
         {
-            // Strafe latéral
+            // Strafe
             dir = Vector3.Cross(toPlayer, Vector3.up) * _strafeDirection;
 
             _strafeTimer -= Time.deltaTime;

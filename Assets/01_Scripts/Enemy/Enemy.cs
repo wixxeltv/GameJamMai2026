@@ -164,15 +164,12 @@ public class Enemy : MonoBehaviour
 
         if (_movement.magnitude > 0.1f)
         {
-            // ✅ Use unscaled time if game can be paused
             float wobbleAngle = Mathf.Sin(Time.time * wobbleSpeed) * wobbleAmount;
-        
-            // ✅ Apply rotation in local space
+            
             objectToWobble.localRotation = _initialWobbleRotation * Quaternion.Euler(0f, 0f, wobbleAngle);
         }
         else
         {
-            // ✅ Return to initial rotation smoothly
             objectToWobble.localRotation = Quaternion.Lerp(
                 objectToWobble.localRotation, 
                 _initialWobbleRotation,
