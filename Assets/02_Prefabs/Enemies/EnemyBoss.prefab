@@ -407,8 +407,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3169078604813445375}
   - {fileID: 8567438005825246182}
@@ -503,22 +503,22 @@ MonoBehaviour:
   _score: 50
   _wrongColorDamageMultiplier: 0.1
   _wrongColorKnockbackMultiplier: 0.3
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _wallAvoidRadius: 1.5
+  _wallAvoidStrength: 5
   _isColorless: 0
   _enemyColor: 0
   deathSounds: []
   sliderImage: {fileID: 1304484777164429968}
   phase2SFX: {fileID: 8300000, guid: f252a6f9e623dc14380011b16e040284, type: 3}
   phase3SFX: {fileID: 8300000, guid: 378069d08565ea045a599e89076dc4c3, type: 3}
-  _forms:
-  - model: {fileID: 3850296628441634321}
-    color: 0
-    visualColor: {r: 1, g: 0, b: 0, a: 0}
-  - model: {fileID: 5898337402272703307}
-    color: 1
-    visualColor: {r: 0.9652157, g: 1, b: 0, a: 0}
-  - model: {fileID: 394247066768306536}
-    color: 2
-    visualColor: {r: 0, g: 0.29786587, b: 1, a: 0}
+  _materials:
+  - {fileID: 2100000, guid: 2f9fb38457c53d04da006009e721b1b3, type: 2}
+  - {fileID: 2100000, guid: 311db73d8b0dd4141b2955465b8d4cdb, type: 2}
+  - {fileID: 2100000, guid: 9f10ddb5d27622840974e14cc58f24b7, type: 2}
+  _meshRenderer: {fileID: 8418881780237827754}
   _bulletPrefabRed: {fileID: 1891232714594278134, guid: ad4a771d8c72f9449aa418ebc6546d8a, type: 3}
   _bulletPrefabYellow: {fileID: 1891232714594278134, guid: decb12d2041adff45b43db24183c2cc7, type: 3}
   _bulletPrefabBlue: {fileID: 1891232714594278134, guid: 7240a521f6407234ea301625cda78642, type: 3}
@@ -866,15 +866,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ace214e3f610cef4abf8e93d563b5dc2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 50
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ace214e3f610cef4abf8e93d563b5dc2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 50
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ace214e3f610cef4abf8e93d563b5dc2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 50
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ace214e3f610cef4abf8e93d563b5dc2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -936,5 +936,10 @@ PrefabInstance:
 --- !u!4 &7838782963715546510 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ace214e3f610cef4abf8e93d563b5dc2, type: 3}
+  m_PrefabInstance: {fileID: 7728822303447546469}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8418881780237827754 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2276475810154939599, guid: ace214e3f610cef4abf8e93d563b5dc2, type: 3}
   m_PrefabInstance: {fileID: 7728822303447546469}
   m_PrefabAsset: {fileID: 0}

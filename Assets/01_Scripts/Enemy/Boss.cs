@@ -16,9 +16,9 @@ public class Boss : Enemy
 
     [SerializeField] private AudioClip phase3SFX;
 
-    [Header("Formes (modèles + couleurs)")] [SerializeField]
-    private Material[] _materials;
-    private BossForm[] _forms;
+    [Header("Formes (modèles + couleurs)")]
+    [SerializeField] private Material[] _materials;
+    [SerializeField] private MeshRenderer _meshRenderer;
 
     private ProgressBar _progressBar;
 
@@ -72,6 +72,7 @@ public class Boss : Enemy
     private Vector3 _spawnCenter;
     private float _volleyAngle;
     private bool _isTransitioning;
+    private int _currentMaterialIndex = 0;
 
     protected override void Start()
     {
@@ -293,58 +294,46 @@ public class Boss : Enemy
 
     protected override void Die()
     {
-        DisableAllModels();
         base.Die();
         
         _progressBar.gameObject.SetActive(false);
         WaveManager.Instance.BossKilled();
     }
 
-    // --- Formes ---
-
-    private void DisableAllModels()
-    {
-        if (_forms == null) return;
-        foreach (var form in _forms)
-            if (form.model != null && form.model != gameObject)
-                form.model.SetActive(false);
-    }
-
     private void InitRandomForm()
     {
-        if (_forms == null || _forms.Length == 0) return;
-        _currentFormIndex = Random.Range(0, _forms.Length);
-        ApplyForm(_currentFormIndex);
+        if (_materials == null || _materials.Length == 0 || _meshRenderer == null) return;
+        _currentMaterialIndex = Random.Range(0, _materials.Length);
+        ApplyMaterial(_currentMaterialIndex);
     }
 
     private void SwitchToRandomForm()
     {
-        if (_forms == null || _forms.Length == 0) return;
+        if (_materials == null || _materials.Length == 0 || _meshRenderer == null) return;
         int newIndex;
         do
         {
-            newIndex = Random.Range(0, _forms.Length);
-        } while (newIndex == _currentFormIndex && _forms.Length > 1);
+            newIndex = Random.Range(0, _materials.Length);
+        } while (newIndex == _currentMaterialIndex && _materials.Length > 1);
 
-        _currentFormIndex = newIndex;
-        ApplyForm(_currentFormIndex);
+        _currentMaterialIndex = newIndex;
+        ApplyMaterial(_currentMaterialIndex);
     }
 
-    private void ApplyForm(int index)
+    private void ApplyMaterial(int index)
     {
-        for (int i = 0; i < _forms.Length; i++)
+        _meshRenderer.material = _materials[index];
+    
+        // Determine color type based on material index (0=Red, 1=Yellow, 2=Blue or customize)
+        ColorType materialColor = index switch
         {
-            if (_forms[i].model == null || _forms[i].model == gameObject) continue;
-            _forms[i].model.SetActive(i == index);
-            if (i == index)
-            {
-                var r = _forms[i].model.GetComponent<Renderer>()
-                        ?? _forms[i].model.GetComponentInChildren<Renderer>();
-                if (r != null) r.SetPropertyBlock(null);
-            }
-        }
-
-        SetBossColor(_forms[index].color);
+            0 => ColorType.Red,
+            1 => ColorType.Yellow,
+            2 => ColorType.Blue,
+            _ => ColorType.Red
+        };
+    
+        SetBossColor(materialColor);
     }
 
     private void SetBossColor(ColorType colorType)
